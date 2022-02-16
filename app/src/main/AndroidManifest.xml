@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sun_moon">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Sun_Moon">
+        <activity
+            android:name=".loading"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.example.sun_moon.list" android:label="list"></activity>
+        <activity android:name="com.example.sun_moon.exercise_screen" android:label="exercise_screen"></activity>
+        <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"></activity>
+        <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"></activity>
+    </application>
+
+</manifest>
