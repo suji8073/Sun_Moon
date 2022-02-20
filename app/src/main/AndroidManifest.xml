@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sun_Moon">
         <activity
-            android:name=".exercise_screen"
+            android:name=".exercise_screen1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
         <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"></activity>
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"></activity>
 
-        <activity android:name="com.example.sun_moon.exercise_screen1" android:label="exercise_screen1"></activity>
+
     </application>
 
 </manifest>
