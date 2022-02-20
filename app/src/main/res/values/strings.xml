@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sun_Moon</string>
+    <string name="todo" />
+    <string name="timer" />
 </resources>
