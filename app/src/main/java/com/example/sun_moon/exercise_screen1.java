@@ -14,7 +14,7 @@ import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class exercise_screen extends AppCompatActivity {
+public class exercise_screen1 extends AppCompatActivity {
     Button skip, up, up1;
     ScrollView scroll;
     int originX, originY;
@@ -61,7 +61,7 @@ public class exercise_screen extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+                Intent start_intent = new Intent(exercise_screen1.this, scoreboard.class);
                 startActivity(start_intent);
             }
         });
