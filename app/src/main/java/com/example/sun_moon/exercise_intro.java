@@ -20,7 +20,7 @@ public class exercise_intro extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
+                Intent start_intent = new Intent(exercise_intro.this, exercise_screen1.class);
                 startActivity(start_intent);
             }
         });

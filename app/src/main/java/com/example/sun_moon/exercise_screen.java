@@ -16,6 +16,7 @@ public class exercise_screen extends Activity {
     private int progressStatus = 0;
     private int timerStatus = 90;
 
+
     private final Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,13 @@ public class exercise_screen extends Activity {
 
         Timer(time);
 
+
         progressStatus = 0;
         pb.setProgress(progressStatus);
 //        pb.setVisibility(View.INVISIBLE);
 
         btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 // Set the progress status zero on each button click
@@ -137,6 +140,7 @@ public class exercise_screen extends Activity {
                             if(timerStatus <=30){
                                 // Set a message of completion
 
+
                                 view.setTextColor(0xAAef484a);
                             }
 
@@ -145,10 +149,8 @@ public class exercise_screen extends Activity {
                 }
             }
         }).start(); // Start the operation
+
     }
 }
-
-
-
 
 
