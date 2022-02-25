@@ -23,17 +23,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class exercise_screen1 extends AppCompatActivity {
-    Button time, up, up1;
+    Button time, up;
     ScrollView scroll;
     int originX, originY;
-    float button_y;
     ImageView image;
     private int progressStatus = 0;
     private int timerStatus = 90;
 
+    int move_num = 100;
 
     private final Handler handler = new Handler();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +154,6 @@ public class exercise_screen1 extends AppCompatActivity {
         });
 
         up = findViewById(R.id.up);
-
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,12 +168,12 @@ public class exercise_screen1 extends AppCompatActivity {
 //                        ObjectAnimator.ofFloat(btn, "Y", view.getHeight()+1900).setDuration(60000).start();
 //                        ObjectAnimator.ofFloat(tv, "Y", view.getHeight()+1500).setDuration(60000).start();
 
-                        ObjectAnimator.ofInt(scroll, "scrollY", 20).setDuration(600).start();
-                        ObjectAnimator.ofFloat(up, "Y", 20).setDuration(600).start();
-                        ObjectAnimator.ofFloat(time, "Y", 20+50).setDuration(600).start();
-                        ObjectAnimator.ofFloat(pb, "Y", 20+600).setDuration(600).start();
-                        ObjectAnimator.ofFloat(btn, "Y", 20+1900).setDuration(600).start();
-                        ObjectAnimator.ofFloat(tv, "Y", 20+1500).setDuration(600).start();
+                        ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY()-move_num)).setDuration(600).start();
+                        ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY()-move_num).setDuration(600).start();
+                        ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY()-move_num).setDuration(600).start();
+                        ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY()-move_num).setDuration(600).start();
+                        ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY()-move_num).setDuration(600).start();
+                        ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY()-move_num).setDuration(600).start();
 
 
 
@@ -186,7 +184,6 @@ public class exercise_screen1 extends AppCompatActivity {
 
     }
     public void Timer(TextView view) {
-
         // Start the lengthy operation in a background thread
         new Thread(new Runnable() {
             @Override
