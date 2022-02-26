@@ -1,5 +1,7 @@
 package com.example.sun_moon;
 
+import static java.lang.Thread.sleep;
+
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -60,63 +62,60 @@ public class exercise_screen1 extends AppCompatActivity {
         pb.setProgress(progressStatus);
 //        pb.setVisibility(View.INVISIBLE);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-
+        // Start the lengthy operation in a background thread
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View view) {
-                // Set the progress status zero on each button click
-//                if(progressStatus==100){
-//                    progressStatus = 0;
-//                    pb.setProgress(progressStatus);
-//                    pb.setProgressBackgroundTintList(ColorStateList.valueOf(0xCBFF7676));
-//                }
-
-//                pb.setVisibility(View.VISIBLE);
-
-                // Start the lengthy operation in a background thread
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while(progressStatus < 100){
-                            // Update the progress status
+            public void run() {
+                while(progressStatus < 100){
+                    // Update the progress status
 //                            if(운동하면){
 //                                잠시 멈추고 progressStatus 저장,
 //                                다시 안움직이면 다시 시작
 //                            }
-                            progressStatus +=1;
-                            // Try to sleep the thread for 20 milliseconds
-                            try{
-                                Thread.sleep(100);
-                            }catch(InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            // Update the progress
-                            handler.post(new Runnable() {
-                                @SuppressLint("SetTextI18n")
-                                @Override
-                                public void run() {
-                                    pb.setProgress(progressStatus);
-                                    // Show the progress on TextView
-                                    tv.setText(progressStatus+"");
-                                    // If task execution completed
-                                    if(progressStatus >= 80){
-                                        // Set a message of completion
-                                        tv.setText("곧 호랑이 ~!");
-                                        tv.setTextColor(0xAAef484a);
-
-                                        pb.setProgressBackgroundTintList(ColorStateList.valueOf(Color.RED));
-                                        //호랑이 쪽에 100이라고 알림
-                                    }
-                                    if(progressStatus == 100){
-                                        // Set a message of completion
-                                        tv.setText("어흥");
-                                        //호랑이 쪽에 100이라고 알림
-                                    }
-                                }
-                            });
-                        }
+                    progressStatus +=1;
+                    // Try to sleep the thread for 20 milliseconds
+                    try{
+                        sleep(300);
+                    }catch(InterruptedException e){
+                        e.printStackTrace();
                     }
-                }).start(); // Start the operation
+                    // Update the progress
+                    handler.post(new Runnable() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run() {
+                            pb.setProgress(progressStatus);
+                            // Show the progress on TextView
+                            tv.setText(progressStatus+"");
+                            // If task execution completed
+                            if(progressStatus >= 80){
+                                // Set a message of completion
+                                tv.setText("곧 호랑이 ~!");
+                                tv.setTextColor(0xAAef484a);
+
+                                pb.setProgressBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                                //호랑이 쪽에 100이라고 알림
+                            }
+                            if(progressStatus == 100){
+                                // Set a message of completion
+                                tv.setText("어흥");
+                                //호랑이 쪽에 100이라고 알림
+                            }
+                        }
+                    });
+                }
+            }
+        }).start(); // Start the operation
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(progressStatus<10){
+                    progressStatus=0;
+                }
+                else{
+                    progressStatus-=10;
+                }
             }
         });
 
