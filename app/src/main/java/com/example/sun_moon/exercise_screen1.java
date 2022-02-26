@@ -32,7 +32,7 @@ public class exercise_screen1 extends AppCompatActivity {
     private int progressStatus = 0;
     private int timerStatus = 90;
 
-    int move_num = 100;
+    int move_num = 1000;
 
     private final Handler handler = new Handler();
 
@@ -49,8 +49,7 @@ public class exercise_screen1 extends AppCompatActivity {
         originY = scroll.getScrollY();
         time = findViewById(R.id.time);
 
-        RelativeLayout rl = findViewById(R.id.rl);
-        ImageButton btn = findViewById(R.id.btn);
+        ImageButton btn = findViewById(R.id.btn); // 호랑이
         TextView tv = findViewById(R.id.tv);
         ProgressBar pb = findViewById(R.id.pb);
         TextView time = findViewById(R.id.time);
@@ -159,6 +158,12 @@ public class exercise_screen1 extends AppCompatActivity {
                 scroll.post(new Runnable() {
                     @Override
                     public void run() {
+                        if(progressStatus<10){
+                            progressStatus=0;
+                        }
+                        else{
+                            progressStatus-=10;
+                        }
                         //scroll.smoothScrollBy(originX, originY - 1000);
 //                        ObjectAnimator.ofInt(scroll, "scrollY", view.getHeight()).setDuration(60000).start();
 //                        ObjectAnimator.ofFloat(up, "Y", view.getHeight()).setDuration(60000).start();
