@@ -2,7 +2,6 @@ package com.example.sun_moon;
 
 import static java.lang.Thread.sleep;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -32,7 +29,7 @@ public class exercise_screen1 extends AppCompatActivity {
     private int progressStatus = 0;
     private int timerStatus = 90;
 
-    int move_num = 1000;
+    int move_num = 600;
 
     private final Handler handler = new Handler();
 
@@ -155,16 +152,16 @@ public class exercise_screen1 extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scroll.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(progressStatus<10){
-                            progressStatus=0;
-                        }
-                        else{
-                            progressStatus-=10;
-                        }
-                        //scroll.smoothScrollBy(originX, originY - 1000);
+                if (up.getY() - move_num >0) {
+                    scroll.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (progressStatus < 10) {
+                                progressStatus = 0;
+                            } else {
+                                progressStatus -= 10;
+                            }
+                            //scroll.smoothScrollBy(originX, originY - 1000);
 //                        ObjectAnimator.ofInt(scroll, "scrollY", view.getHeight()).setDuration(60000).start();
 //                        ObjectAnimator.ofFloat(up, "Y", view.getHeight()).setDuration(60000).start();
 //                        ObjectAnimator.ofFloat(time, "Y", view.getHeight()+50).setDuration(60000).start();
@@ -172,17 +169,17 @@ public class exercise_screen1 extends AppCompatActivity {
 //                        ObjectAnimator.ofFloat(btn, "Y", view.getHeight()+1900).setDuration(60000).start();
 //                        ObjectAnimator.ofFloat(tv, "Y", view.getHeight()+1500).setDuration(60000).start();
 
-                        ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY()-move_num)).setDuration(600).start();
-                        ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY()-move_num).setDuration(600).start();
+                            ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
+                            ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY() - move_num).setDuration(600).start();
 
 
-
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 
@@ -201,7 +198,7 @@ public class exercise_screen1 extends AppCompatActivity {
                     timerStatus -=1;
                     // Try to sleep the thread for 20 milliseconds
                     try{
-                        Thread.sleep(1000);
+                        Thread.sleep(400);
                     }catch(InterruptedException e){
                         e.printStackTrace();
                     }

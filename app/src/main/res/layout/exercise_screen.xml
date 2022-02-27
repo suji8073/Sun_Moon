@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".exercise_screen">
+    tools:context=".exercise_screen1">
 
 
     <LinearLayout
@@ -49,33 +49,29 @@
 
                 <TextView
                     android:id="@+id/tv"
-                    android:layout_width="305dp"
-                    android:layout_height="260dp"
-                    android:layout_marginLeft="150dp"
-                    android:layout_marginTop="600dp"
+                    android:layout_width="338dp"
+                    android:layout_height="232dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="600dp"
                     android:fontFamily="sans-serif-condensed"
                     android:gravity="center"
                     android:textAlignment="gravity"
                     android:textColor="#676a6b"
                     android:textSize="60sp" />
 
-
-
-
-
                 <ProgressBar
                     android:id="@+id/pb"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="65dp"
                     android:layout_height="610dp"
-                    android:layout_marginLeft="37.5dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="37.5dp"
                     android:layout_marginTop="305dp"
-                    android:progressBackgroundTint="#CBFF7676"
-                    android:progressDrawable="@drawable/vertical" />
+                    android:progressDrawable="@drawable/gradient"
+                    />
 
 
                 <ImageButton
