@@ -201,7 +201,7 @@ public class exercise_screen1 extends AppCompatActivity {
                     timerStatus -=1;
                     // Try to sleep the thread for 20 milliseconds
                     try{
-                        Thread.sleep(400);
+                        Thread.sleep(1000);
                     }catch(InterruptedException e){
                         e.printStackTrace();
                     }
