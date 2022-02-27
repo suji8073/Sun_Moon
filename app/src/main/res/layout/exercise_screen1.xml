@@ -104,7 +104,7 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="41dp"
                     android:layout_marginEnd="41dp"
-                    android:background="@drawable/round"
+                    android:background="@drawable/score"
                     android:padding="7dp"
                     android:text="1:30"
                     android:textColor="#00BCD4"
