@@ -156,42 +156,42 @@ public class exercise_screen extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scroll.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(progressStatus<10){
-                            progressStatus=0;
+                if (up.getY() - move_num >0) {
+                    scroll.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (progressStatus < 10) {
+                                progressStatus = 0;
+                            } else {
+                                progressStatus -= 10;
+                            }
+
+                            Score(score);
+
+
+                            //scroll.smoothScrollBy(originX, originY - 1000);
+                            //                        ObjectAnimator.ofInt(scroll, "scrollY", view.getHeight()).setDuration(60000).start();
+                            //                        ObjectAnimator.ofFloat(up, "Y", view.getHeight()).setDuration(60000).start();
+                            //                        ObjectAnimator.ofFloat(time, "Y", view.getHeight()+50).setDuration(60000).start();
+                            //                        ObjectAnimator.ofFloat(pb, "Y", view.getHeight()+600).setDuration(60000).start();
+                            //                        ObjectAnimator.ofFloat(btn, "Y", view.getHeight()+1900).setDuration(60000).start();
+                            //                        ObjectAnimator.ofFloat(tv, "Y", view.getHeight()+1500).setDuration(60000).start();
+
+                            ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
+                            ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY() - move_num).setDuration(600).start();
+
+                            //score.setBackgroundResource(R.drawable.score);
                         }
-                        else{
-                            progressStatus-=10;
-                        }
 
-                        Score(score);
+                    });
 
-
-                        //scroll.smoothScrollBy(originX, originY - 1000);
-//                        ObjectAnimator.ofInt(scroll, "scrollY", view.getHeight()).setDuration(60000).start();
-//                        ObjectAnimator.ofFloat(up, "Y", view.getHeight()).setDuration(60000).start();
-//                        ObjectAnimator.ofFloat(time, "Y", view.getHeight()+50).setDuration(60000).start();
-//                        ObjectAnimator.ofFloat(pb, "Y", view.getHeight()+600).setDuration(60000).start();
-//                        ObjectAnimator.ofFloat(btn, "Y", view.getHeight()+1900).setDuration(60000).start();
-//                        ObjectAnimator.ofFloat(tv, "Y", view.getHeight()+1500).setDuration(60000).start();
-
-                        ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY()-move_num)).setDuration(600).start();
-                        ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY()-move_num).setDuration(600).start();
-                        ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY()-move_num).setDuration(600).start();
-
-                        //score.setBackgroundResource(R.drawable.score);
-                    }
-
-                });
-
-                        score.setBackgroundResource(R.drawable.score);
-
+                    score.setBackgroundResource(R.drawable.score);
+                }
             }
         });
 
