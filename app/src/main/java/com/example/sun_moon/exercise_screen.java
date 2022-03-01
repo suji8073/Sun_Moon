@@ -27,8 +27,8 @@ public class exercise_screen extends AppCompatActivity {
     int originX, originY;
     ImageView image;
     private int progressStatus = 0;
-    private int timerStatus = 90;
-    private int score_text = 0;
+    private int timerStatus = 10; //90
+    private int score_text;
 
     int move_num = 1000;
 
@@ -144,13 +144,13 @@ public class exercise_screen extends AppCompatActivity {
 
 
 
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
-                startActivity(start_intent);
-            }
-        });
+//        time.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+//                startActivity(start_intent);
+//            }
+//        });
 
         up = findViewById(R.id.up);
         up.setOnClickListener(new View.OnClickListener() {
@@ -240,6 +240,13 @@ public class exercise_screen extends AppCompatActivity {
                             if(timerStatus <=30){
                                 // Set a message of completion
                                 btn.setTextColor(0xAAef484a);
+                            }
+
+                            if(timerStatus ==0){
+                                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+                                startActivity(start_intent);
+
+                                start_intent.putExtra("점수", score_text);
                             }
 
                         }

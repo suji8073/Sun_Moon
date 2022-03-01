@@ -19,10 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class scoreboard extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreboard);
+
+        Intent secondIntent = getIntent();
+        int score_text = secondIntent.getIntExtra("점수",0);
 
         ImageButton home = findViewById(R.id.home);
         ImageButton person = findViewById(R.id.person);
@@ -34,6 +38,30 @@ public class scoreboard extends AppCompatActivity {
         TextView set2 = findViewById(R.id.set2);
         TextView tiger_count = findViewById(R.id.tiger_count);
         Button final_btn = findViewById(R.id.final_btn);
+
+        final_score.setText(score_text+"점");
+
+//        int set1_score=80;
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+//                (set1.getWidth(), set1.getHeight() * (set1.getHeight())/set1_score);
+//        set1.setLayoutParams(params);
+//        set1.setText(set1_score+"점");
+//
+//        int set2_score= score_text+15;
+//        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams
+//                (set2.getWidth(), set2.getHeight() * (set2.getHeight())/set2_score);
+//        set2.setLayoutParams(params2);
+//        set2.setText(score_text+"점");
+//
+//        int diff;
+//        if((set1_score - score_text)>0){
+//            diff=set1_score - score_text;
+//        }
+//        else{
+//            diff=score_text - set1_score;
+//        }
+//
+//        diff_score.setText(diff+"점");
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -49,40 +77,6 @@ public class scoreboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent start_intent = new Intent(scoreboard.this, list.class);
                 startActivity(start_intent);
-            }
-        });
-
-        person.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-
-                int final_score_t = 95;
-                final_score.setText(final_score_t+"점");
-
-                int set1_score=80;
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                        (set1.getWidth(), (int) (set1.getHeight() * (set1.getHeight())/set1_score));
-                set1.setLayoutParams(params);
-                set1.setText(set1_score+"점");
-
-//                int set2_score= Integer.parseInt((String) final_score.getText());
-                int set2_score= 95+15;
-                LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams
-                        (set2.getWidth(), (int) (set2.getHeight() * (set2.getHeight())/set2_score));
-                set2.setLayoutParams(params2);
-                set2.setText(((set2_score)-15)+"점");
-
-//                if((set1_score - set2_score)>0){
-//                    diff=set1_score - (set2_score-15);
-//                }
-//                else{
-//                    diff=(set2_score-15) - set1_score;
-//                }
-
-                int diff=(set2_score-15) - set1_score;
-                diff_score.setText(diff+"점");
-
             }
         });
 
