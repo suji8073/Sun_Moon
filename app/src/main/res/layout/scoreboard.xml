@@ -9,22 +9,309 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-66dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            android:background="#FFA84B"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/person"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFA84B"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/icon_person"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="580dp"
+                android:layout_height="match_parent"
+                android:background="#FFA84B"
+                android:backgroundTint="#FFA84B"
+                android:gravity="center"
+                android:text="상승세"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="48sp"
+                tools:ignore="RtlCompat" />
+
+            <ImageButton
+                android:id="@+id/home"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFA84B"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/icon_home" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="최종 점수판" />
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="174dp"
+            android:gravity="bottom"
+            android:text="햇님달님"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="60sp" />
 
-
-        <Button
-            android:id="@+id/home"
+        <TextView
+            android:id="@+id/final_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="홈 화면으로 가기" />
+            android:gravity="center"
+            android:text="90점"
+            android:textAlignment="center"
+            android:textColor="#0E5C9F"
+            android:textSize="130sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/which_score"
+                android:layout_width="375dp"
+                android:layout_height="63dp"
+                android:gravity="center"
+                android:text="1세트의 성적이"
+                android:textAlignment="textEnd"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/diff_score"
+                android:layout_width="36dp"
+                android:layout_height="63dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="5점"
+                android:textAlignment="center"
+                android:textColor="#0C79D8"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="285dp"
+                android:layout_height="63dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="더 높습니다."
+                android:textAlignment="textStart"
+                android:textSize="34sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="330dp"
+                android:layout_height="63dp"
+                android:gravity="center"
+                android:text="호랑이는"
+                android:textAlignment="textEnd"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/tiger_score"
+                android:layout_width="36dp"
+                android:layout_height="63dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2번"
+                android:textAlignment="center"
+                android:textColor="#FF0000"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="348dp"
+                android:layout_height="63dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="등장했습니다."
+                android:textAlignment="textStart"
+                android:textSize="34sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="593dp"
+            android:layout_height="403dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="105dp"
+            android:background="@drawable/final_score">
+
+
+            <LinearLayout
+                android:id="@+id/space"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:layout_width="531dp"
+                android:layout_height="322dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="81dp"
+                android:layout_toEndOf="@+id/space"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/set1_layout"
+                    android:layout_width="132dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/set1"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:gravity="bottom|center"
+                        android:text="95점"
+                        android:textAlignment="center"
+                        android:textColor="#0C79D8"
+                        android:textSize="28sp" />
+
+                    <ProgressBar
+                        android:id="@+id/pb5"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="false"
+                        android:layout_alignParentEnd="false"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:progressDrawable="@drawable/final_progress" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/set2_layout"
+                    android:layout_width="111dp"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/set2"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:gravity="bottom|center"
+                        android:text="90점"
+                        android:textAlignment="center"
+                        android:textColor="#0C79D8"
+                        android:textSize="28sp" />
+
+                    <ProgressBar
+                        android:id="@+id/pb6"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="55dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="false"
+                        android:layout_alignParentEnd="false"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:progressDrawable="@drawable/final_progress" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="309dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tiger_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:gravity="center"
+                        android:text="2번"
+                        android:textAlignment="center"
+                        android:textColor="#FF0303"
+                        android:textSize="28sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="186dp"
+                        android:layout_height="170dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/tiger" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="548dp"
+                android:layout_height="83dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="319dp"
+                android:layout_marginBottom="1dp"
+                android:layout_toEndOf="@id/space"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/set"
+                    android:layout_width="21dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1세트"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/set3"
+                    android:layout_width="10dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2세트"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/set4"
+                    android:layout_width="193dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="호랑이 등장"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="28sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/final_btn"
+            android:layout_width="197dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/final_btn"
+            android:text="확인"
+            android:textAlignment="center"
+            android:textSize="34sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
