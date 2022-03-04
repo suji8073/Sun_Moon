@@ -25,7 +25,7 @@ public class exercise_screen extends AppCompatActivity {
     Button time, up;
     ScrollView scroll;
     int originX, originY;
-    ImageView image;
+    ImageView image, tiger;
     private int progressStatus = 0;
     private int timerStatus = 10; //90
     private int score_text;
@@ -42,6 +42,7 @@ public class exercise_screen extends AppCompatActivity {
 
         LinearLayout view = findViewById(R.id.view);
         image= findViewById(R.id.image);
+        tiger=findViewById(R.id.tiger_exercise);
 
         scroll= findViewById(R.id.scrl);
         originX = scroll.getScrollX();
@@ -55,7 +56,7 @@ public class exercise_screen extends AppCompatActivity {
         Button score = findViewById(R.id.score);
 
         Timer(time);
-
+        tiger.setVisibility(View.INVISIBLE);
 
         progressStatus = 0;
         pb.setProgress(progressStatus);
@@ -88,8 +89,12 @@ public class exercise_screen extends AppCompatActivity {
                             tv.setText(progressStatus + "");
                             // If task execution completed
 
-                            if(progressStatus==5){
+                            if(progressStatus==5){ //100대신 보기쉽게 임시로 해둔 것
                                 tiger_count+=1;
+                                tiger.setVisibility(View.VISIBLE); //안움직이면 호랑이 계속있음, 프로세스바 안움직임
+                            }
+                            if(progressStatus==8){ //움직이는 신호를 대신함.
+                                tiger.setVisibility(View.INVISIBLE); //호랑이 사라짐
                             }
 
                             if (progressStatus >= 80) {
@@ -145,6 +150,7 @@ public class exercise_screen extends AppCompatActivity {
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     btn.setY(image.getHeight()- view.getHeight() + 1900);
                     tv.setY(image.getHeight()- view.getHeight() + 1500);
+                    tiger.setY(image.getHeight()- view.getHeight() + 1700);
                 }
             });
         }
@@ -191,6 +197,7 @@ public class exercise_screen extends AppCompatActivity {
                             ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(tiger, "Y", tiger.getY(), tiger.getY() - move_num).setDuration(600).start();
 
                             //score.setBackgroundResource(R.drawable.score);
                         }
