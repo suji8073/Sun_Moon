@@ -29,6 +29,7 @@ public class exercise_screen extends AppCompatActivity {
     private int progressStatus = 0;
     private int timerStatus = 10; //90
     private int score_text;
+    public int tiger_count=0;
 
     int move_num = 1000;
 
@@ -86,6 +87,11 @@ public class exercise_screen extends AppCompatActivity {
                             // Show the progress on TextView
                             tv.setText(progressStatus + "");
                             // If task execution completed
+
+                            if(progressStatus==5){
+                                tiger_count+=1;
+                            }
+
                             if (progressStatus >= 80) {
                                 // Set a message of completion
                                 tv.setText("곧 호랑이 ~!");
@@ -96,13 +102,14 @@ public class exercise_screen extends AppCompatActivity {
                             }
                             if (progressStatus == 100) {
                                 // Set a message of completion
-                                tv.setText("어흥");
+                                //tiger_count+=1;
                                 //호랑이 쪽에 100이라고 알림
                             }
                         }
                     });
 
                 }
+
             }
         }).start(); // Start the operation
 
@@ -244,9 +251,9 @@ public class exercise_screen extends AppCompatActivity {
 
                             if(timerStatus ==0){
                                 Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
-                                startActivity(start_intent);
-
                                 start_intent.putExtra("점수", score_text);
+                                start_intent.putExtra("호랑이", tiger_count);
+                                startActivity(start_intent);
                             }
 
                         }
