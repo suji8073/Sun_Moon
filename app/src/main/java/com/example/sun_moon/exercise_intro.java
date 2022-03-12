@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.Surface;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class exercise_intro extends AppCompatActivity {
     Button skip, back;
+    TextView starttext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,7 @@ public class exercise_intro extends AppCompatActivity {
         videoView.setMediaController(mc);
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.im));
         videoView.start();
+
 
 
         skip = findViewById(R.id.skip);
@@ -49,5 +56,6 @@ public class exercise_intro extends AppCompatActivity {
         });
 
     }
+
 
 }
