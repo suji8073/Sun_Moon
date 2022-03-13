@@ -4,9 +4,12 @@ import static java.lang.Thread.sleep;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -23,15 +26,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 public class exercise_screen extends AppCompatActivity {
     Button time, up;
     ScrollView scroll;
     int originX, originY;
     ImageView image;
-    ImageView iv;
     private int progressStatus = 0;
     private int timerStatus = 90;
     private int score_text = 0;
+
+    private SoundPool soundPool;
+    private int sound;
 
     int move_num = 1000;
 
@@ -41,6 +48,20 @@ public class exercise_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen);
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes=new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool=new SoundPool.Builder()
+                    .setMaxStreams(6)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        }else{
+            soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
+        }
+        sound=soundPool.load(this,R.raw.growl,1);
 
         LinearLayout view = findViewById(R.id.view);
         image= findViewById(R.id.image);
@@ -101,6 +122,9 @@ public class exercise_screen extends AppCompatActivity {
                                 // Set a message of completion
                                 tv.setText("어흥");
                                 //호랑이 쪽에 100이라고 알림
+
+                                soundPool.play(sound,1,1,0,0,1);
+
                             }
                         }
                     });
