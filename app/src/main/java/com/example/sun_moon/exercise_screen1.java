@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ public class exercise_screen1 extends AppCompatActivity {
     ScrollView scroll;
     int originX, originY;
     ImageView image;
+    ImageView iv;
     private int progressStatus = 0;
     private int timerStatus = 90;
 
@@ -40,6 +43,8 @@ public class exercise_screen1 extends AppCompatActivity {
 
         LinearLayout view = findViewById(R.id.view);
         image= findViewById(R.id.image);
+
+        Animation anima= AnimationUtils.loadAnimation(this,R.anim.alpha);
 
         scroll= findViewById(R.id.scrl);
         originX = scroll.getScrollX();
@@ -95,6 +100,7 @@ public class exercise_screen1 extends AppCompatActivity {
                             if(progressStatus == 100){
                                 // Set a message of completion
                                 tv.setText("어흥");
+                                iv.startAnimation(anima);
                                 //호랑이 쪽에 100이라고 알림
                             }
                         }

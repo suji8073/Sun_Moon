@@ -35,13 +35,12 @@ public class exercise_intro extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                CountDownTimer countDownTimer=new CountDownTimer(15000,1000) {
-                    @Override
+                CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
                     public void onTick(long millisUntilFinished) {
-                        int num=(int) (millisUntilFinished/1000);
-                        txt.setText(Integer.toString(num+1));
-
+                        int num = (int) (millisUntilFinished / 1000);
+                        txt.setText(Integer.toString(num + 1));
                     }
+
 
                     @Override
                     public void onFinish() {
@@ -53,7 +52,7 @@ public class exercise_intro extends AppCompatActivity {
                 }.start();
 
             }
-        },6000);
+        },600);
 
 
 

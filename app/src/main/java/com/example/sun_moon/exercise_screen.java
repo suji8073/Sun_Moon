@@ -28,6 +28,7 @@ public class exercise_screen extends AppCompatActivity {
     ScrollView scroll;
     int originX, originY;
     ImageView image;
+    ImageView iv;
     private int progressStatus = 0;
     private int timerStatus = 90;
     private int score_text = 0;
