@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sun_Moon">
         <activity
-            android:name=".list"
+            android:name=".loading"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity android:name="com.example.sun_moon.exercise_screen" android:label="exercise_screen"></activity>
-        <activity android:name="com.example.sun_moon.loading" android:label="loading"></activity>
+        <activity android:name="com.example.sun_moon.list" android:label="list"></activity>
         <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"></activity>
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"></activity>
 

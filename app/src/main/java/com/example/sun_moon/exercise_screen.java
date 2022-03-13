@@ -4,13 +4,18 @@ import static java.lang.Thread.sleep;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,15 +26,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 public class exercise_screen extends AppCompatActivity {
     Button time, up;
     ScrollView scroll;
     int originX, originY;
-    ImageView image, tiger;
+    ImageView image;
     private int progressStatus = 0;
-    private int timerStatus = 10; //90
-    private int score_text;
+    private int timerStatus = 90;
+    private int score_text = 0;
     public int tiger_count=0;
+
+    private SoundPool soundPool;
+    private int sound;
 
     int move_num = 1000;
 
@@ -40,9 +50,22 @@ public class exercise_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen);
 
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes=new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool=new SoundPool.Builder()
+                    .setMaxStreams(6)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        }else{
+            soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
+        }
+        sound=soundPool.load(this,R.raw.growl,1);
+
         LinearLayout view = findViewById(R.id.view);
         image= findViewById(R.id.image);
-        tiger=findViewById(R.id.tiger_exercise);
 
         scroll= findViewById(R.id.scrl);
         originX = scroll.getScrollX();
@@ -53,10 +76,15 @@ public class exercise_screen extends AppCompatActivity {
         TextView tv = findViewById(R.id.tv);
         ProgressBar pb = findViewById(R.id.pb);
         Button time = findViewById(R.id.time);
+        TextView time_title = findViewById(R.id.time_title);
         Button score = findViewById(R.id.score);
+        TextView score_title = findViewById(R.id.score_title);
+
+        time_title.bringToFront();
+        score_title.bringToFront();
 
         Timer(time);
-        tiger.setVisibility(View.INVISIBLE);
+
 
         progressStatus = 0;
         pb.setProgress(progressStatus);
@@ -88,15 +116,6 @@ public class exercise_screen extends AppCompatActivity {
                             // Show the progress on TextView
                             tv.setText(progressStatus + "");
                             // If task execution completed
-
-                            if(progressStatus==5){ //100대신 보기쉽게 임시로 해둔 것
-                                tiger_count+=1;
-                                tiger.setVisibility(View.VISIBLE); //안움직이면 호랑이 계속있음, 프로세스바 안움직임
-                            }
-                            if(progressStatus==8){ //움직이는 신호를 대신함.
-                                tiger.setVisibility(View.INVISIBLE); //호랑이 사라짐
-                            }
-
                             if (progressStatus >= 80) {
                                 // Set a message of completion
                                 tv.setText("곧 호랑이 ~!");
@@ -107,14 +126,17 @@ public class exercise_screen extends AppCompatActivity {
                             }
                             if (progressStatus == 100) {
                                 // Set a message of completion
-                                //tiger_count+=1;
+                                tv.setText("어흥");
                                 //호랑이 쪽에 100이라고 알림
+                                tiger_count+=1;
+
+                                soundPool.play(sound,1,1,0,0,1);
+
                             }
                         }
                     });
 
                 }
-
             }
         }).start(); // Start the operation
 
@@ -145,25 +167,26 @@ public class exercise_screen extends AppCompatActivity {
                 public void run() {
                     scroll.fullScroll(ScrollView.FOCUS_DOWN);
                     up.setY(image.getHeight()- view.getHeight());
+                    time_title.setY(image.getHeight()- view.getHeight() + 40);
+                    score_title.setY(image.getHeight()- view.getHeight() + 40);
                     time.setY(image.getHeight()- view.getHeight() + 50);
                     score.setY(image.getHeight()- view.getHeight() + 50);
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     btn.setY(image.getHeight()- view.getHeight() + 1900);
                     tv.setY(image.getHeight()- view.getHeight() + 1500);
-                    tiger.setY(image.getHeight()- view.getHeight() + 1700);
                 }
             });
         }
 
 
 
-//        time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
-//                startActivity(start_intent);
-//            }
-//        });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+                startActivity(start_intent);
+            }
+        });
 
         up = findViewById(R.id.up);
         up.setOnClickListener(new View.OnClickListener() {
@@ -192,12 +215,13 @@ public class exercise_screen extends AppCompatActivity {
 
                             ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
                             ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(time_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(score_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(btn, "Y", btn.getY(), btn.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(tiger, "Y", tiger.getY(), tiger.getY() - move_num).setDuration(600).start();
 
                             //score.setBackgroundResource(R.drawable.score);
                         }
@@ -255,7 +279,6 @@ public class exercise_screen extends AppCompatActivity {
                                 // Set a message of completion
                                 btn.setTextColor(0xAAef484a);
                             }
-
                             if(timerStatus ==0){
                                 Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
                                 start_intent.putExtra("점수", score_text);
@@ -274,7 +297,9 @@ public class exercise_screen extends AppCompatActivity {
 
     public void Score(Button btn) {
         score_text+=1;
-        btn.setText(String.valueOf(score_text));
+        Animation startAnimation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink_animation);
+        btn.startAnimation(startAnimation);
+        btn.setText(String.valueOf(score_text)+"점");
         btn.setBackgroundResource(R.drawable.score_plus);
 //        try{
 //            Thread.sleep(1000);
