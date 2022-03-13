@@ -87,23 +87,6 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/tiger"
                     tools:ignore="SpeakableTextPresentCheck" />
-                <TextView
-                    android:id="@+id/time_title"
-                    android:layout_width="181dp"
-                    android:layout_height="64dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="75dp"
-                    android:layout_marginEnd="42dp"
-                    android:fontFamily="@font/sds"
-                    android:gravity="center"
-                    android:text="@string/time"
-                    android:textAlignment="center"
-                    android:textColor="#FFC809"
-                    android:textSize="45sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlCompat" />
 
                 <Button
                     android:id="@+id/time"
@@ -147,11 +130,29 @@
                     app:srcCompat="@drawable/tiger_exercise" />
 
                 <TextView
+                    android:id="@+id/time_title"
+                    android:layout_width="181dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentRight="false"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginEnd="42dp"
+                    android:fontFamily="@font/sds"
+                    android:gravity="center"
+                    android:text="@string/time"
+                    android:textAlignment="center"
+                    android:textColor="#FFC809"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
                     android:id="@+id/score_title"
                     android:layout_width="181dp"
                     android:layout_height="64dp"
                     android:layout_marginStart="41dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="60dp"
                     android:fontFamily="@font/sds"
                     android:gravity="center"
                     android:text="@string/점수"
