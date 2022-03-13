@@ -36,6 +36,7 @@ public class exercise_screen extends AppCompatActivity {
     private int progressStatus = 0;
     private int timerStatus = 90;
     private int score_text = 0;
+    public int tiger_count=0;
 
     private SoundPool soundPool;
     private int sound;
@@ -75,7 +76,12 @@ public class exercise_screen extends AppCompatActivity {
         TextView tv = findViewById(R.id.tv);
         ProgressBar pb = findViewById(R.id.pb);
         Button time = findViewById(R.id.time);
+        TextView time_title = findViewById(R.id.time_title);
         Button score = findViewById(R.id.score);
+        TextView score_title = findViewById(R.id.score_title);
+
+        time_title.bringToFront();
+        score_title.bringToFront();
 
         Timer(time);
 
@@ -122,6 +128,7 @@ public class exercise_screen extends AppCompatActivity {
                                 // Set a message of completion
                                 tv.setText("어흥");
                                 //호랑이 쪽에 100이라고 알림
+                                tiger_count+=1;
 
                                 soundPool.play(sound,1,1,0,0,1);
 
@@ -160,6 +167,8 @@ public class exercise_screen extends AppCompatActivity {
                 public void run() {
                     scroll.fullScroll(ScrollView.FOCUS_DOWN);
                     up.setY(image.getHeight()- view.getHeight());
+                    time_title.setY(image.getHeight()- view.getHeight() + 40);
+                    score_title.setY(image.getHeight()- view.getHeight() + 40);
                     time.setY(image.getHeight()- view.getHeight() + 50);
                     score.setY(image.getHeight()- view.getHeight() + 50);
                     pb.setY(image.getHeight()- view.getHeight() + 600);
@@ -206,6 +215,8 @@ public class exercise_screen extends AppCompatActivity {
 
                             ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
                             ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(time_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(score_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
@@ -268,6 +279,12 @@ public class exercise_screen extends AppCompatActivity {
                                 // Set a message of completion
                                 btn.setTextColor(0xAAef484a);
                             }
+                            if(timerStatus ==0){
+                                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+                                start_intent.putExtra("점수", score_text);
+                                start_intent.putExtra("호랑이", tiger_count);
+                                startActivity(start_intent);
+                            }
 
                         }
                     });
@@ -282,7 +299,7 @@ public class exercise_screen extends AppCompatActivity {
         score_text+=1;
         Animation startAnimation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink_animation);
         btn.startAnimation(startAnimation);
-        btn.setText(String.valueOf(score_text));
+        btn.setText(String.valueOf(score_text)+"점");
         btn.setBackgroundResource(R.drawable.score_plus);
 //        try{
 //            Thread.sleep(1000);

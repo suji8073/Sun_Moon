@@ -87,6 +87,23 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/tiger"
                     tools:ignore="SpeakableTextPresentCheck" />
+                <TextView
+                    android:id="@+id/time_title"
+                    android:layout_width="181dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginEnd="42dp"
+                    android:fontFamily="@font/sds"
+                    android:gravity="center"
+                    android:text="@string/time"
+                    android:textAlignment="center"
+                    android:textColor="#FFC809"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
 
                 <Button
                     android:id="@+id/time"
@@ -98,7 +115,8 @@
                     android:layout_marginTop="41dp"
                     android:layout_marginEnd="41dp"
                     android:background="@drawable/score"
-                    android:padding="7dp"
+                    android:fontFamily="@font/sds"
+                    android:paddingTop="30dp"
                     android:text="1:30"
                     android:textColor="#00BCD4"
                     android:textSize="50sp" />
@@ -112,9 +130,9 @@
                     android:layout_marginTop="41dp"
                     android:layout_marginEnd="41dp"
                     android:background="@drawable/score"
-                    android:padding="7dp"
-                    android:text="0"
-                    android:textAlignment="center"
+                    android:fontFamily="@font/sds"
+                    android:paddingTop="30dp"
+                    android:text="0점"
                     android:textColor="#00BCD4"
                     android:textSize="50sp" />
 
@@ -127,6 +145,22 @@
                     android:rotation="-17"
                     android:rotationY="180"
                     app:srcCompat="@drawable/tiger_exercise" />
+
+                <TextView
+                    android:id="@+id/score_title"
+                    android:layout_width="181dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="41dp"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/sds"
+                    android:gravity="center"
+                    android:text="@string/점수"
+                    android:textAlignment="center"
+                    android:textColor="#FFC809"
+                    android:textSize="45sp"
+                    android:textStyle="bold" />
+
+
 
 
             </FrameLayout>`
