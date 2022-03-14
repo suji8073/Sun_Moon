@@ -265,7 +265,7 @@
                         android:layout_width="186dp"
                         android:layout_height="170dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/tiger" />
+                        app:srcCompat="@drawable/tiger_progress" />
                 </LinearLayout>
             </LinearLayout>
 

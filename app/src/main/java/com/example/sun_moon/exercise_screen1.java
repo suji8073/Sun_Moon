@@ -51,7 +51,7 @@ public class exercise_screen1 extends AppCompatActivity {
         originY = scroll.getScrollY();
         time = findViewById(R.id.time);
 
-        ImageButton btn = findViewById(R.id.btn); // 호랑이
+        ImageButton btn = findViewById(R.id.tiger_progress); // 호랑이
         TextView tv = findViewById(R.id.tv);
         ProgressBar pb = findViewById(R.id.pb);
         TextView time = findViewById(R.id.time);

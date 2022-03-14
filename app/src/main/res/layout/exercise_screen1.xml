@@ -79,7 +79,7 @@
 
 
                 <ImageButton
-                    android:id="@+id/btn"
+                    android:id="@+id/tiger_progress"
                     style="@android:style/Widget.DeviceDefault.ImageButton"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
