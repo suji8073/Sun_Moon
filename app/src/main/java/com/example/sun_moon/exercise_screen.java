@@ -189,21 +189,22 @@ public class exercise_screen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tiger_exercise.setVisibility(View.INVISIBLE);
+                if (progressStatus <= 10) {
+                    progressStatus = 0;
+                }
+                else if(progressStatus>=100) {
+                    progressStatus = 90;
+                }
+                else{
+                    progressStatus -= 10;
+                }
+
+                Score(score);
+
                 if (up.getY() - move_num >0) {
                     scroll.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (progressStatus <= 10) {
-                                progressStatus = 0;
-                            }
-                            else if(progressStatus>=100) {
-                                progressStatus = 90;
-                            }
-                            else{
-                                progressStatus -= 10;
-                            }
-
-                            Score(score);
 
 
                             //scroll.smoothScrollBy(originX, originY - 1000);
