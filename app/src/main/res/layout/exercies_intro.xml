@@ -64,7 +64,7 @@
 
                 <VideoView
                     android:id="@+id/video"
-                    android:layout_width="880dp"
+                    android:layout_width="800dp"
                     android:layout_height="match_parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></VideoView>
@@ -73,8 +73,8 @@
                     android:id="@+id/skip"
                     android:layout_width="200dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="550dp"
-                    android:layout_marginTop="950dp"
+                    android:layout_marginStart="500dp"
+                    android:layout_marginTop="900dp"
                     android:background="#FFFFFF"
                     android:text="skip"
                     android:textSize="50dp"

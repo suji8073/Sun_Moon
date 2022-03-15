@@ -17,20 +17,30 @@ import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class exercise_intro extends AppCompatActivity {
     Button skip, back;
     TextView txt;
+
+
+    private final Timer mTimer=new Timer();
+    private TimerTask mTimerTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercies_intro);
         txt=findViewById(R.id.txt);
+        skip = findViewById(R.id.skip);
         final VideoView videoView=(VideoView) findViewById(R.id.video);
         MediaController mc=new MediaController(this);
         videoView.setMediaController(mc);
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.im));
         videoView.start();
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -48,16 +58,15 @@ public class exercise_intro extends AppCompatActivity {
                         Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                         startActivity(start_intent);
 
+
+
+
+
                     }
                 }.start();
 
             }
-        },600);
-
-
-
-
-        skip = findViewById(R.id.skip);
+        },900000);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +75,7 @@ public class exercise_intro extends AppCompatActivity {
                 startActivity(start_intent);
             }
         });
+
 
         back = findViewById(R.id.back);
 
