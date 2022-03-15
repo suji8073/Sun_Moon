@@ -84,7 +84,7 @@ public class exercise_intro extends AppCompatActivity {
         });
 
 
-        Button back = findViewById(R.id.back);
+        TextView back = findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,9 +109,11 @@ public class exercise_intro extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while(timerStatus > 0 ){
                     timerStatus -=1;
-                    txt.setText(String.valueOf(timerStatus));
+                    txt.setText(timerStatus+"");
+
                     try{
                         Thread.sleep(1000);
                     }catch(InterruptedException e){
