@@ -21,7 +21,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class exercise_intro extends AppCompatActivity {
-    Button skip, back;
+    Button skip;
+    TextView back;
     TextView txt;
     private CountDownTimer countDownTimer;
     private boolean TimerRunning;
