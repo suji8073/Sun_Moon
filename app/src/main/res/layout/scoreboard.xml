@@ -37,12 +37,12 @@
                 android:layout_height="match_parent"
                 android:background="#FFA84B"
                 android:backgroundTint="#FFA84B"
+                android:fontFamily="@font/sds"
                 android:gravity="center"
                 android:text="상승세"
-                android:fontFamily="@font/sds"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="48sp"
+                android:textSize="52sp"
                 tools:ignore="RtlCompat" />
 
             <ImageButton
@@ -60,23 +60,23 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="174dp"
-            android:gravity="bottom"
             android:fontFamily="@font/sds"
+            android:gravity="bottom"
             android:text="햇님달님"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="60dp" />
+            android:textSize="63dp" />
 
         <TextView
             android:id="@+id/final_score"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="184dp"
             android:fontFamily="@font/sds"
-            android:text="90점"
+            android:gravity="center"
+            android:text="80점"
             android:textAlignment="center"
             android:textColor="#0E5C9F"
-            android:textSize="130sp" />
+            android:textSize="135sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,34 +87,34 @@
                 android:id="@+id/which_score"
                 android:layout_width="375dp"
                 android:layout_height="63dp"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="1세트의 성적이"
                 android:textAlignment="textEnd"
-                android:textSize="34sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/diff_score"
                 android:layout_width="36dp"
                 android:layout_height="63dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="5점"
                 android:textAlignment="center"
                 android:textColor="#0C79D8"
-                android:textSize="34sp" />
+                android:textSize="38sp" />
 
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="285dp"
                 android:layout_height="63dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="더 높습니다."
                 android:textAlignment="textStart"
-                android:textSize="34sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,34 +126,34 @@
                 android:id="@+id/tv2"
                 android:layout_width="330dp"
                 android:layout_height="63dp"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="호랑이는"
                 android:textAlignment="textEnd"
-                android:textSize="34sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/tiger_score"
                 android:layout_width="36dp"
                 android:layout_height="63dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="2번"
                 android:textAlignment="center"
                 android:textColor="#FF0000"
-                android:textSize="34sp" />
+                android:textSize="38sp" />
 
             <TextView
                 android:id="@+id/tv3"
                 android:layout_width="348dp"
                 android:layout_height="63dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/sds"
+                android:gravity="center"
                 android:text="등장했습니다."
                 android:textAlignment="textStart"
-                android:textSize="34sp" />
+                android:textSize="36sp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -173,40 +173,42 @@
                 android:orientation="vertical" />
 
             <LinearLayout
-                android:layout_width="531dp"
-                android:layout_height="322dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="81dp"
+                android:id="@+id/linear"
+                android:layout_width="535dp"
+                android:layout_height="335dp"
                 android:layout_toEndOf="@+id/space"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/set1_layout"
                     android:layout_width="132dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
+                    android:layout_height="286dp"
                     android:gravity="bottom"
                     android:orientation="vertical">
+                    // android:layout_alignBottom="@+id/linear"
+                    android:layout_alignParentBottom="true"
+
 
                     <TextView
                         android:id="@+id/set1"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:gravity="bottom|center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:width="132dp"
+                        android:height="64dp"
                         android:fontFamily="@font/sds"
-                        android:text="95점"
+                        android:gravity="bottom|center"
+                        android:text="80점"
                         android:textAlignment="center"
                         android:textColor="#0C79D8"
-                        android:textSize="28sp" />
+                        android:textSize="30sp" />
 
                     <ProgressBar
                         android:id="@+id/pb5"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
-
-                        android:layout_alignParentTop="false"
-                        android:layout_alignParentEnd="false"
+                        android:layout_alignParentBottom="true"
                         android:layout_gravity="bottom|center_horizontal"
                         android:progressDrawable="@drawable/final_progress" />
 
@@ -215,20 +217,23 @@
                 <LinearLayout
                     android:id="@+id/set2_layout"
                     android:layout_width="111dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="96dp"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/set2"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:gravity="bottom|center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:width="132dp"
+                        android:height="64dp"
                         android:fontFamily="@font/sds"
-                        android:text="90점"
+                        android:gravity="bottom|center"
+                        android:text="75점"
                         android:textAlignment="center"
                         android:textColor="#0C79D8"
-                        android:textSize="28sp" />
+                        android:textSize="30sp" />
 
                     <ProgressBar
                         android:id="@+id/pb6"
@@ -252,13 +257,13 @@
                     <TextView
                         android:id="@+id/tiger_count"
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:gravity="center"
+                        android:layout_height="40dp"
                         android:fontFamily="@font/sds"
+                        android:gravity="center"
                         android:text="2번"
                         android:textAlignment="center"
                         android:textColor="#FF0303"
-                        android:textSize="28sp" />
+                        android:textSize="33sp" />
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -270,13 +275,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear2"
                 android:layout_width="548dp"
-                android:layout_height="83dp"
-                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="319dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="0dp"
                 android:layout_toEndOf="@id/space"
                 android:orientation="horizontal">
 
@@ -285,8 +289,8 @@
                     android:layout_width="21dp"
                     android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:fontFamily="@font/sds"
+                    android:gravity="center"
                     android:text="1세트"
                     android:textAlignment="center"
                     android:textColor="#000000"
@@ -297,8 +301,8 @@
                     android:layout_width="10dp"
                     android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:fontFamily="@font/sds"
+                    android:gravity="center"
                     android:text="2세트"
                     android:textAlignment="center"
                     android:textColor="#000000"
@@ -309,8 +313,8 @@
                     android:layout_width="193dp"
                     android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:fontFamily="@font/sds"
+                    android:gravity="center"
                     android:text="호랑이 등장"
                     android:textAlignment="center"
                     android:textColor="#000000"
@@ -328,7 +332,7 @@
             android:fontFamily="@font/sds"
             android:text="확인"
             android:textAlignment="center"
-            android:textSize="34sp" />
+            android:textSize="40sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

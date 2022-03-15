@@ -31,7 +31,7 @@ public class exercise_screen extends AppCompatActivity {
     int originX, originY;
     ImageView image;
     private int progressStatus = 0;
-    private int timerStatus = 90;
+    private int timerStatus = 10;
     private int score_text = 0;
     public int tiger_count=0;
     ImageView tiger_exercise;
@@ -282,15 +282,15 @@ public class exercise_screen extends AppCompatActivity {
                                 // Set a message of completion
                                 btn.setTextColor(0xAAef484a);
                             }
-                            if(timerStatus ==0){
-                                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
-                                start_intent.putExtra("점수", score_text);
-                                start_intent.putExtra("호랑이", tiger_count);
-                                startActivity(start_intent);
-                            }
 
                         }
                     });
+                }
+                if(timerStatus ==0){
+                    Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
+                    start_intent.putExtra("점수", score_text);
+                    start_intent.putExtra("호랑이", tiger_count);
+                    startActivity(start_intent);
                 }
             }
         }).start(); // Start the operation
