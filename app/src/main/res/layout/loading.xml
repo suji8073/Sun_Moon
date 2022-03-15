@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
     android:orientation="vertical">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="700dp">
-
-        <ImageView
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:layout_marginLeft="520dp"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/rabbit" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pop"
-            android:layout_marginTop="150dp"
-            android:text="Joynt"
-            android:layout_gravity="center"
-            android:textColor="#904805"
-            android:textSize="130dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:fontFamily="@font/pop"
-            android:text="Uptrend"
-            android:layout_gravity="center"
-            android:textColor="#530404"
-            android:textSize="130dp" />
-
-
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,25 +11,15 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType = "fitXY"
-                android:src="@drawable/back2"/>
-
-            <ImageView
-                android:layout_width="330dp"
-                android:layout_height="380dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="60dp"
-                android:src="@drawable/tt" />
-
-
-
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/loading_back" />
         </FrameLayout>
     </LinearLayout>
 
