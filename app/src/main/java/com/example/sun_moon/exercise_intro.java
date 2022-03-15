@@ -23,10 +23,10 @@ import java.util.TimerTask;
 public class exercise_intro extends AppCompatActivity {
     Button skip, back;
     TextView txt;
+    private CountDownTimer countDownTimer;
+    private boolean TimerRunning;
 
 
-    private final Timer mTimer=new Timer();
-    private TimerTask mTimerTask;
 
 
     @Override
@@ -58,21 +58,20 @@ public class exercise_intro extends AppCompatActivity {
                         Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                         startActivity(start_intent);
 
-
-
-
-
                     }
                 }.start();
 
             }
-        },900000);
+        },600);
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                 startActivity(start_intent);
+
+                //위의 타이머 중단해야됨
+                pauseTimer();
             }
         });
 
@@ -87,6 +86,16 @@ public class exercise_intro extends AppCompatActivity {
             }
         });
 
+
+
     }
+    private final Timer mTimer=new Timer();
+    private TimerTask mTimerTask;
+    private void pauseTimer(){
+        countDownTimer.cancel();
+        TimerRunning=false;
+
+    }
+
 
 }
