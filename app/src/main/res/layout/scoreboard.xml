@@ -183,7 +183,7 @@
                     android:id="@+id/set1_layout"
                     android:layout_width="132dp"
                     android:layout_height="286dp"
-                    android:gravity="bottom"
+                    android:gravity="center"
                     android:orientation="vertical">
                     // android:layout_alignBottom="@+id/linear"
                     android:layout_alignParentBottom="true"
@@ -203,6 +203,11 @@
                         android:textColor="#0C79D8"
                         android:textSize="30sp" />
 
+                    <View
+                        android:id="@+id/view_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"/>
+
                     <ProgressBar
                         android:id="@+id/pb5"
                         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -217,8 +222,8 @@
                 <LinearLayout
                     android:id="@+id/set2_layout"
                     android:layout_width="111dp"
-                    android:layout_height="96dp"
-                    android:gravity="bottom"
+                    android:layout_height="286dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -235,6 +240,11 @@
                         android:textColor="#0C79D8"
                         android:textSize="30sp" />
 
+                    <View
+                        android:id="@+id/view_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"/>
+
                     <ProgressBar
                         android:id="@+id/pb6"
                         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -242,7 +252,7 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="false"
                         android:layout_alignParentEnd="false"
-                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:progressDrawable="@drawable/final_progress" />
 
                 </LinearLayout>

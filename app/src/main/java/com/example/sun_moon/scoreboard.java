@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class scoreboard extends AppCompatActivity {
 
+    View view_1, view_2;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,15 @@ public class scoreboard extends AppCompatActivity {
             new_h = (int)(content_h + content_h*0.025*score_text);
         }
 
-        set2_layout.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, new_h));
+
+        ProgressBar pb = findViewById(R.id.pb5);
+        int pb5_height = pb.getLayoutParams().height;
+        int view_new_h = pb5_height / 100 * score_text;
+
+        view_2 = findViewById(R.id.view_2);
+        view_2.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, view_new_h));
+
+        //set2_layout.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, new_h));
         set1.setText(set1_score+"점");
         set2.setText(score_text+"점");
 

@@ -42,18 +42,21 @@ public class exercise_intro extends AppCompatActivity {
         videoView.start();
 
 
-        new Handler().postDelayed(new Runnable() {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+                CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
                     public void onTick(long millisUntilFinished) {
                         int num = (int) (millisUntilFinished / 1000);
-                        txt.setText(Integer.toString(num + 1));
+                        txt.setText(Integer.toString(num));
                     }
 
 
                     @Override
                     public void onFinish() {
+                        handler.removeCallbacksAndMessages(null);
                         txt.setText("시작");
                         Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                         startActivity(start_intent);
@@ -67,6 +70,7 @@ public class exercise_intro extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                handler.removeCallbacksAndMessages(null);
                 Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                 startActivity(start_intent);
 
