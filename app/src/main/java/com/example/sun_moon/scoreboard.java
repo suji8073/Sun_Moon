@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,7 +36,6 @@ public class scoreboard extends AppCompatActivity {
         TextView final_score = findViewById(R.id.final_score);
         TextView diff_score = findViewById(R.id.diff_score);
         TextView tiger_score = findViewById(R.id.tiger_score);
-        TextView set1 = findViewById(R.id.set1);
         TextView set2 = findViewById(R.id.set2);
         TextView tiger_count = findViewById(R.id.tiger_count);
         Button final_btn = findViewById(R.id.final_btn);
@@ -44,16 +44,41 @@ public class scoreboard extends AppCompatActivity {
         tiger_score.setText(tiger+"번");
         tiger_count.setText(tiger+"번");
 
-        int set1_score=80;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (set1.getWidth(), set1.getHeight() * (set1.getHeight())/set1_score);
-        set1.setLayoutParams(params);
-        set1.setText(set1_score+"점");
+        final TextView set1 = findViewById(R.id.set1);
 
-        int set2_score= score_text+15;
-        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams
-                (set2.getWidth(), set2.getHeight() * (set2.getHeight())/set2_score);
-        set2.setLayoutParams(params2);
+        set1.post(new Runnable() {
+            @Override
+            public void run() {
+                set1.getHeight(); //height is ready
+            }
+        });
+
+        //layout세로 - pb세로*(점수/100)
+        int set1_score=80;
+
+        float zero_h = getResources().getDimension(R.dimen.zero_h);
+        float content_w = getResources().getDimension(R.dimen.content_w);
+        float content_h= getResources().getDimension(R.dimen.content_h);
+        float layout_w = getResources().getDimension(R.dimen.layout_w);
+        float layout_h= getResources().getDimension(R.dimen.layout_h);
+
+        LinearLayout set2_layout = findViewById(R.id.set2_layout);
+
+        //int new_h = (int)(content_h*((layout_h-content_h)*(50/100)));
+        //int new_h = (int)(content_h + content_h*0.00249*score_text);
+        int new_h = 0;
+        if(score_text==0){
+            new_h = (int)(zero_h);
+        }
+        else if((score_text>0)&(score_text<4)){
+            new_h = (int)(content_h);
+        }
+        else if(score_text>=4){
+            new_h = (int)(content_h + content_h*0.025*score_text);
+        }
+
+        set2_layout.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, new_h));
+        set1.setText(set1_score+"점");
         set2.setText(score_text+"점");
 
         int diff;
@@ -85,4 +110,23 @@ public class scoreboard extends AppCompatActivity {
 
     }
 
+
+
+
 }
+
+
+
+
+
+//int pb5 = set1_layout.getLay() - set1.getHeight();
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+//                (set1_layout.getWidth(), (int)(set1_layout.getHeight() - pb5*(set1_score/100)));
+//        set1.setLayoutParams(params);
+//        int set2_score= score_text+15;
+//        int pb6 = set2_layout.getHeight() - set2.getHeight();
+//        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams
+//                (set2.getWidth(), (int) (set2.getHeight() * 10));
+//        //(set2.getHeight())/set2_score
+//        set2.setLayoutParams(params2);
+//        set2.setText(score_text+"점");

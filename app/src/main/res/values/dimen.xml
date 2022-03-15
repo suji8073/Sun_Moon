@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero_h">64dp</dimen>
+    <dimen name="content_w">132dp</dimen>
+    <dimen name="content_h">96dp</dimen>
+    <dimen name="layout_w">132dp</dimen>
+    <dimen name="layout_h">335dp</dimen>
+</resources>
