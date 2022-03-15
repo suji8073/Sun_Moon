@@ -30,7 +30,7 @@ public class exercise_screen extends AppCompatActivity {
     ScrollView scroll;
     int originX, originY;
     ImageView image;
-    private int progressStatus = 0;
+    private int progressStatus = 80;
     private int timerStatus = 10;
     private int score_text = 0;
     public int tiger_count=0;
@@ -88,7 +88,7 @@ public class exercise_screen extends AppCompatActivity {
         Timer(time);
 
 
-        progressStatus = 0;
+        //progressStatus = 0;
         pb.setProgress(progressStatus);
 
         // Start the lengthy operation in a background thread
@@ -138,7 +138,7 @@ public class exercise_screen extends AppCompatActivity {
 
                             }
                             if(progressStatus >100){
-                                progressStatus=100;
+                                progressStatus=101;
                             }
                         }
                     });
@@ -174,15 +174,6 @@ public class exercise_screen extends AppCompatActivity {
             });
         }
 
-
-
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent start_intent = new Intent(exercise_screen.this, scoreboard.class);
-                startActivity(start_intent);
-            }
-        });
 
         up = findViewById(R.id.up);
         up.setOnClickListener(new View.OnClickListener() {

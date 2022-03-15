@@ -4,4 +4,5 @@
     <string name="timer" />
     <string name="점수">점수</string>
     <string name="time">Time</string>
+    <string name="_10">10</string>
 </resources>

@@ -89,6 +89,7 @@
                     android:layout_marginTop="204dp"
                     android:fontFamily="@font/sds"
                     android:textAlignment="center"
+                    android:text="@string/_10"
                     android:textSize="400dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

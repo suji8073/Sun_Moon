@@ -80,14 +80,15 @@ public class scoreboard extends AppCompatActivity {
         }
 
 
-        ProgressBar pb = findViewById(R.id.pb5);
-        int pb5_height = pb.getLayoutParams().height;
-        int view_new_h = pb5_height / 100 * score_text;
+//        ProgressBar pb = findViewById(R.id.pb5);
+//        int pb5_height = pb.getLayoutParams().height;
+//        int view_new_h = pb5_height / 100 * score_text;
+//
+//        view_2 = findViewById(R.id.view_2);
+//        view_2.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, view_new_h));
 
-        view_2 = findViewById(R.id.view_2);
-        view_2.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, view_new_h));
+        set2_layout.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, new_h));
 
-        //set2_layout.setLayoutParams(new LinearLayout.LayoutParams((int) layout_w, new_h));
         set1.setText(set1_score+"점");
         set2.setText(score_text+"점");
 
