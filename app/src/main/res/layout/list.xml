@@ -84,23 +84,21 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="1000dp"
-                    android:layout_marginTop="120dp"
-                    android:src="@drawable/back2"></ImageView>
+                    android:layout_height="wrap_content"
+                    android:scaleType = "fitXY"
+                    android:src="@drawable/back2"/>
 
                 <ImageView
                     android:layout_width="815dp"
                     android:layout_height="461dp"
                     android:layout_marginLeft="10dp"
-
-                    android:src="@drawable/sisters"></ImageView>
+                    android:src="@drawable/sisters"/>
 
                 <ImageView
                     android:layout_width="300dp"
                     android:layout_height="300dp"
-
                     android:layout_marginTop="500dp"
-                    android:src="@drawable/tt"></ImageView>
+                    android:src="@drawable/tt"/>
 
 
             </FrameLayout>

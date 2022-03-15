@@ -9,26 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="700dp">
 
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginLeft="520dp"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/rabbit" />
+
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="600dp"
-            android:layout_height="558dp"
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/pop"
-            android:text="\n\nJoynt"
-            android:textAlignment="viewEnd"
+            android:layout_marginTop="150dp"
+            android:text="Joynt"
+            android:layout_gravity="center"
             android:textColor="#904805"
             android:textSize="130dp" />
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="715dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="500dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
             android:fontFamily="@font/pop"
-            android:text="   Uptrend"
-            android:textAlignment="center"
+            android:text="Uptrend"
+            android:layout_gravity="center"
             android:textColor="#530404"
             android:textSize="130dp" />
 
@@ -46,19 +51,17 @@
 
 
             <ImageView
-                android:layout_width="1000dp"
-                android:layout_height="600dp"
-                android:layout_marginLeft="-150dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/back2"></ImageView>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType = "fitXY"
+                android:src="@drawable/back2"/>
 
             <ImageView
-                android:layout_width="350dp"
-                android:layout_height="400dp"
-                android:layout_marginLeft="-70dp"
-
-                android:layout_marginTop="100dp"
-                android:src="@drawable/tt"></ImageView>
+                android:layout_width="330dp"
+                android:layout_height="380dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/tt" />
 
 
 
