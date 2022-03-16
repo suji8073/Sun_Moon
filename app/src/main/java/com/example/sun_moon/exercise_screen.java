@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,9 +37,10 @@ public class exercise_screen extends AppCompatActivity {
     public int tiger_count=0;
     ImageView tiger_exercise;
     ImageView tiger_progress;
+    MediaPlayer mediaPlayer;
 
     private SoundPool soundPool;
-    private int sound;
+    private int sound, sound1;
 
     int move_num = 1000;
 
@@ -48,6 +50,9 @@ public class exercise_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen);
+        mediaPlayer = MediaPlayer.create(this, R.raw.background);
+        //mediaPlayer.setLooping(true); //무한재생
+        mediaPlayer.start();
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes audioAttributes=new AudioAttributes.Builder()
@@ -62,6 +67,7 @@ public class exercise_screen extends AppCompatActivity {
             soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
         }
         sound=soundPool.load(this,R.raw.growl,1);
+        sound1=soundPool.load(this,R.raw.plus,1);
 
         LinearLayout view = findViewById(R.id.view);
         image= findViewById(R.id.image);
@@ -295,12 +301,17 @@ public class exercise_screen extends AppCompatActivity {
         btn.startAnimation(startAnimation);
         btn.setText(String.valueOf(score_text)+"점");
         btn.setBackgroundResource(R.drawable.score_plus);
+
 //        try{
 //            Thread.sleep(1000);
 //        }catch(InterruptedException e){
 //            e.printStackTrace();
 //        }
 //        btn.setBackgroundResource(R.drawable.score);
+
+
+        soundPool.play(sound1,1,1,0,0,1);
+
     }
 
 }
