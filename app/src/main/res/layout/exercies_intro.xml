@@ -6,7 +6,7 @@
     android:background="#EAA45F"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="50dp"
@@ -22,7 +22,9 @@
                 android:id="@+id/video"
                 android:layout_width="fill_parent"
                 android:layout_gravity="center"
-                android:layout_height="fill_parent" />
+                android:layout_height="fill_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
 
 
@@ -80,9 +82,8 @@
                 android:textSize="50dp" />
 
 
-
-
         </FrameLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>

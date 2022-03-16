@@ -2,6 +2,7 @@ package com.example.sun_moon;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -22,12 +23,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class exercise_intro extends AppCompatActivity {
-    TextView txt;
+    TextView txt, back;
     //private CountDownTimer countDownTimer;
     //private boolean TimerRunning;
-    private int timerStatus=10;
+    public int timerStatus=10;
     private final Handler handler = new Handler();
-
+    Button skip;
+    VideoView videoView;
 
 
     @Override
@@ -35,14 +37,15 @@ public class exercise_intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercies_intro);
         txt=findViewById(R.id.txt);
-        Button skip = findViewById(R.id.skip);
-        final VideoView videoView=(VideoView) findViewById(R.id.video);
+        skip = findViewById(R.id.skip);
+        videoView= findViewById(R.id.video);
         MediaController mc=new MediaController(this);
         videoView.setMediaController(mc);
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.im));
         videoView.start();
 
-        Timer(txt);
+
+        runThread(txt);
 
 
 
@@ -84,7 +87,7 @@ public class exercise_intro extends AppCompatActivity {
         });
 
 
-        TextView back = findViewById(R.id.back);
+        back = findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +101,12 @@ public class exercise_intro extends AppCompatActivity {
 
 
     }
-//    private final Timer mTimer=new Timer();
+
+    private Activity getActivity() {
+        return null;
+    }
+
+    //    private final Timer mTimer=new Timer();
 //    private TimerTask mTimerTask;
 //    private void pauseTimer(){
 //        countDownTimer.cancel();
@@ -112,7 +120,7 @@ public class exercise_intro extends AppCompatActivity {
 
                 while(timerStatus > 0 ){
                     timerStatus -=1;
-                    txt.setText(timerStatus+"");
+                    txt.setText("");
 
                     try{
                         Thread.sleep(1000);
@@ -127,6 +135,35 @@ public class exercise_intro extends AppCompatActivity {
                 }
             }
         }).start(); // Start the operation
+    }
+
+    private void runThread(TextView txt) {
+
+        new Thread() {
+            public void run() {
+                while (timerStatus >= 0 ) {
+                    try {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                timerStatus -=1;
+                                txt.setText(String.valueOf(timerStatus));
+
+                                if (timerStatus == 0)
+                                {
+                                    txt.setText("시작");
+                                    Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
+                                    startActivity(start_intent);
+                                }
+                            }
+                        });
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 
 
