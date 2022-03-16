@@ -24,8 +24,6 @@ import java.util.TimerTask;
 
 public class exercise_intro extends AppCompatActivity {
     TextView txt, back;
-    //private CountDownTimer countDownTimer;
-    //private boolean TimerRunning;
     public int timerStatus=10;
     private final Handler handler = new Handler();
     Button skip;
