@@ -27,8 +27,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class exercise_screen extends AppCompatActivity {
-    Button time, up;
+    Button up;
     ScrollView scroll;
+    ProgressBar pb;
+    TextView time, tv, score;
     int originX, originY;
     ImageView image;
     private int progressStatus = 0;
@@ -38,6 +40,7 @@ public class exercise_screen extends AppCompatActivity {
     ImageView tiger_exercise;
     ImageView tiger_progress;
     MediaPlayer mediaPlayer;
+    LinearLayout view, score_view, time_view;
 
     private SoundPool soundPool;
     private int sound, sound1;
@@ -69,27 +72,25 @@ public class exercise_screen extends AppCompatActivity {
         sound=soundPool.load(this,R.raw.growl,1);
         sound1=soundPool.load(this,R.raw.plus,1);
 
-        LinearLayout view = findViewById(R.id.view);
+        view = findViewById(R.id.view);
         image= findViewById(R.id.image);
+
+        score_view = findViewById(R.id.score_view);
+        time_view= findViewById(R.id.time_view);
 
         scroll= findViewById(R.id.scrl);
         originX = scroll.getScrollX();
         originY = scroll.getScrollY();
         time = findViewById(R.id.time);
 
-        TextView tv = findViewById(R.id.tv);
-        ProgressBar pb = findViewById(R.id.pb);
-        Button time = findViewById(R.id.time);
-        TextView time_title = findViewById(R.id.time_title);
-        Button score = findViewById(R.id.score);
-        TextView score_title = findViewById(R.id.score_title);
+        tv = findViewById(R.id.tv);
+        pb = findViewById(R.id.pb);
+        time = findViewById(R.id.time);
+        score = findViewById(R.id.score);
 
         tiger_progress = findViewById(R.id.tiger_progress); // 호랑이
         tiger_exercise = findViewById(R.id.tiger_exercise); // 호랑이
         tiger_exercise.setVisibility(View.INVISIBLE);
-
-        time_title.bringToFront();
-        score_title.bringToFront();
 
         Timer(time);
 
@@ -121,13 +122,13 @@ public class exercise_screen extends AppCompatActivity {
                         public void run() {
                             pb.setProgress(progressStatus);
                             // Show the progress on TextView
-                            if(progressStatus<100){
-                                tv.setText(" ");
+                            if(progressStatus < 100){
+                                //tv.setText(" ");
                             }
                             // If task execution completed
                             if ((progressStatus >= 80)&(progressStatus<100)) {
                                 // Set a message of completion
-                                tv.setText("곧 호랑이 ~!");
+                                //tv.setText("곧 호랑이 ~!");
                                 tv.setTextColor(0xAAef484a);
 
                                 //pb.setProgressBackgroundTintList(ColorStateList.valueOf(Color.RED));
@@ -135,7 +136,7 @@ public class exercise_screen extends AppCompatActivity {
                             }
                             if (progressStatus == 100) {
                                 // Set a message of completion
-                                tv.setText("어흥");
+                                //tv.setText("어흥");
                                 //호랑이 쪽에 100이라고 알림
                                 tiger_count+=1;
                                 tiger_exercise.setVisibility(View.VISIBLE);
@@ -168,14 +169,19 @@ public class exercise_screen extends AppCompatActivity {
                 public void run() {
                     scroll.fullScroll(ScrollView.FOCUS_DOWN);
                     up.setY(image.getHeight()- view.getHeight());
-                    time_title.setY(image.getHeight()- view.getHeight() + 40);
+                   /* time_title.setY(image.getHeight()- view.getHeight() + 40);
                     score_title.setY(image.getHeight()- view.getHeight() + 40);
                     time.setY(image.getHeight()- view.getHeight() + 50);
-                    score.setY(image.getHeight()- view.getHeight() + 50);
+                    score.setY(image.getHeight()- view.getHeight() + 50);*/
+
+                    time_view.setY(image.getHeight()- view.getHeight() + 40);
+                    score_view.setY(image.getHeight()- view.getHeight() + 40);
+
+
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
                     tv.setY(image.getHeight()- view.getHeight() + 1500);
-                    tiger_exercise.setY(image.getHeight()- view.getHeight() + 1900);
+                    tiger_exercise.setY(image.getHeight()- view.getHeight() + 1600);
                 }
             });
         }
@@ -202,33 +208,27 @@ public class exercise_screen extends AppCompatActivity {
                     scroll.post(new Runnable() {
                         @Override
                         public void run() {
-
-
-                            //scroll.smoothScrollBy(originX, originY - 1000);
-                            //                        ObjectAnimator.ofInt(scroll, "scrollY", view.getHeight()).setDuration(60000).start();
-                            //                        ObjectAnimator.ofFloat(up, "Y", view.getHeight()).setDuration(60000).start();
-                            //                        ObjectAnimator.ofFloat(time, "Y", view.getHeight()+50).setDuration(60000).start();
-                            //                        ObjectAnimator.ofFloat(pb, "Y", view.getHeight()+600).setDuration(60000).start();
-                            //                        ObjectAnimator.ofFloat(btn, "Y", view.getHeight()+1900).setDuration(60000).start();
-                            //                        ObjectAnimator.ofFloat(tv, "Y", view.getHeight()+1500).setDuration(60000).start();
-
                             ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
                             ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(time_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            /*ObjectAnimator.ofFloat(time_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(score_title, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(time, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(score, "Y", time.getY(), time.getY() - move_num).setDuration(600).start();*/
+
+                            ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+                            ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+
+
                             ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
                             ObjectAnimator.ofFloat(tv, "Y", tv.getY(), tv.getY() - move_num).setDuration(600).start();
 
-                            //score.setBackgroundResource(R.drawable.score);
                         }
 
                     });
 
-                    score.setBackgroundResource(R.drawable.score);
+                    score_view.setBackgroundResource(R.drawable.score);
                 }
             }
         });
@@ -236,7 +236,7 @@ public class exercise_screen extends AppCompatActivity {
 
 
     }
-    public void Timer(Button btn) {
+    public void Timer(TextView btn) {
         // Start the lengthy operation in a background thread
         new Thread(new Runnable() {
             @Override
@@ -295,20 +295,12 @@ public class exercise_screen extends AppCompatActivity {
     }
 
 
-    public void Score(Button btn) {
+    public void Score(TextView btn) {
         score_text+=1;
         Animation startAnimation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink_animation);
-        btn.startAnimation(startAnimation);
+        score_view.startAnimation(startAnimation);
         btn.setText(String.valueOf(score_text)+"점");
-        btn.setBackgroundResource(R.drawable.score_plus);
-
-//        try{
-//            Thread.sleep(1000);
-//        }catch(InterruptedException e){
-//            e.printStackTrace();
-//        }
-//        btn.setBackgroundResource(R.drawable.score);
-
+        score_view.setBackgroundResource(R.drawable.score_plus);
 
         soundPool.play(sound1,1,1,0,0,1);
 

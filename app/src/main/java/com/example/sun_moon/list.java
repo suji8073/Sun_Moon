@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class list extends AppCompatActivity {
-    Button move1;
+    Button name;
     Button start;
     Button logout;
 
@@ -30,7 +30,7 @@ public class list extends AppCompatActivity {
             }
         });
 
-        logout=(Button) findViewById(R.id.logout);
+        logout= findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +53,15 @@ public class list extends AppCompatActivity {
                 AlertDialog alert=builder.create();
                 alert.setTitle("종료 알림창");
                 alert.show();
+            }
+        });
+
+        name = findViewById(R.id.name);
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent start = new Intent(list.this, scoreboard.class);
+                startActivity(start);
             }
         });
 
