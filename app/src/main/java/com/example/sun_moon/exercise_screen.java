@@ -30,8 +30,8 @@ public class exercise_screen extends AppCompatActivity {
     ScrollView scroll;
     int originX, originY;
     ImageView image;
-    private int progressStatus = 80;
-    private int timerStatus = 10;
+    private int progressStatus = 0;
+    private int timerStatus = 90;
     private int score_text = 0;
     public int tiger_count=0;
     ImageView tiger_exercise;
@@ -116,7 +116,7 @@ public class exercise_screen extends AppCompatActivity {
                             pb.setProgress(progressStatus);
                             // Show the progress on TextView
                             if(progressStatus<100){
-                                tv.setText(progressStatus + "");
+                                tv.setText(" ");
                             }
                             // If task execution completed
                             if ((progressStatus >= 80)&(progressStatus<100)) {
