@@ -23,6 +23,7 @@
         <activity android:name="com.example.sun_moon.list" android:label="list"></activity>
         <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"></activity>
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"></activity>
+        <activity android:name="com.example.sun_moon.exercise_camera" android:label="exercise_camera"></activity>
 
 
     </application>

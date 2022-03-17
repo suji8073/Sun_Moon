@@ -25,7 +25,7 @@ public class list extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent start_intent = new Intent(list.this, exercise_intro.class);
+                Intent start_intent = new Intent(list.this, exercise_camera.class);
                 startActivity(start_intent);
             }
         });

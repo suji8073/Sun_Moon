@@ -42,6 +42,7 @@ public class exercise_screen extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
 
+
     private SoundPool soundPool;
     private int sound, sound1;
 
@@ -92,6 +93,8 @@ public class exercise_screen extends AppCompatActivity {
         tiger_exercise = findViewById(R.id.tiger_exercise); // 호랑이
         tiger_exercise.setVisibility(View.INVISIBLE);
 
+        final Animation animTransAlpha=AnimationUtils.loadAnimation(this, R.anim.scale);
+
         Timer(time);
 
 
@@ -140,6 +143,8 @@ public class exercise_screen extends AppCompatActivity {
                                 //호랑이 쪽에 100이라고 알림
                                 tiger_count+=1;
                                 tiger_exercise.setVisibility(View.VISIBLE);
+                                tiger_exercise.startAnimation(animTransAlpha);
+
 
                                 soundPool.play(sound,1,1,0,0,1);
 

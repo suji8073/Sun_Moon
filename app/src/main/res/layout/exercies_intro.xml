@@ -41,7 +41,7 @@
                     android:background="@drawable/round"
                     android:fontFamily="@font/sds"
                     android:padding="20dp"
-                    android:text="비틀어 올리기"
+                    android:text="어깨내리기"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="60dp" />
