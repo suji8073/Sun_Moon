@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class scoreboard extends AppCompatActivity {
+public class finalscoreboard extends AppCompatActivity {
 
     View view_1, view_2;
     ImageView home;
@@ -24,7 +24,7 @@ public class scoreboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scoreboard);
+        setContentView(R.layout.finalscoreboard);
 
         Intent secondIntent = getIntent();
         int score_text = secondIntent.getIntExtra("점수",50);
@@ -93,7 +93,7 @@ public class scoreboard extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent start_intent = new Intent(scoreboard.this, list.class);
+                Intent start_intent = new Intent(finalscoreboard.this, list.class);
                 startActivity(start_intent);
             }
         });
@@ -101,7 +101,7 @@ public class scoreboard extends AppCompatActivity {
         final_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent start_intent = new Intent(scoreboard.this, list.class);
+                Intent start_intent = new Intent(finalscoreboard.this, list.class);
                 startActivity(start_intent);
             }
         });
