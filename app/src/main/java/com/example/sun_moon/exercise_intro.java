@@ -39,7 +39,7 @@ public class exercise_intro extends AppCompatActivity {
         videoView= findViewById(R.id.video);
         MediaController mc=new MediaController(this);
         videoView.setMediaController(mc);
-        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.im));
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro));
         videoView.start();
 
 
@@ -111,29 +111,7 @@ public class exercise_intro extends AppCompatActivity {
 //        TimerRunning=false;
 //
 //    }
-    public void Timer(TextView txt){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                while(timerStatus > 0 ){
-                    timerStatus -=1;
-                    txt.setText("");
-
-                    try{
-                        Thread.sleep(1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-                if(timerStatus == 0){
-                    txt.setText("시작");
-                    Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
-                    startActivity(start_intent);
-                }
-            }
-        }).start(); // Start the operation
-    }
 
     private void runThread(TextView txt) {
 
