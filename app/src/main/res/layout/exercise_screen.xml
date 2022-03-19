@@ -94,20 +94,25 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/time_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="103dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/sds"
+                        android:gravity="center"
+                        android:singleLine="true"
                         android:text="@string/time"
                         android:textColor="#FFC809"
                         android:textSize="45dp"
-                        android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        tools:ignore="RtlCompat" />
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0" />
 
-                    <TextView
+
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -115,7 +120,10 @@
                         android:fontFamily="@font/sds"
                         android:text="1:30"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp" />
+                        android:textSize="50dp"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
 
@@ -131,20 +139,24 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/score_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="83dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/sds"
+                        android:gravity="center"
                         android:text="점수"
                         android:textColor="#FFC809"
                         android:textSize="45dp"
-                        android:layout_marginBottom="10dp"
                         android:textStyle="bold"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"
                         tools:ignore="RtlCompat" />
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -152,7 +164,10 @@
                         android:fontFamily="@font/sds"
                         android:text="0점"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp" />
+                        android:textSize="50dp"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
 
