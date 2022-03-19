@@ -27,8 +27,8 @@ public class scoreboard extends AppCompatActivity {
         setContentView(R.layout.scoreboard);
 
         Intent secondIntent = getIntent();
-        int set1_score = secondIntent.getIntExtra("점수_1",0);
-        int score_text = secondIntent.getIntExtra("점수_2",0);
+        int set1_score = secondIntent.getIntExtra("점수_1",10);
+        int score_text = secondIntent.getIntExtra("점수_2",14);
         int tiger = secondIntent.getIntExtra("호랑이",0);
 
 
@@ -54,16 +54,17 @@ public class scoreboard extends AppCompatActivity {
         set2.setText(score_text+"점"); // 사용자의 현재 점수
 
         //사용자 전 세트와 현재 점수 차이 보여주기
-        which_score = findViewById(R.id.which_score);
         pb5 = findViewById(R.id.pb5); //1세트
         pb6 = findViewById(R.id.pb6); //2세트
         view_1 = findViewById(R.id.view_1);
         view_2 = findViewById(R.id.view_2);
 
+        int sum = set1_score + score_text;
+        diff_score.setText((sum / 2) + "점");
+
         if((set1_score - score_text) > 0)
         {
             diff = set1_score - score_text;
-            which_score.setText("1");
 
             pb5.getLayoutParams().height = 440;
             view_1.getLayoutParams().height = 0;
@@ -78,7 +79,6 @@ public class scoreboard extends AppCompatActivity {
         else
         {
             diff = score_text - set1_score;
-            which_score.setText("2");
 
             pb6.getLayoutParams().height = 440;
             view_2.getLayoutParams().height = 0;
@@ -89,7 +89,7 @@ public class scoreboard extends AppCompatActivity {
             view_1.getLayoutParams().height = (int) (diff * user_one_point_dp);
             pb5.getLayoutParams().height = 440 - (int) (diff * user_one_point_dp);
         }
-        diff_score.setText(diff+"점");
+
 
 
         home.setOnClickListener(new View.OnClickListener() {

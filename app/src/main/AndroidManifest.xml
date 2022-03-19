@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-
+        <activity android:name="com.example.sun_moon.login" android:label="login"/>
         <activity android:name="com.example.sun_moon.exercise_screen" android:label="exercise_screen"/>
         <activity android:name="com.example.sun_moon.exercise_screen_1" android:label="exercise_screen_1"/>
         <activity android:name="com.example.sun_moon.list" android:label="list"/>

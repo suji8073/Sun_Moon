@@ -97,23 +97,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
-            <TextView
-                android:id="@+id/which_score"
-                android:layout_width="wrap_content"
-                android:layout_height="63dp"
-                android:fontFamily="@font/sds"
-                android:gravity="center"
-                android:layout_gravity="right"
-                android:text="1"
-                android:textSize="36dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="63dp"
+                android:layout_gravity="right"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
-                android:layout_gravity="right"
-                android:text="세트의 성적이"
+                android:text="평균 게임 스코어는"
                 android:textSize="36dp" />
 
             <TextView
@@ -122,7 +113,7 @@
                 android:layout_height="63dp"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
-                android:text="5점"
+                android:text="40점"
                 android:textAlignment="center"
                 android:textColor="#0C79D8"
                 android:textSize="38dp" />
@@ -133,7 +124,7 @@
                 android:layout_height="63dp"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
-                android:text="더 높습니다."
+                android:text="입니다."
                 android:textSize="36dp" />
 
             <View
@@ -159,12 +150,12 @@
                 android:layout_height="63dp"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
-                android:text="호랑이는"
+                android:text="호랑이는 총"
                 android:textSize="36dp" />
 
             <TextView
                 android:id="@+id/tiger_score"
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="63dp"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
@@ -214,11 +205,15 @@
                 <LinearLayout
                     android:id="@+id/set1_layout"
                     android:layout_width="132dp"
-                    android:layout_height="286dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
 
 
+                    <View
+                        android:id="@+id/view_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="46dp" />
 
                     <TextView
                         android:id="@+id/set1"
@@ -228,16 +223,11 @@
                         android:width="132dp"
                         android:height="64dp"
                         android:fontFamily="@font/sds"
-                        android:gravity="bottom|center"
+                        android:gravity="center"
                         android:text="40점"
                         android:textAlignment="center"
                         android:textColor="#0C79D8"
                         android:textSize="30dp" />
-
-                    <View
-                        android:id="@+id/view_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"/>
 
                     <ProgressBar
                         android:id="@+id/pb5"
@@ -253,9 +243,14 @@
                 <LinearLayout
                     android:id="@+id/set2_layout"
                     android:layout_width="111dp"
-                    android:layout_height="286dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/view_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="69dp" />
 
                     <TextView
                         android:id="@+id/set2"
@@ -265,16 +260,11 @@
                         android:width="132dp"
                         android:height="64dp"
                         android:fontFamily="@font/sds"
-                        android:gravity="bottom|center"
+                        android:gravity="center"
                         android:text="75점"
                         android:textAlignment="center"
                         android:textColor="#0C79D8"
                         android:textSize="30dp" />
-
-                    <View
-                        android:id="@+id/view_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"/>
 
                     <ProgressBar
                         android:id="@+id/pb6"

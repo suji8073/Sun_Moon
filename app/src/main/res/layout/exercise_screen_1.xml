@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/time_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:textStyle="bold"
                         tools:ignore="RtlCompat" />
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/score_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                         android:textStyle="bold"
                         tools:ignore="RtlCompat" />
 
-                    <TextView
+                    <com.example.sun_moon.CustomTextView
                         android:id="@+id/score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
