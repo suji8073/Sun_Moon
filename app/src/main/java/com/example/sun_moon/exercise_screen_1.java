@@ -29,15 +29,13 @@ public class exercise_screen_1 extends AppCompatActivity {
     Button up;
     ScrollView scroll;
     ProgressBar pb;
-    TextView time, tv, score, rest_timer;
+    TextView time, tv, score;
     int originX, originY;
     ImageView image, tiger_exercise, tiger_progress;
     private int progressStatus = 0;
     private int timerStatus = 90;
     MediaPlayer mediaPlayer;
-    LinearLayout view, score_view, time_view, rest_view;
-    int rest_time = 31;
-    float alpha = 1;
+    LinearLayout view, score_view, time_view;
     private int score_text = 0;
     public int tiger_count=0;
 
@@ -45,7 +43,6 @@ public class exercise_screen_1 extends AppCompatActivity {
     private int sound, sound1;
 
     int move_num = 100;
-    View full_view_rest;
     int score_text_1, screen_up;
 
 
@@ -64,11 +61,6 @@ public class exercise_screen_1 extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         mediaPlayer.start();
-        rest_view = findViewById(R.id.rest_view);
-        rest_timer = findViewById(R.id.rest_timer);
-        full_view_rest = findViewById(R.id.full_view_rest);
-        full_view_rest.setVisibility(View.INVISIBLE);
-        rest_view.setVisibility(View.INVISIBLE);
 
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
@@ -130,18 +122,19 @@ public class exercise_screen_1 extends AppCompatActivity {
                     up.setY(image.getHeight()- view.getHeight() - screen_up);
                     time_view.setY(image.getHeight()- view.getHeight() + 40 - screen_up);
                     score_view.setY(image.getHeight()- view.getHeight() + 40 - screen_up);
-                    rest_view.setY(image.getHeight()- view.getHeight() + 800 - screen_up);
 
                     pb.setY(image.getHeight()- view.getHeight() + 600 - screen_up);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900 - screen_up);
                     tv.setY(image.getHeight()- view.getHeight() + 1500 - screen_up);
                     tiger_exercise.setY(image.getHeight()- view.getHeight() + 1600 - screen_up);
-                    up.setEnabled(false);
 
                     ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up_location), Math.round(up_location - screen_up)).setDuration(600).start();
                 }
             });
         }
+
+        Timer();
+        tiget_timer();
 
 
         up = findViewById(R.id.up);
@@ -189,7 +182,6 @@ public class exercise_screen_1 extends AppCompatActivity {
                 }
             }
         });
-        rest_timer();
 
 
 
@@ -317,44 +309,7 @@ public class exercise_screen_1 extends AppCompatActivity {
         soundPool.play(sound1,1,1,0,0,1);
 
     }
-    private void rest_timer() {
-        new Thread() {
-            public void run() {
-                rest_time = 31; // 초기화
-                alpha = 1;
-                float one_set = alpha / rest_time;
-                rest_view.setVisibility(View.VISIBLE);
-                full_view_rest.setVisibility(View.VISIBLE);
-                while (rest_time >= 0 ) {
-                    try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                rest_time--;
-                                System.out.println(rest_time);
-                                rest_timer.setText(String.valueOf(rest_time));
-                                full_view_rest.setAlpha(alpha);
 
-                                if (rest_time == 0) {
-                                    rest_time = -1;
-                                    rest_view.setVisibility(View.INVISIBLE);
-                                    up.setEnabled(true);
-                                    Timer();
-                                    tiget_timer();
-                                }
-
-                                alpha = alpha - one_set;
-
-                            }
-                        });
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
-    }
 
 }
 

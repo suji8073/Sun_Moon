@@ -73,7 +73,7 @@ public class scoreboard extends AppCompatActivity {
             System.out.println(user_one_point_dp);
 
             view_2.getLayoutParams().height = (int) (diff * user_one_point_dp);
-            pb6.getLayoutParams().height =  440 - (int) (score_text * user_one_point_dp);
+            pb6.getLayoutParams().height =  440 - (int) (diff * user_one_point_dp);
         }
 
         else

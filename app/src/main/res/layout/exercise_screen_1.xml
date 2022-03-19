@@ -99,16 +99,21 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/time_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="103dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/sds"
+                        android:gravity="center"
+                        android:singleLine="true"
                         android:text="@string/time"
                         android:textColor="#FFC809"
                         android:textSize="45dp"
-                        android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        tools:ignore="RtlCompat" />
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0" />
+
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/time"
@@ -118,7 +123,10 @@
                         android:fontFamily="@font/sds"
                         android:text="1:30"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp" />
+                        android:textSize="50dp"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
 
@@ -136,15 +144,19 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/score_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="83dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/sds"
+                        android:gravity="center"
                         android:text="점수"
                         android:textColor="#FFC809"
                         android:textSize="45dp"
-                        android:layout_marginBottom="10dp"
                         android:textStyle="bold"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"
                         tools:ignore="RtlCompat" />
 
                     <com.example.sun_moon.CustomTextView
@@ -155,11 +167,12 @@
                         android:fontFamily="@font/sds"
                         android:text="0점"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp" />
+                        android:textSize="50dp"
+                        app:textStroke="true"
+                        app:textStrokeColor="#000000"
+                        app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
-
-
 
 
 
@@ -173,48 +186,6 @@
                     android:rotation="-17"
                     android:rotationY="180"
                     app:srcCompat="@drawable/tiger_exercise" />
-
-                <View
-                    android:id="@+id/full_view_rest"
-                    android:background="#EAA45F"
-                    android:alpha="0.3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <LinearLayout
-                    android:id="@+id/rest_view"
-                    android:layout_marginTop="500dp"
-                    android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="250dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_rest"
-                        android:fontFamily="@font/sds"
-                        android:gravity="center"
-                        android:text="휴식"
-                        android:textColor="#F36300"
-                        android:textSize="50dp" />
-
-
-                    <TextView
-                        android:id="@+id/rest_timer"
-                        android:layout_width="250dp"
-                        android:layout_height="250dp"
-                        android:fontFamily="@font/sds"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="200dp"
-                        android:textStyle="bold"
-                        android:text="30" />
-
-
-                </LinearLayout>
 
 
             </FrameLayout>

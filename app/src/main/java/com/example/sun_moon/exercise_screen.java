@@ -282,7 +282,7 @@ public class exercise_screen extends AppCompatActivity {
                     });
                 }
                 if(timerStatus ==0){
-                    Intent start_intent = new Intent(exercise_screen.this, exercise_screen_1.class);
+                    Intent start_intent = new Intent(exercise_screen.this, rest.class);
                     start_intent.putExtra("점수", score_text);
                     start_intent.putExtra("호랑이", tiger_count);
                     start_intent.putExtra("screen_up", move_num * score_text );
