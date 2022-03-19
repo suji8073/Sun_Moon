@@ -320,7 +320,7 @@ public class exercise_screen_1 extends AppCompatActivity {
     private void rest_timer() {
         new Thread() {
             public void run() {
-                rest_time = 21; // 초기화
+                rest_time = 31; // 초기화
                 alpha = 1;
                 float one_set = alpha / rest_time;
                 rest_view.setVisibility(View.VISIBLE);
