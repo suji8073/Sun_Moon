@@ -4,7 +4,6 @@ package com.example.sun_moon;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,13 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class list extends AppCompatActivity {
     Button name;
-    Button start;
     Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
+
+        Intent secondIntent = getIntent();
+        String name_text = secondIntent.getStringExtra("이름");
+
+        Button name_btn = findViewById(R.id.name);
+        name_btn.setText(name_text);
+
         LinearLayout start = (LinearLayout) findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +47,7 @@ public class list extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 finish();
+
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -53,15 +59,6 @@ public class list extends AppCompatActivity {
                 AlertDialog alert=builder.create();
                 alert.setTitle("종료 알림창");
                 alert.show();
-            }
-        });
-
-        name = findViewById(R.id.name);
-        name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent start = new Intent(list.this, scoreboard.class);
-                startActivity(start);
             }
         });
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    tools:context=".login">
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="316dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="231dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/sds"
+        android:gravity="center"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="85sp" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="626dp"
+        android:layout_height="208dp"
+        android:layout_alignBaseline="@+id/nametag"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:layout_toEndOf="@+id/birthdaytag"
+        android:background="@drawable/round2"
+        android:fontFamily="@font/sds"
+        android:gravity="center"
+        android:hint="이름"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="#C6C6C6"
+        android:textSize="55sp" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="176dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/final_score"
+        android:fontFamily="@font/sds"
+        android:text="확인"
+        android:textAlignment="center"
+        android:textColor="#3E3B3B"
+        android:textSize="40dp" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>
