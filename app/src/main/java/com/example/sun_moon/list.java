@@ -39,7 +39,7 @@ public class list extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(list.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(list.this);
                 builder.setMessage("로그아웃 하시겠습니까?");
                 builder.setTitle("로그아웃 알림창")
                         .setCancelable(false)

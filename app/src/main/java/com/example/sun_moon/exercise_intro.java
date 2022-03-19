@@ -24,7 +24,7 @@ import java.util.TimerTask;
 
 public class exercise_intro extends AppCompatActivity {
     TextView txt, back;
-    public int timerStatus=10;
+    public int timerStatus = 30;
     private final Handler handler = new Handler();
     Button skip;
     VideoView videoView;

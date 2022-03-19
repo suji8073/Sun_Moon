@@ -20,6 +20,34 @@
                 android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/loading_back" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.example.sun_moon.TextGradient
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sds"
+                    android:textColor="@color/black"
+                    android:text="JOYnT"
+                    android:textSize="150dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sds"
+                    android:textColor="#530404"
+                    android:text="Uptrend"
+                    android:textSize="150dp" />
+            </LinearLayout>
+
+
         </FrameLayout>
     </LinearLayout>
 
