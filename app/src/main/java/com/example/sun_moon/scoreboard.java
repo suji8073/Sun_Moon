@@ -34,8 +34,11 @@ public class scoreboard extends AppCompatActivity {
         setContentView(R.layout.scoreboard);
 
         Intent secondIntent = getIntent();
-        int score_text = secondIntent.getIntExtra("점수",50);
+        int set1_score = secondIntent.getIntExtra("점수_1",0);
+        int score_text = secondIntent.getIntExtra("점수_2",0);
         int tiger = secondIntent.getIntExtra("호랑이",0);
+
+
 
         home = findViewById(R.id.home);
         name = findViewById(R.id.name); // 사용자 이름
@@ -54,7 +57,6 @@ public class scoreboard extends AppCompatActivity {
 
         set1 = findViewById(R.id.set1); // 사용자 전 세트 점수
 
-        int set1_score = 40; //사용자의 전 세트 점수
         set1.setText(set1_score+"점");
         set2.setText(score_text+"점"); // 사용자의 현재 점수
 
