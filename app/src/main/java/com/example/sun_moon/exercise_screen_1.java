@@ -63,7 +63,6 @@ public class exercise_screen_1 extends AppCompatActivity {
 
 
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
-        //mediaPlayer.setLooping(true); //무한재생
         mediaPlayer.start();
         rest_view = findViewById(R.id.rest_view);
         rest_timer = findViewById(R.id.rest_timer);
@@ -126,17 +125,12 @@ public class exercise_screen_1 extends AppCompatActivity {
                 @Override
                 public void run() {
                     scroll.fullScroll(ScrollView.FOCUS_DOWN);
-                    System.out.println(scroll.getY());
-                    //scroll.scrollTo(0,-5000);
-                    System.out.println(scroll.getY());
                     float up_location = image.getHeight()- view.getHeight();
 
                     up.setY(image.getHeight()- view.getHeight() - screen_up);
-
                     time_view.setY(image.getHeight()- view.getHeight() + 40 - screen_up);
                     score_view.setY(image.getHeight()- view.getHeight() + 40 - screen_up);
                     rest_view.setY(image.getHeight()- view.getHeight() + 800 - screen_up);
-                    //rest_timer.setY(image.getHeight()- view.getHeight() + 1000);
 
                     pb.setY(image.getHeight()- view.getHeight() + 600 - screen_up);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900 - screen_up);
