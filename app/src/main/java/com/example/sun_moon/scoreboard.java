@@ -2,6 +2,7 @@ package com.example.sun_moon;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,11 +32,13 @@ public class scoreboard extends AppCompatActivity {
         int score_text = secondIntent.getIntExtra("점수_2",14);
         int tiger = secondIntent.getIntExtra("호랑이",0);
 
-
+        SharedPreferences pref;
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String name_text = pref.getString("name",null);
 
         home = findViewById(R.id.home);
         name = findViewById(R.id.name); // 사용자 이름
-        //사용자 이름 수정 코드 추가해야 함.
+        name.setText(name_text);
 
         final_score = findViewById(R.id.final_score);
         diff_score = findViewById(R.id.diff_score);

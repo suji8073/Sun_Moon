@@ -34,7 +34,7 @@ public class exercise_screen extends AppCompatActivity {
     int originX, originY;
     ImageView image;
     private int progressStatus = 0;
-    private int timerStatus = 90;
+    private int timerStatus = 10;
     private int score_text = 0;
     public int tiger_count=0;
     ImageView tiger_exercise;

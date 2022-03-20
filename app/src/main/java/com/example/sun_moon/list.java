@@ -3,6 +3,7 @@ package com.example.sun_moon;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +21,13 @@ public class list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
 
-        Intent secondIntent = getIntent();
-        String name_text = secondIntent.getStringExtra("이름");
+        //Intent secondIntent = getIntent();
+        //String name_text = secondIntent.getStringExtra("이름");
+
+
+        SharedPreferences pref;
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String name_text = pref.getString("name",null);
 
         Button name_btn = findViewById(R.id.name);
         name_btn.setText(name_text);
