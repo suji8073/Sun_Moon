@@ -52,8 +52,8 @@ public class list extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-
+                                Intent start_intent = new Intent(list.this, login.class);
+                                startActivity(start_intent);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

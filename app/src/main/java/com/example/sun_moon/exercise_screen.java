@@ -34,7 +34,7 @@ public class exercise_screen extends AppCompatActivity {
     int originX, originY;
     ImageView image;
     private int progressStatus = 0;
-    private int timerStatus = 10;
+    private int timerStatus = 90;
     private int score_text = 0;
     public int tiger_count=0;
     ImageView tiger_exercise;
@@ -283,6 +283,9 @@ public class exercise_screen extends AppCompatActivity {
                 }
                 if(timerStatus ==0){
                     Intent start_intent = new Intent(exercise_screen.this, rest.class);
+
+                    //배경음악 멈춰야됨.
+
                     start_intent.putExtra("점수", score_text);
                     start_intent.putExtra("호랑이", tiger_count);
                     start_intent.putExtra("screen_up", move_num * score_text );

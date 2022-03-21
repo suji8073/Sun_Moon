@@ -91,7 +91,7 @@ public class exercise_intro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 timerStatus=-1;
-                Intent start_intent = new Intent(exercise_intro.this, list.class);
+                Intent start_intent = new Intent(exercise_intro.this, exercise_camera.class);
                 startActivity(start_intent);
             }
         });
