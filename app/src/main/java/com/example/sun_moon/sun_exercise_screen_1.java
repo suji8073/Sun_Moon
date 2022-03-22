@@ -291,6 +291,7 @@ public class sun_exercise_screen_1 extends AppCompatActivity {
                     start_intent.putExtra("점수_1", score_text_1);
                     start_intent.putExtra("점수_2", score_text);
                     start_intent.putExtra("호랑이", tiger_count);
+                    start_intent.putExtra("game_name", "햇님달님");
                     startActivity(start_intent);
                 }
             }

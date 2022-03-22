@@ -7,164 +7,155 @@
     android:orientation="vertical"
     tools:context=".clap_exercise_screen">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginRight="40dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/score_view"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:background="@drawable/score"
-            android:fontFamily="@font/sds"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
 
-            <com.example.sun_moon.CustomTextView
-                android:id="@+id/score_title"
-                android:layout_width="83dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
+            <LinearLayout
+                android:id="@+id/score_view"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:background="@drawable/score"
                 android:fontFamily="@font/sds"
                 android:gravity="center"
-                android:text="점수"
-                android:textColor="#FFC809"
-                android:textSize="45dp"
-                android:textStyle="bold"
-                app:textStroke="true"
-                app:textStrokeColor="#000000"
-                app:textStrokeWidth="7.0"
-                tools:ignore="RtlCompat" />
+                android:orientation="vertical">
 
-            <com.example.sun_moon.CustomTextView
-                android:id="@+id/score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                <com.example.sun_moon.CustomTextView
+                    android:id="@+id/score_title"
+                    android:layout_width="83dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sds"
+                    android:gravity="center"
+                    android:text="점수"
+                    android:textColor="#FFC809"
+                    android:textSize="45dp"
+                    android:textStyle="bold"
+                    app:textStroke="true"
+                    app:textStrokeColor="#000000"
+                    app:textStrokeWidth="7.0"
+                    tools:ignore="RtlCompat" />
+
+                <com.example.sun_moon.CustomTextView
+                    android:id="@+id/score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sds"
+                    android:text="0점"
+                    android:textColor="#00BCD4"
+                    android:textSize="50dp"
+                    app:textStroke="true"
+                    app:textStrokeColor="#000000"
+                    app:textStrokeWidth="7.0" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/up"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal|top"
+                android:text="*up*"
+                android:textColor="@color/white"
+                android:textSize="40dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+
+            <LinearLayout
+                android:id="@+id/time_view"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="right"
+                android:background="@drawable/score"
                 android:fontFamily="@font/sds"
-                android:text="0점"
-                android:textColor="#00BCD4"
-                android:textSize="50dp"
-                app:textStroke="true"
-                app:textStrokeColor="#000000"
-                app:textStrokeWidth="7.0" />
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <com.example.sun_moon.CustomTextView
+                    android:id="@+id/time_title"
+                    android:layout_width="103dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/sds"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/time"
+                    android:textColor="#FFC809"
+                    android:textSize="45dp"
+                    android:textStyle="bold"
+                    app:textStroke="true"
+                    app:textStrokeColor="#000000"
+                    app:textStrokeWidth="7.0" />
+
+
+                <com.example.sun_moon.CustomTextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sds"
+                    android:text="1:30"
+                    android:textColor="#00BCD4"
+                    android:textSize="50dp"
+                    app:textStroke="true"
+                    app:textStrokeColor="#000000"
+                    app:textStrokeWidth="7.0" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/pb"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="65dp"
+                android:layout_height="610dp"
+                android:layout_marginLeft="37.5dp"
+                android:progressDrawable="@drawable/progress" />
+
+            <ImageView
+                android:id="@+id/tiger_progress"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/pb"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/tiger_progress" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/up"
+            android:id="@+id/next"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal|top"
-            android:text="*up*"
+            android:layout_gravity="bottom"
+            android:text="*next*"
             android:textColor="@color/white"
             android:textSize="40dp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-
-        <LinearLayout
-            android:id="@+id/time_view"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="right"
-            android:background="@drawable/score"
-            android:fontFamily="@font/sds"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.example.sun_moon.CustomTextView
-                android:id="@+id/time_title"
-                android:layout_width="103dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/sds"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/time"
-                android:textColor="#FFC809"
-                android:textSize="45dp"
-                android:textStyle="bold"
-                app:textStroke="true"
-                app:textStrokeColor="#000000"
-                app:textStrokeWidth="7.0" />
-
-
-            <com.example.sun_moon.CustomTextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/sds"
-                android:text="1:30"
-                android:textColor="#00BCD4"
-                android:textSize="50dp"
-                app:textStroke="true"
-                app:textStrokeColor="#000000"
-                app:textStrokeWidth="7.0" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ProgressBar
-            android:id="@+id/pb"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="65dp"
-            android:layout_height="610dp"
-            android:layout_marginLeft="37.5dp"
-            android:progressDrawable="@drawable/progress" />
-
-        <ImageView
-            android:id="@+id/tiger_progress"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@id/pb"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/tiger_progress" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"/>
-
-
-    <Button
-        android:id="@+id/next"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom"
-        android:text="*next*"
-        android:textColor="@color/white"
-        android:textSize="40dp" />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
+    </FrameLayout>
 
 </LinearLayout>

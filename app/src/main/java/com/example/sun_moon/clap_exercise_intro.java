@@ -67,11 +67,9 @@ public class clap_exercise_intro extends AppCompatActivity {
             public void onClick(View view) {
                 //handler.removeCallbacksAndMessages(null);
                 timerStatus=-1;
-                Intent start_intent = new Intent(clap_exercise_intro.this, sun_exercise_screen.class);
-                //startActivity(start_intent);
-
-                //위의 타이머 중단해야됨
-                //pauseTimer();
+                Intent start_intent = new Intent(clap_exercise_intro.this, clap_exercise_screen.class);
+                startActivity(start_intent);
+                
             }
         });
 

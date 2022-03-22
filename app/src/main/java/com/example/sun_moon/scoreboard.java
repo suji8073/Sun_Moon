@@ -16,10 +16,11 @@ public class scoreboard extends AppCompatActivity {
 
     View view_1, view_2;
     ImageView home;
-    TextView name, diff_score, final_score, tiger_score, set1, set2, tiger_count, which_score;
+    TextView name, game_name, diff_score, final_score, tiger_score, set1, set2, tiger_count, which_score;
     Button final_btn;
     ProgressBar pb5, pb6;
     int diff = 0;
+    String game_name_get;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -31,6 +32,7 @@ public class scoreboard extends AppCompatActivity {
         int set1_score = secondIntent.getIntExtra("점수_1",10);
         int score_text = secondIntent.getIntExtra("점수_2",14);
         int tiger = secondIntent.getIntExtra("호랑이",0);
+        game_name_get = secondIntent.getStringExtra("game_name");
 
         SharedPreferences pref;
         pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -39,7 +41,7 @@ public class scoreboard extends AppCompatActivity {
         home = findViewById(R.id.home);
         name = findViewById(R.id.name); // 사용자 이름
         name.setText(name_text);
-
+        game_name = findViewById(R.id.game_name);
         final_score = findViewById(R.id.final_score);
         diff_score = findViewById(R.id.diff_score);
         tiger_score = findViewById(R.id.tiger_score);
@@ -49,7 +51,8 @@ public class scoreboard extends AppCompatActivity {
 
         final_score.setText(score_text+"점"); // 사용자 총 점수
         tiger_score.setText(tiger+"번"); //호랑이 등장 횟수
-        tiger_count.setText(tiger+"번");//호랑이 등장 횟수
+        tiger_count.setText(tiger+"번");//호랑이 등장 횟수'
+        game_name.setText(game_name_get);
 
         set1 = findViewById(R.id.set1); // 사용자 전 세트 점수
 

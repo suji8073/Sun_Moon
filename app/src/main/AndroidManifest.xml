@@ -36,8 +36,8 @@
         <activity android:name="com.example.sun_moon.sun_exercise_screen" android:label="sun_exercise_screen"/>
         <activity android:name="com.example.sun_moon.sun_exercise_screen_1" android:label="sun_exercise_screen_1"/>
 
-<!--        <activity android:name="com.example.sun_moon.clap_exercise_screen" android:label="clap_exercise_screen"/>
-        <activity android:name="com.example.sun_moon.clap_exercise_screen_1" android:label="clap_exercise_screen_1"/>-->
+        <activity android:name="com.example.sun_moon.clap_exercise_screen" android:label="clap_exercise_screen"/>
+        <activity android:name="com.example.sun_moon.clap_exercise_screen_1" android:label="clap_exercise_screen_1"/>
 
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"/>
 
