@@ -15,6 +15,11 @@
             android:layout_height="fill_parent">
 
 
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/loading_back" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -29,7 +34,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/sds"
                     android:textColor="@color/black"
-                    android:text="전체"
+                    android:text="JOYnT"
                     android:textSize="150dp" />
 
                 <TextView
@@ -38,7 +43,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/sds"
                     android:textColor="#530404"
-                    android:text="로딩화면"
+                    android:text="Uptrend"
                     android:textSize="150dp" />
             </LinearLayout>
 

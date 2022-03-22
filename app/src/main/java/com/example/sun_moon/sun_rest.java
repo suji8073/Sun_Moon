@@ -2,14 +2,12 @@ package com.example.sun_moon;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class rest extends AppCompatActivity {
+public class sun_rest extends AppCompatActivity {
     int rest_time = 31;
     float alpha = 1;
     ImageView full_view_rest;
@@ -20,7 +18,7 @@ public class rest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rest);
+        setContentView(R.layout.sun_rest);
 
         full_view_rest = findViewById(R.id.full_view_rest);
         rest_timer = findViewById(R.id.rest_timer);
@@ -49,7 +47,7 @@ public class rest extends AppCompatActivity {
 
                                 if (rest_time == 0) {
                                     rest_time = -1;
-                                    Intent start_intent = new Intent(rest.this, exercise_screen_1.class);
+                                    Intent start_intent = new Intent(sun_rest.this, sun_exercise_screen_1.class);
                                     start_intent.putExtra("점수", score_text_1);
                                     start_intent.putExtra("호랑이", tiger_count);
                                     start_intent.putExtra("screen_up", screen_up );

@@ -1,28 +1,19 @@
 package com.example.sun_moon;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MediaController;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class exercise_intro extends AppCompatActivity {
+public class clap_exercise_intro extends AppCompatActivity {
     TextView txt, back;
     public int timerStatus = 30;
     private final Handler handler = new Handler();
@@ -33,7 +24,7 @@ public class exercise_intro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercies_intro);
+        setContentView(R.layout.clap_exercies_intro);
         txt=findViewById(R.id.txt);
         skip = findViewById(R.id.skip);
         videoView= findViewById(R.id.video);
@@ -71,13 +62,13 @@ public class exercise_intro extends AppCompatActivity {
 //            }
 //        },600);
 
-        skip.setOnClickListener(new View.OnClickListener() {
+        skip.setOnClickListener(new View.OnClickListener() { // 운동 화면으로 넘어가기
             @Override
             public void onClick(View view) {
                 //handler.removeCallbacksAndMessages(null);
                 timerStatus=-1;
-                Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
-                startActivity(start_intent);
+                Intent start_intent = new Intent(clap_exercise_intro.this, sun_exercise_screen.class);
+                //startActivity(start_intent);
 
                 //위의 타이머 중단해야됨
                 //pauseTimer();
@@ -91,7 +82,7 @@ public class exercise_intro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 timerStatus=-1;
-                Intent start_intent = new Intent(exercise_intro.this, list.class);
+                Intent start_intent = new Intent(clap_exercise_intro.this, list.class);
                 startActivity(start_intent);
             }
         });
@@ -128,7 +119,7 @@ public class exercise_intro extends AppCompatActivity {
                                 if (timerStatus == 0)
                                 {
                                     txt.setText("시작");
-                                    Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
+                                    Intent start_intent = new Intent(clap_exercise_intro.this, sun_exercise_screen.class);
                                     startActivity(start_intent);
                                 }
                             }

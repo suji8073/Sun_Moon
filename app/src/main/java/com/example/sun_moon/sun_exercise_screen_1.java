@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class exercise_screen_1 extends AppCompatActivity {
+public class sun_exercise_screen_1 extends AppCompatActivity {
     Button up;
     ScrollView scroll;
     ProgressBar pb;
@@ -51,7 +51,7 @@ public class exercise_screen_1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercise_screen_1);
+        setContentView(R.layout.sun_exercise_screen_1);
 
         Intent intent = getIntent(); //전달할 데이터를 받을 Intent
         score_text_1 = intent.getIntExtra("점수", 0);
@@ -287,7 +287,7 @@ public class exercise_screen_1 extends AppCompatActivity {
                     });
                 }
                 if(timerStatus ==0){
-                    Intent start_intent = new Intent(exercise_screen_1.this, scoreboard.class);
+                    Intent start_intent = new Intent(sun_exercise_screen_1.this, scoreboard.class);
                     start_intent.putExtra("점수_1", score_text_1);
                     start_intent.putExtra("점수_2", score_text);
                     start_intent.putExtra("호랑이", tiger_count);

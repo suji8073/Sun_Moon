@@ -23,6 +23,7 @@
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_progress.xml" value="0.208" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_progress1.xml" value="0.208" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/bg_gradient.xml" value="0.126" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/dash.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/exit.xml" value="0.126" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/home_scoreboard.xml" value="0.126" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/ic_launcher_background.xml" value="0.126" />
@@ -34,6 +35,11 @@
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/score_plus.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/vertical.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/clap_exercies_intro.xml" value="0.187109375" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/clap_exercise_screen.xml" value="0.1" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/clap_exercise_screen_1.xml" value="0.187109375" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/clap_loading.xml" value="0.13977832512315272" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/clap_rest.xml" value="0.13977832512315272" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/exercies_intro.xml" value="0.10400000000000001" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/exercise_camera.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/exercise_screen.xml" value="0.1" />
@@ -45,6 +51,10 @@
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/rest.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/scoreboard.xml" value="0.165625" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/sun_exercies_intro.xml" value="0.13977832512315272" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/sun_exercise_screen.xml" value="0.14639364303178484" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/sun_loading.xml" value="0.13977832512315272" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/sun_rest.xml" value="0.187109375" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/exit.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.1" />

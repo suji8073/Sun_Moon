@@ -29,7 +29,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/sds"
                     android:textColor="@color/black"
-                    android:text="전체"
+                    android:text="곶감"
                     android:textSize="150dp" />
 
                 <TextView

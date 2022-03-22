@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -26,7 +25,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class exercise_screen extends AppCompatActivity {
+public class sun_exercise_screen extends AppCompatActivity {
     Button up;
     ScrollView scroll;
     ProgressBar pb;
@@ -53,7 +52,7 @@ public class exercise_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercise_screen);
+        setContentView(R.layout.sun_exercise_screen);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         //mediaPlayer.setLooping(true); //무한재생
         mediaPlayer.start();
@@ -282,7 +281,7 @@ public class exercise_screen extends AppCompatActivity {
                     });
                 }
                 if(timerStatus ==0){
-                    Intent start_intent = new Intent(exercise_screen.this, rest.class);
+                    Intent start_intent = new Intent(sun_exercise_screen.this, sun_rest.class);
                     start_intent.putExtra("점수", score_text);
                     start_intent.putExtra("호랑이", tiger_count);
                     start_intent.putExtra("screen_up", move_num * score_text );

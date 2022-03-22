@@ -20,12 +20,25 @@
         </activity>
 
         <activity android:name="com.example.sun_moon.login" android:label="login"/>
-        <activity android:name="com.example.sun_moon.rest" android:label="rest"/>
-        <activity android:name="com.example.sun_moon.exercise_screen" android:label="exercise_screen"/>
-        <activity android:name="com.example.sun_moon.exercise_screen_1" android:label="exercise_screen_1"/>
         <activity android:name="com.example.sun_moon.list" android:label="list"/>
-        <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"/>
+
+        <activity android:name="com.example.sun_moon.sun_loading" android:label="sun_loading"/>
+        <activity android:name="com.example.sun_moon.clap_loading" android:label="clap_loading"/>
+
         <activity android:name="com.example.sun_moon.exercise_camera" android:label="exercise_camera"/>
+
+        <activity android:name="com.example.sun_moon.clap_exercise_intro" android:label="exercise_intro"/>
+        <activity android:name="com.example.sun_moon.sun_exercise_intro" android:label="sun_exercise_intro"/>
+
+        <activity android:name="com.example.sun_moon.sun_rest" android:label="sun_rest"/>
+        <activity android:name="com.example.sun_moon.clap_rest" android:label="clap_rest"/>
+
+        <activity android:name="com.example.sun_moon.sun_exercise_screen" android:label="sun_exercise_screen"/>
+        <activity android:name="com.example.sun_moon.sun_exercise_screen_1" android:label="sun_exercise_screen_1"/>
+
+<!--        <activity android:name="com.example.sun_moon.clap_exercise_screen" android:label="clap_exercise_screen"/>
+        <activity android:name="com.example.sun_moon.clap_exercise_screen_1" android:label="clap_exercise_screen_1"/>-->
+
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"/>
 
 

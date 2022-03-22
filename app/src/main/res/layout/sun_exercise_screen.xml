@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".exercise_screen">
+    tools:context=".sun_exercise_screen">
 
 
     <LinearLayout
@@ -35,7 +35,14 @@
 
                 </ImageView>
 
-
+                <Button
+                    android:id="@+id/up"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|top"
+                    android:text="*up*"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
 
                 <TextView
                     android:id="@+id/tv"
@@ -69,21 +76,10 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_below="@id/pb"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="951dp"
                     android:src="@drawable/tiger_progress"
                     />
-
-                <Button
-                    android:id="@+id/up"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:layout_marginLeft="300dp"
-                    android:text="*up*"
-                    android:textColor="@color/white"
-                    android:textSize="40dp" />
 
                 <LinearLayout
                     android:id="@+id/time_view"
@@ -177,6 +173,8 @@
 
 
 
+
+
                 <ImageView
                     android:id="@+id/tiger_exercise"
                     android:layout_width="543dp"
@@ -188,7 +186,11 @@
                     app:srcCompat="@drawable/tiger_exercise" />
 
 
-            </FrameLayout>
+
+
+
+
+            </FrameLayout>`
         </ScrollView>
 
 
