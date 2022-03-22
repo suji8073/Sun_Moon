@@ -286,7 +286,7 @@ public class exercise_screen extends AppCompatActivity {
 
                     Intent start_intent = new Intent(exercise_screen.this, rest.class);
 
-                    //배경음악 멈춰야됨.
+                    mediaPlayer.stop();
                     start_intent.putExtra("점수", score_text);
                     start_intent.putExtra("호랑이", tiger_count);
                     start_intent.putExtra("screen_up", move_num * score_text );
