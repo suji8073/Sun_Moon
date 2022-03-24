@@ -27,8 +27,8 @@
 
                 app:srcCompat="@drawable/dash" />
 
-            <SurfaceView
-                android:id="@+id/surfaceview"
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
@@ -68,8 +68,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/back"
+                <Button
+                    android:id="@+id/back2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"

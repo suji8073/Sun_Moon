@@ -28,7 +28,7 @@
         <activity android:name="com.example.sun_moon.exercise_screen_1" android:label="exercise_screen_1"/>
         <activity android:name="com.example.sun_moon.list" android:label="list"/>
         <activity android:name="com.example.sun_moon.exercise_intro" android:label="exercise_intro"/>
-        <activity android:name="com.example.sun_moon.exercise_camera" android:label="exercise_camera" android:screenOrientation="portrait"/>
+        <activity android:name="com.example.sun_moon.camerax" android:label="exercise_camera" android:screenOrientation="portrait"/>
         <activity android:name="com.example.sun_moon.scoreboard" android:label="scoreboard"/>
 
 
