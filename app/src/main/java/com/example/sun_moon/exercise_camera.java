@@ -52,7 +52,7 @@ public class exercise_camera extends AppCompatActivity implements SurfaceHolder.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         setContentView(R.layout.exercise_camera);
         go = findViewById(R.id.go);
         on=findViewById(R.id.on);
