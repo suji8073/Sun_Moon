@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.Preview;
@@ -20,6 +21,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
+
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -96,7 +98,7 @@ public class camerax extends AppCompatActivity {
     }
     void bindPreview(ProcessCameraProvider cameraProvider){
         Preview preview=new Preview.Builder().build();
-        CameraSelector cameraSelector=new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
+        CameraSelector cameraSelector=new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build();
         preview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
         Camera camera=cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
 
