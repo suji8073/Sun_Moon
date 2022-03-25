@@ -13,25 +13,54 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/sds"
-        android:gravity="center"
-        android:text="LOGIN"
-        android:textColor="#FFFFFF"
-        android:textSize="85dp" />
+        android:layout_height="300dp"
+        android:layout_margin="50dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/fat" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.example.sun_moon.TextGradient
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sds"
+                android:text="JOYnT"
+                android:textColor="@color/black"
+                android:textSize="100dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sds"
+                android:text="Uptrend"
+                android:textColor="#530404"
+                android:textSize="100dp" />
+        </LinearLayout>
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="626dp"
-        android:layout_height="208dp"
-        android:layout_alignBaseline="@+id/nametag"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_margin="50dp"
-        android:layout_toEndOf="@+id/birthdaytag"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:background="@drawable/round2"
         android:fontFamily="@font/sds"
         android:gravity="center"
@@ -39,7 +68,7 @@
         android:inputType="text"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="55dp"
+        android:textSize="50dp"
         android:privateImeOptions="defaultInputmode=korean"/>
 
     <Button
@@ -52,7 +81,7 @@
         android:fontFamily="@font/sds"
         android:text="확인"
         android:textAlignment="center"
-        android:textColor="#3E3B3B"
+        android:textColor="#530404"
         android:textSize="40dp" />
 
     <View

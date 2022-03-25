@@ -1,16 +1,12 @@
 package com.example.sun_moon;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.camera.core.Camera;
@@ -22,7 +18,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
@@ -31,11 +26,9 @@ import java.util.concurrent.Executors;
 
 
 public class camerax extends AppCompatActivity {
-    Button back;
+    TextView back;
     Button go;
-
-
-    private Executor executor= Executors.newSingleThreadExecutor();
+    private final Executor executor= Executors.newSingleThreadExecutor();
     private int REQUEST_CODE_PERMISSIONS=1001;
     private final String[] REQUIRED_PERMISSIONS=new String[]{
             "android.permission.CAMERA",
@@ -46,39 +39,31 @@ public class camerax extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_camera);
-        mPreviewView=findViewById(R.id.previewView);
 
-        go=findViewById(R.id.go);
-        back= findViewById(R.id.back2);
+        mPreviewView = findViewById(R.id.previewView);
+
+        if (allPermissionsGranted()) startCamera();
+        else ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
 
 
-        if(allPermissionsGranted()){
-            startCamera();
-        }else{
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
-        }
+        back = findViewById(R.id.back2);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent start_intent = new Intent(camerax.this, list.class);
                 startActivity(start_intent);
             }
         });
+
+        go = findViewById(R.id.go);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent start_intent = new Intent(camerax.this, exercise_intro.class);
                 startActivity(start_intent);
             }
         });
-
-
-
     }
-
-
 
     private void startCamera() {
         final ListenableFuture<ProcessCameraProvider>
@@ -100,10 +85,8 @@ public class camerax extends AppCompatActivity {
         Preview preview=new Preview.Builder().build();
         CameraSelector cameraSelector=new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build();
         preview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
-        Camera camera=cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
-
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
     }
-
 
     private boolean allPermissionsGranted() {
         for(String permission: REQUIRED_PERMISSIONS){
@@ -113,9 +96,6 @@ public class camerax extends AppCompatActivity {
         }
         return true;
     }
-
-
-
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -127,7 +107,4 @@ public class camerax extends AppCompatActivity {
             }
         }
     }
-
-
-
 }

@@ -24,7 +24,6 @@
                 android:id="@+id/dash"
                 android:layout_width="match_parent"
                 android:layout_height="1.5dp"
-
                 app:srcCompat="@drawable/dash" />
 
             <androidx.camera.view.PreviewView
@@ -32,16 +31,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
+                android:background="@drawable/round2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/dot"
-                android:layout_width="fill_parent"
-                android:layout_height="900dp"
-                android:layout_gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="800dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="120dp"
                 app:srcCompat="@drawable/dot" />
 
 
@@ -68,7 +67,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
+                <TextView
                     android:id="@+id/back2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
