@@ -29,15 +29,33 @@
                 android:layout_margin="30dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/name"
+                <LinearLayout
+                    android:id="@+id/name_view"
                     android:layout_width="250dp"
                     android:layout_height="100dp"
                     android:background="@drawable/round"
-                    android:fontFamily="@font/sds"
-                    android:text="상승세"
-                    android:textAllCaps="false"
-                    android:textSize="40sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/person1" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#191919"
+                        android:fontFamily="@font/sds"
+                        android:text="상승세"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textAllCaps="false"
+                        android:textSize="40sp" />
+                </LinearLayout>
 
                 <View
                     android:layout_width="0dp"
@@ -55,6 +73,7 @@
                         android:layout_height="80dp"
                         android:background="@drawable/round"
                         android:fontFamily="@font/sds"
+                        android:textColor="#191919"
                         android:layout_marginBottom="20dp"
                         android:text="로그아웃"
                         android:textSize="30sp" />
@@ -72,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sds"
                             android:textSize="30sp"
-                            android:textColor="@color/black"
+                            android:textColor="#191919"
                             android:layout_marginEnd="20dp"
                             android:text="랭킹" />
 
@@ -132,7 +151,21 @@
                         android:layout_weight="1"/>
 
                 </LinearLayout>
+
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sds"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:padding="20dp"
+                android:background="@drawable/board"
+                android:text="- 추가 예정 -"
+                android:layout_marginTop="300dp"
+                android:textSize="40dp" />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

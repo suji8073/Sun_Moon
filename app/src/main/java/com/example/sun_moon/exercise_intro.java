@@ -37,56 +37,28 @@ public class exercise_intro extends AppCompatActivity {
         txt=findViewById(R.id.txt);
         skip = findViewById(R.id.skip);
         videoView= findViewById(R.id.video);
-        MediaController mc=new MediaController(this);
+        MediaController mc = new MediaController(this);
         videoView.setMediaController(mc);
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro));
         videoView.start();
+
+        videoView.setOnCompletionListener(completionListener);
 
 
         runThread(txt);
 
 
-
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
-//                    public void onTick(long millisUntilFinished) {
-//                        int num = (int) (millisUntilFinished / 1000);
-//                        txt.setText(Integer.toString(num));
-//                    }
-//
-//
-//                    @Override
-//                    public void onFinish() {
-//                        handler.removeCallbacksAndMessages(null);
-//                        txt.setText("시작");
-//                        Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
-//                        startActivity(start_intent);
-//
-//                    }
-//                }.start();
-//
-//            }
-//        },600);
-
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //handler.removeCallbacksAndMessages(null);
                 timerStatus=-1;
                 Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
                 startActivity(start_intent);
-
-                //위의 타이머 중단해야됨
-                //pauseTimer();
             }
         });
 
 
         back = findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,22 +68,15 @@ public class exercise_intro extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-    private Activity getActivity() {
-        return null;
-    }
-
-    //    private final Timer mTimer=new Timer();
-//    private TimerTask mTimerTask;
-//    private void pauseTimer(){
-//        countDownTimer.cancel();
-//        TimerRunning=false;
-//
-//    }
-
+    MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            System.out.println("다시 시작");
+            videoView.start();
+        }
+    };
 
     private void runThread(TextView txt) {
 
@@ -141,6 +106,4 @@ public class exercise_intro extends AppCompatActivity {
             }
         }.start();
     }
-
-
 }

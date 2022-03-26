@@ -8,14 +8,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class list extends AppCompatActivity {
-    Button name_btn;
+    TextView name;
     Button logout;
     String name_text;
     SharedPreferences pref;
-    LinearLayout start;
+    LinearLayout start, name_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,9 @@ public class list extends AppCompatActivity {
         pref = getSharedPreferences("pref", MODE_PRIVATE);
         name_text = pref.getString("name",null);
 
-        name_btn = findViewById(R.id.name);
-        name_btn.setText(name_text);
+        name_view = findViewById(R.id.name_view);
+        name = findViewById(R.id.name);
+        name.setText(name_text);
 
         start = findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
