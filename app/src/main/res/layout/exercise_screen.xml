@@ -22,18 +22,14 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/background">
-
-
-                </ImageView>
+                    app:srcCompat="@drawable/background"/>
 
                 <Button
                     android:id="@+id/up"
@@ -55,8 +51,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="305dp"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progress"
-                    />
+                    android:progressDrawable="@drawable/progress" />
 
 
                 <ImageView
@@ -67,8 +62,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="951dp"
-                    android:src="@drawable/tiger_progress"
-                    />
+                    android:src="@drawable/tiger_progress"/>
 
                 <LinearLayout
                     android:id="@+id/time_view"
@@ -159,11 +153,6 @@
 
                 </LinearLayout>
 
-
-
-
-
-
                 <ImageView
                     android:id="@+id/tiger_exercise"
                     android:layout_width="543dp"
@@ -174,15 +163,16 @@
                     android:rotationY="180"
                     app:srcCompat="@drawable/tiger_exercise" />
 
+                <ImageView
+                    android:id="@+id/tiger_100"
+                    android:layout_width="400dp"
+                    android:layout_height="500dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="750dp"
+                    android:rotationY="180"
+                    app:srcCompat="@drawable/tiger_angry" />
 
-
-
-
-
-            </FrameLayout>`
+            </FrameLayout>
         </ScrollView>
-
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

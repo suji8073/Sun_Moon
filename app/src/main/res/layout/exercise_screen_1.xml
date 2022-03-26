@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".exercise_screen">
+    tools:context=".exercise_screen_1">
 
 
     <LinearLayout
@@ -22,34 +22,24 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/background">
+                    app:srcCompat="@drawable/background"/>
 
+                <Button
+                    android:id="@+id/up"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|top"
+                    android:text="*up*"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
 
-                </ImageView>
-
-
-
-                <TextView
-                    android:id="@+id/tv"
-                    android:layout_width="338dp"
-                    android:layout_height="232dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="700dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:textColor="#676a6b"
-                    android:textSize="60sp" />
 
                 <ProgressBar
                     android:id="@+id/pb"
@@ -58,32 +48,21 @@
                     android:layout_height="610dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="37.5dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="305dp"
-                    android:progressDrawable="@drawable/progress"
-                    />
+                    android:progress="0"
+                    android:progressDrawable="@drawable/progress" />
 
 
                 <ImageView
                     android:id="@+id/tiger_progress"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_below="@id/pb"
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="951dp"
-                    android:src="@drawable/tiger_progress"
-                    />
-
-                <Button
-                    android:id="@+id/up"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:layout_marginLeft="300dp"
-                    android:text="*up*"
-                    android:textColor="@color/white"
-                    android:textSize="40dp" />
+                    android:src="@drawable/tiger_progress"/>
 
                 <LinearLayout
                     android:id="@+id/time_view"
@@ -174,9 +153,6 @@
 
                 </LinearLayout>
 
-
-
-
                 <ImageView
                     android:id="@+id/tiger_exercise"
                     android:layout_width="543dp"
@@ -187,11 +163,16 @@
                     android:rotationY="180"
                     app:srcCompat="@drawable/tiger_exercise" />
 
+                <ImageView
+                    android:id="@+id/tiger_100"
+                    android:layout_width="400dp"
+                    android:layout_height="500dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="750dp"
+                    android:rotationY="180"
+                    app:srcCompat="@drawable/tiger_angry" />
 
             </FrameLayout>
         </ScrollView>
-
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

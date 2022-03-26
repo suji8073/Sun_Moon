@@ -12,7 +12,6 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -31,20 +30,13 @@ public class exercise_screen extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    ImageView image;
-    private int progressStatus = 0;
-    private int timerStatus = 90;
-    private int score_text = 0;
-    public int tiger_count=0;
-    ImageView tiger_exercise;
-    ImageView tiger_progress;
+    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
-    Animation animTransAlpha;
 
     private SoundPool soundPool;
     private int sound, sound1;
-    int move_num = 100;
     private final Handler handler = new Handler();
 
 
@@ -53,22 +45,8 @@ public class exercise_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
-        //mediaPlayer.setLooping(true); //무한재생
         mediaPlayer.start();
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-            AudioAttributes audioAttributes=new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-            soundPool=new SoundPool.Builder()
-                    .setMaxStreams(6)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
-
-        sound=soundPool.load(this,R.raw.growl,1);
-        sound1=soundPool.load(this,R.raw.plus,1);
 
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
@@ -87,16 +65,44 @@ public class exercise_screen extends AppCompatActivity {
 
         tiger_progress = findViewById(R.id.tiger_progress); // 호랑이
         tiger_exercise = findViewById(R.id.tiger_exercise); // 호랑이
-        tiger_exercise.setVisibility(View.INVISIBLE);
+        tiger_100 = findViewById(R.id.tiger_100);// 호랑이 100일 때 나오는 호랑이
 
-        animTransAlpha = AnimationUtils.loadAnimation(this, R.anim.scale);
+        //tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
+        tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
+
 
         Timer();
         progress();
+        system_start();
+        music_start();
 
+        up = findViewById(R.id.up);
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                up_action();
+            }
+        });
+
+    }
+    public void music_start(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes=new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool=new SoundPool.Builder()
+                    .setMaxStreams(6)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
+
+        sound = soundPool.load(this,R.raw.growl,1);
+        sound1 = soundPool.load(this,R.raw.plus,1);
+    }
+
+    public void system_start(){
         pb.setProgress(progressStatus);
-
-
         if (originY == 0) {
             scroll.post(new Runnable() {
                 @Override
@@ -108,48 +114,42 @@ public class exercise_screen extends AppCompatActivity {
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
                     tiger_exercise.setY(image.getHeight()- view.getHeight() + 1600);
+                    tiger_100.setY(image.getHeight()- view.getHeight() + 1400);
                 }
             });
         }
+    }
 
+    public void up_action(){
+        //tiger_exercise.setVisibility(View.INVISIBLE);
+        if (progressStatus <= 10) {
+            progressStatus = 0;
+        }
+        else if(progressStatus >= 100) {
+            progressStatus = 90;
+        }
+        else{
+            progressStatus -= 10;
+        }
 
-        up = findViewById(R.id.up);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tiger_exercise.setVisibility(View.INVISIBLE);
-                if (progressStatus <= 10) {
-                    progressStatus = 0;
+        Score();
+
+        if (up.getY() - move_num >0) {
+            scroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
+                    ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(tiger_100, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
                 }
-                else if(progressStatus >= 100) {
-                    progressStatus = 90;
-                }
-                else{
-                    progressStatus -= 10;
-                }
-
-                Score();
-
-                if (up.getY() - move_num >0) {
-                    scroll.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
-                            ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
-                            ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
-                        }
-                    });
-                    score_view.setBackgroundResource(R.drawable.score);
-                }
-            }
-        });
-
-
-
+            });
+            score_view.setBackgroundResource(R.drawable.score);
+        }
     }
 
     public void progress() {
@@ -173,8 +173,8 @@ public class exercise_screen extends AppCompatActivity {
                             if (progressStatus == 100) { // 호랑이 등장
 
                                 tiger_count += 1;
-                                tiger_exercise.setVisibility(View.VISIBLE);
-                                tiger_exercise.startAnimation(animTransAlpha);
+                                //tiger_exercise.setVisibility(View.VISIBLE);
+                                tiger_100.setVisibility(View.VISIBLE);
                                 soundPool.play(sound,1,1,0,0,1); //호랑이 등장 소리
 
                             }
@@ -212,7 +212,6 @@ public class exercise_screen extends AppCompatActivity {
                             if(timerStatus <=30){
                                 time.setTextColor(0xAAef484a);
                             }
-
                         }
                     });
                 }
