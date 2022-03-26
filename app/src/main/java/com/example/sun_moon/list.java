@@ -17,7 +17,7 @@ public class list extends AppCompatActivity {
     Button logout;
     String name_text;
     SharedPreferences pref;
-    LinearLayout start, name_view;
+    LinearLayout start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,6 @@ public class list extends AppCompatActivity {
         pref = getSharedPreferences("pref", MODE_PRIVATE);
         name_text = pref.getString("name",null);
 
-        name_view = findViewById(R.id.name_view);
         name = findViewById(R.id.name);
         name.setText(name_text);
 

@@ -1,26 +1,17 @@
 package com.example.sun_moon;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.MediaController;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class exercise_intro extends AppCompatActivity {
     TextView txt, back;
@@ -28,7 +19,6 @@ public class exercise_intro extends AppCompatActivity {
     private final Handler handler = new Handler();
     Button skip;
     VideoView videoView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +31,6 @@ public class exercise_intro extends AppCompatActivity {
         videoView.setMediaController(mc);
         videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.intro));
         videoView.start();
-
         videoView.setOnCompletionListener(completionListener);
 
 
@@ -73,13 +62,11 @@ public class exercise_intro extends AppCompatActivity {
     MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
-            System.out.println("다시 시작");
             videoView.start();
         }
     };
 
     private void runThread(TextView txt) {
-
         new Thread() {
             public void run() {
                 while (timerStatus >= 0 ) {
@@ -89,7 +76,6 @@ public class exercise_intro extends AppCompatActivity {
                             public void run() {
                                 timerStatus -=1;
                                 txt.setText(String.valueOf(timerStatus));
-
                                 if (timerStatus == 0)
                                 {
                                     txt.setText("시작");

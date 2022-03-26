@@ -30,7 +30,6 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/name_view"
                     android:layout_width="250dp"
                     android:layout_height="100dp"
                     android:background="@drawable/round"
@@ -45,14 +44,14 @@
 
                     <TextView
                         android:id="@+id/name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="#191919"
                         android:fontFamily="@font/sds"
                         android:text="상승세"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="20dp"
                         android:textAllCaps="false"
                         android:textSize="40sp" />
                 </LinearLayout>
