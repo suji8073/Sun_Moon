@@ -31,7 +31,7 @@ public class exercise_screen_1 extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    private int timerStatus = 10, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
@@ -104,12 +104,15 @@ public class exercise_screen_1 extends AppCompatActivity {
         soundPool.autoPause();
         mediaPlayer.pause();
 
+
     }
     @Override
     protected void onResume(){
         super.onResume();
         soundPool.autoResume();
         mediaPlayer.start();
+
+
 
     }
 
@@ -233,8 +236,7 @@ public class exercise_screen_1 extends AppCompatActivity {
         class TimerThread implements Runnable {
             public void run() {
                 try {
-                    while (!Thread.currentThread().isInterrupted()) {
-                        while (timerStatus > 0) {
+                        while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
                             timerStatus -= 1;
                             try {
                                 Thread.sleep(1000);
@@ -269,7 +271,7 @@ public class exercise_screen_1 extends AppCompatActivity {
                             start_intent.putExtra("호랑이", tiger_count);
                             startActivity(start_intent);
                         }
-                    }
+
 
                 } catch (Exception ignored) {
 

@@ -12,6 +12,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,7 +31,7 @@ public class exercise_screen extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    private int timerStatus = 10, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
@@ -89,16 +90,24 @@ public class exercise_screen extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        Log.v("로그","퍼즈");
         soundPool.autoPause();
         mediaPlayer.pause();
-
+        tthread.interrupt();
+        pthread.interrupt();
     }
     @Override
     protected void onResume(){
         super.onResume();
+        Log.v("로그","리섬");
         soundPool.autoResume();
         mediaPlayer.start();
-
+        if(tthread.isInterrupted()){
+            tthread.start();
+        }
+        if(pthread.isInterrupted()){
+            pthread.start();
+        }
     }
     @Override
     protected void onStop(){
@@ -215,33 +224,29 @@ public class exercise_screen extends AppCompatActivity {
     class TimerThread implements Runnable {
         public void run() {
             try {
-                while (!Thread.currentThread().isInterrupted()) {
-                    while (timerStatus > 0) {
+                    while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
                         timerStatus -= 1;
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        handler.post(new Runnable() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void run() {
-                                if (timerStatus >= 60) {
-                                    if ((timerStatus - 60) <= 9)
-                                        time.setText("1:0" + (timerStatus - 60));
-                                    else time.setText("1:" + (timerStatus - 60));
-                                } else if (timerStatus <= 9)
-                                    time.setText("0:0" + (timerStatus));
-                                else time.setText("0:" + (timerStatus));
+                        handler.post(() -> {
+                            if (timerStatus >= 60) {
+                                if ((timerStatus - 60) <= 9)
+                                    time.setText("1:0" + (timerStatus - 60));
+                                else time.setText("1:" + (timerStatus - 60));
+                            } else if (timerStatus <= 9)
+                                time.setText("0:0" + (timerStatus));
+                            else time.setText("0:" + (timerStatus));
 
-                                if (timerStatus <= 30) {
-                                    time.setTextColor(0xAAef484a);
-                                }
+                            if (timerStatus <= 30) {
+                                time.setTextColor(0xAAef484a);
                             }
                         });
                     }
-                    if (timerStatus == 0){
+                    if (timerStatus == 0&&!Thread.currentThread().isInterrupted()){
+                        Log.v("타이머 탈출","타이머 탈출");
                         mediaPlayer.stop();
                         progressStatus = 101;
                         Intent start_intent = new Intent(exercise_screen.this, rest.class);
@@ -250,7 +255,7 @@ public class exercise_screen extends AppCompatActivity {
                         start_intent.putExtra("screen_up", move_num * score_text );
                         startActivity(start_intent);
                     }
-                }
+
 
             } catch (Exception ignored) {
 
@@ -259,6 +264,8 @@ public class exercise_screen extends AppCompatActivity {
         }
 
     }
+
+
 
 
     public void Score() {
