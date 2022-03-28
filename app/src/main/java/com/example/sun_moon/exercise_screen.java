@@ -86,18 +86,30 @@ public class exercise_screen extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        soundPool.autoPause();
+        mediaPlayer.pause();
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        soundPool.autoResume();
+        mediaPlayer.start();
+
+    }
 
     public void music_start(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(6)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else soundPool = new SoundPool(6,AudioManager.STREAM_MUSIC,0);
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
 
         sound = soundPool.load(this,R.raw.growl,1);
         sound1 = soundPool.load(this,R.raw.plus,1);
