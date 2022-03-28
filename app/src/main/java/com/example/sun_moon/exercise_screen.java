@@ -70,8 +70,8 @@ public class exercise_screen extends AppCompatActivity {
         tiger_exercise = findViewById(R.id.tiger_exercise); // 호랑이
         tiger_100 = findViewById(R.id.tiger_100);// 호랑이 100일 때 나오는 호랑이
 
-        //tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
-        //tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
+        tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
+        tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
         Timer();
         progress();
@@ -110,9 +110,11 @@ public class exercise_screen extends AppCompatActivity {
                 @Override
                 public void run() {
                     scroll.fullScroll(ScrollView.FOCUS_DOWN);
+
                     up.setY(image.getHeight()- view.getHeight());
                     time_view.setY(image.getHeight()- view.getHeight() + 40);
                     score_view.setY(image.getHeight()- view.getHeight() + 40);
+
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
                     tiger_exercise.setY(image.getHeight()- view.getHeight() + 2400); // 처음 1600
@@ -143,8 +145,7 @@ public class exercise_screen extends AppCompatActivity {
                     ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
                     ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
                     ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(tiger_100, "Y", tiger_exercise.getY(), tiger_exercise.getY() - move_num).setDuration(600).start();
+                    ObjectAnimator.ofFloat(tiger_100, "Y", tiger_100.getY(), tiger_100.getY() - move_num).setDuration(600).start();
                 }
             });
             score_view.setBackgroundResource(R.drawable.score);

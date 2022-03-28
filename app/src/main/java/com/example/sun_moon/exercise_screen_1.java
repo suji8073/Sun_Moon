@@ -57,7 +57,6 @@ public class exercise_screen_1 extends AppCompatActivity {
         tiger_count = intent.getIntExtra("호랑이", 0);
         screen_up = intent.getIntExtra("screen_up", 0);
 
-
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
 
@@ -126,7 +125,7 @@ public class exercise_screen_1 extends AppCompatActivity {
                     pb.setY(image.getHeight()- view.getHeight() + 600 - screen_up);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900 - screen_up);
                     tiger_exercise.setY(image.getHeight()- view.getHeight() + 2400 - screen_up);
-                    tiger_100.setY(image.getHeight()- view.getHeight() + 1400- screen_up);
+                    tiger_100.setY(image.getHeight()- view.getHeight() + 1400 - screen_up);
 
                     ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up_location), Math.round(up_location - screen_up)).setDuration(600).start();
                 }
@@ -157,7 +156,6 @@ public class exercise_screen_1 extends AppCompatActivity {
                     ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
                     ObjectAnimator.ofFloat(tiger_100, "Y", tiger_100.getY(), tiger_100.getY() - move_num).setDuration(600).start();
                 }
-
             });
             score_view.setBackgroundResource(R.drawable.score);
         }
