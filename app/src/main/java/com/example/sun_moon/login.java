@@ -2,18 +2,21 @@ package com.example.sun_moon;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class login extends AppCompatActivity {
     EditText name;
     Button next;
+    ImageView logout_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,14 @@ public class login extends AppCompatActivity {
                 }
             }
         });
+
+        logout_exit = findViewById(R.id.logout_exit);
+        logout_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout_dialog();
+            }
+        });
     }
 
     void popup_show(){
@@ -46,6 +57,26 @@ public class login extends AppCompatActivity {
             @Override
             public void onPositiveClick() { //확인 버튼
                 Log.i("Dialog", "확인");
+            }
+        });
+        octDialog.setCanceledOnTouchOutside(true);
+        octDialog.setCancelable(true);
+        octDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        octDialog.show();
+    }
+
+    void logout_dialog(){
+        logout1 octDialog = new logout1(login.this, new CustomDialogClickListener1() {
+            @Override
+            public void onPositiveClick() { //로그아웃 취소
+                Log.i("Dialog", "확인");
+            }
+
+            @Override
+            public void onNegativeClick() { //로그아웃
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                android.os.Process.killProcess(android.os.Process.myPid());
             }
         });
         octDialog.setCanceledOnTouchOutside(true);
