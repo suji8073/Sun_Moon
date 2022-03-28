@@ -43,6 +43,11 @@ public class exercise_screen extends AppCompatActivity {
     int tiger_up_num = 30;
     String tiger_up_check = "f";
 
+    TimerThread timerThread = new TimerThread();
+    progressThread progressThread = new progressThread();
+    Thread tthread = new Thread(timerThread);
+    Thread pthread = new Thread(progressThread);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,18 +78,13 @@ public class exercise_screen extends AppCompatActivity {
         tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
         tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
-        Timer();
-        progress();
+        tthread.start();
+        pthread.start();
         system_start();
         music_start();
 
         up = findViewById(R.id.up);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                up_action();
-            }
-        });
+        up.setOnClickListener(view -> up_action());
     }
     @Override
     protected void onPause(){
@@ -100,6 +100,14 @@ public class exercise_screen extends AppCompatActivity {
         mediaPlayer.start();
 
     }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        tthread.interrupt();
+        pthread.interrupt();
+    }
+
+
 
     public void music_start(){
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -118,20 +126,17 @@ public class exercise_screen extends AppCompatActivity {
     public void system_start(){
         pb.setProgress(progressStatus);
         if (originY == 0) {
-            scroll.post(new Runnable() {
-                @Override
-                public void run() {
-                    scroll.fullScroll(ScrollView.FOCUS_DOWN);
+            scroll.post(() -> {
+                scroll.fullScroll(ScrollView.FOCUS_DOWN);
 
-                    up.setY(image.getHeight()- view.getHeight());
-                    time_view.setY(image.getHeight()- view.getHeight() + 40);
-                    score_view.setY(image.getHeight()- view.getHeight() + 40);
+                up.setY(image.getHeight()- view.getHeight());
+                time_view.setY(image.getHeight()- view.getHeight() + 40);
+                score_view.setY(image.getHeight()- view.getHeight() + 40);
 
-                    pb.setY(image.getHeight()- view.getHeight() + 600);
-                    tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
-                    tiger_exercise.setY(image.getHeight()- view.getHeight() + 2400); // 처음 1600
-                    tiger_100.setY(image.getHeight()- view.getHeight() + 1400);
-                }
+                pb.setY(image.getHeight()- view.getHeight() + 600);
+                tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
+                tiger_exercise.setY(image.getHeight()- view.getHeight() + 2400); // 처음 1600
+                tiger_100.setY(image.getHeight()- view.getHeight() + 1400);
             });
         }
     }
@@ -148,28 +153,23 @@ public class exercise_screen extends AppCompatActivity {
         Score();
 
         if (up.getY() - move_num >0) {
-            scroll.post(new Runnable() {
-                @Override
-                public void run() {
-                    ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
-                    ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
-                    ObjectAnimator.ofFloat(tiger_100, "Y", tiger_100.getY(), tiger_100.getY() - move_num).setDuration(600).start();
-                }
+            scroll.post(() -> {
+                ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
+                ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
+                ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+                ObjectAnimator.ofFloat(score_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
+                ObjectAnimator.ofFloat(pb, "Y", pb.getY(), pb.getY() - move_num).setDuration(600).start();
+                ObjectAnimator.ofFloat(tiger_progress, "Y", tiger_progress.getY(), tiger_progress.getY() - move_num).setDuration(600).start();
+                ObjectAnimator.ofFloat(tiger_100, "Y", tiger_100.getY(), tiger_100.getY() - move_num).setDuration(600).start();
             });
             score_view.setBackgroundResource(R.drawable.score);
         }
     }
-
-    public void progress() {
-        tiger_up_check = "t";
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
+    class progressThread implements Runnable {
+        public void run() {
+            try {
+                tiger_up_check = "t";
+                while (!Thread.currentThread().isInterrupted()) {
                     try {
                         sleep(300);
                     } catch (InterruptedException e) {
@@ -180,86 +180,92 @@ public class exercise_screen extends AppCompatActivity {
                         @Override
                         public void run() {
                             pb.setProgress(progressStatus);
-                            if (progressStatus < 50){
+                            if (progressStatus < 50) {
                                 tiger_exercise.setVisibility(View.INVISIBLE);
-                            }
-                            else if (progressStatus == 50){
+                            } else if (progressStatus == 50) {
                                 tiger_exercise.setY(tiger_100.getY() + 800);
-                            }
-                            else if (progressStatus < 100) {
+                            } else if (progressStatus < 100) {
                                 up_count++;
                                 tiger_exercise.setVisibility(View.VISIBLE);
                                 if (tiger_up_check.equals("t")) { // 올라가기
+                                    System.out.println("올라감");
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - tiger_up_num).setDuration(600).start();
-                                }
-                                else { // 내려가기 up 버튼을 눌렀을 때
+                                } else { // 내려가기 up 버튼을 눌렀을 때
+                                    System.out.println("내려가야함");
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() + 3 * tiger_up_num).setDuration(600).start();
                                     tiger_up_check = "t";
                                 }
-                            }
-                            else if (progressStatus == 100) { // 호랑이 등장
+                            } else if (progressStatus == 100) { // 호랑이 등장
                                 System.out.println("up_count : " + up_count);
                                 tiger_count += 1;
                                 tiger_exercise.setVisibility(View.INVISIBLE);
                                 tiger_100.setVisibility(View.VISIBLE);
-                                soundPool.play(sound,1,1,0,0,1); //호랑이 등장 소리
-                            }
-                            else progressStatus = 101;
+                                soundPool.play(sound, 1, 1, 0, 0, 1); //호랑이 등장 소리
+                            } else progressStatus = 101;
                         }
                     });
                     progressStatus += 1;
                 }
+
+            } catch (Exception ignored) {
             }
-        }).start();
+        }
     }
 
-    public void Timer() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(timerStatus > 0 ){
-                    timerStatus -=1;
-                    try{
-                        Thread.sleep(1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
-                    handler.post(new Runnable() {
-                        @SuppressLint("SetTextI18n")
-                        @Override
-                        public void run() {
-                            if(timerStatus>=60){
-                                if((timerStatus-60) <= 9) time.setText("1:0"+(timerStatus-60));
-                                else time.setText("1:"+(timerStatus-60));
-                            }
-                            else if(timerStatus <= 9) time.setText( "0:0" + (timerStatus));
-                            else time.setText("0:"+(timerStatus));
-
-                            if(timerStatus <=30){
-                                time.setTextColor(0xAAef484a);
-                            }
+    class TimerThread implements Runnable {
+        public void run() {
+            try {
+                while (!Thread.currentThread().isInterrupted()) {
+                    while (timerStatus > 0) {
+                        timerStatus -= 1;
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    });
-                }
-                if (timerStatus == 0){
-                    mediaPlayer.stop();
-                    progressStatus = 101;
-                    Intent start_intent = new Intent(exercise_screen.this, rest.class);
+                        handler.post(new Runnable() {
+                            @SuppressLint("SetTextI18n")
+                            @Override
+                            public void run() {
+                                if (timerStatus >= 60) {
+                                    if ((timerStatus - 60) <= 9)
+                                        time.setText("1:0" + (timerStatus - 60));
+                                    else time.setText("1:" + (timerStatus - 60));
+                                } else if (timerStatus <= 9)
+                                    time.setText("0:0" + (timerStatus));
+                                else time.setText("0:" + (timerStatus));
 
-                    start_intent.putExtra("점수", score_text);
-                    start_intent.putExtra("호랑이", tiger_count);
-                    start_intent.putExtra("screen_up", move_num * score_text );
-                    startActivity(start_intent);
+                                if (timerStatus <= 30) {
+                                    time.setTextColor(0xAAef484a);
+                                }
+                            }
+                        });
+                    }
+                    if (timerStatus == 0){
+                        mediaPlayer.stop();
+                        progressStatus = 101;
+                        Intent start_intent = new Intent(exercise_screen.this, rest.class);
+                        start_intent.putExtra("점수", score_text);
+                        start_intent.putExtra("호랑이", tiger_count);
+                        start_intent.putExtra("screen_up", move_num * score_text );
+                        startActivity(start_intent);
+                    }
                 }
+
+            } catch (Exception ignored) {
+
+
             }
-        }).start();
+        }
+
     }
+
 
     public void Score() {
         score_text += 1;
         Animation startAnimation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink_animation);
         score_view.startAnimation(startAnimation);
-        score.setText(String.valueOf(score_text)+"점");
+        score.setText(score_text +"점");
         score_view.setBackgroundResource(R.drawable.score_plus);
 
         soundPool.play(sound1,1,1,0,0,1);

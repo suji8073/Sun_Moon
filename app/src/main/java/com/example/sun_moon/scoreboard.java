@@ -72,7 +72,7 @@ public class scoreboard extends AppCompatActivity {
             pb5.getLayoutParams().height = 440;
             view_1.getLayoutParams().height = 0;
 
-            float user_one_point_dp = pb5.getLayoutParams().height / set1_score;
+            float user_one_point_dp = set1_score==0 ?pb5.getLayoutParams().height :pb5.getLayoutParams().height / set1_score;
             System.out.println(user_one_point_dp);
 
             view_2.getLayoutParams().height = (int) (diff * user_one_point_dp);
@@ -86,7 +86,7 @@ public class scoreboard extends AppCompatActivity {
             pb6.getLayoutParams().height = 440;
             view_2.getLayoutParams().height = 0;
 
-            float user_one_point_dp = 440 / score_text;
+            float user_one_point_dp = score_text==0?440:440 / score_text;
             System.out.println(user_one_point_dp);
 
             view_1.getLayoutParams().height = (int) (diff * user_one_point_dp);
