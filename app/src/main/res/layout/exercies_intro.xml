@@ -117,7 +117,7 @@
                 android:layout_marginTop="1000dp"
                 android:layout_marginLeft="440dp"
                 android:background="@drawable/final_btn"
-                android:text="skip"
+                android:text="시 작"
                 android:fontFamily="@font/sds"
                 android:textColor="@color/white"
                 android:textSize="50dp" />

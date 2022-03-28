@@ -13,11 +13,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class list extends AppCompatActivity {
-    TextView name;
+    TextView name, rank_more;
     Button logout;
     String name_text;
     SharedPreferences pref;
-    LinearLayout start;
+    LinearLayout start, rank_click;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,22 @@ public class list extends AppCompatActivity {
                 logout_dialog();
             }
         });
+
+        rank_click = findViewById(R.id.rank_click);
+        rank_click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rank_popup();
+            }
+        });
+
+        rank_more = findViewById(R.id.rank_more);
+        rank_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rank_popup();
+            }
+        });
     }
 
     void logout_dialog(){
@@ -59,6 +75,19 @@ public class list extends AppCompatActivity {
             public void onNegativeClick() { //로그아웃
                 Intent start_intent = new Intent(list.this, login.class);
                 startActivity(start_intent);
+            }
+        });
+        octDialog.setCanceledOnTouchOutside(true);
+        octDialog.setCancelable(true);
+        octDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        octDialog.show();
+    }
+
+    void rank_popup(){
+        popup_dialog1 octDialog = new popup_dialog1(list.this, new CustomDialogClickListener() {
+            @Override
+            public void onPositiveClick() { //확인 버튼
+                Log.i("Dialog", "확인");
             }
         });
         octDialog.setCanceledOnTouchOutside(true);

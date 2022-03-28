@@ -39,6 +39,10 @@ public class exercise_screen extends AppCompatActivity {
     private int sound, sound1;
     private final Handler handler = new Handler();
 
+    int up_count = 0;
+    int tiger_up_num = 30;
+    String tiger_up_check = "f";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,6 @@ public class exercise_screen extends AppCompatActivity {
         setContentView(R.layout.exercise_screen);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         mediaPlayer.start();
-
 
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
@@ -68,8 +71,7 @@ public class exercise_screen extends AppCompatActivity {
         tiger_100 = findViewById(R.id.tiger_100);// 호랑이 100일 때 나오는 호랑이
 
         //tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
-        tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
-
+        //tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
         Timer();
         progress();
@@ -83,19 +85,19 @@ public class exercise_screen extends AppCompatActivity {
                 up_action();
             }
         });
-
     }
+
     public void music_start(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            AudioAttributes audioAttributes=new AudioAttributes.Builder()
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
-            soundPool=new SoundPool.Builder()
+            soundPool = new SoundPool.Builder()
                     .setMaxStreams(6)
                     .setAudioAttributes(audioAttributes)
                     .build();
-        } else soundPool=new SoundPool(6,AudioManager.STREAM_MUSIC,0);
+        } else soundPool = new SoundPool(6,AudioManager.STREAM_MUSIC,0);
 
         sound = soundPool.load(this,R.raw.growl,1);
         sound1 = soundPool.load(this,R.raw.plus,1);
@@ -113,7 +115,7 @@ public class exercise_screen extends AppCompatActivity {
                     score_view.setY(image.getHeight()- view.getHeight() + 40);
                     pb.setY(image.getHeight()- view.getHeight() + 600);
                     tiger_progress.setY(image.getHeight()- view.getHeight() + 1900);
-                    tiger_exercise.setY(image.getHeight()- view.getHeight() + 1600);
+                    tiger_exercise.setY(image.getHeight()- view.getHeight() + 2400); // 처음 1600
                     tiger_100.setY(image.getHeight()- view.getHeight() + 1400);
                 }
             });
@@ -121,16 +123,13 @@ public class exercise_screen extends AppCompatActivity {
     }
 
     public void up_action(){
-        //tiger_exercise.setVisibility(View.INVISIBLE);
-        if (progressStatus <= 10) {
-            progressStatus = 0;
-        }
-        else if(progressStatus >= 100) {
-            progressStatus = 90;
-        }
-        else{
-            progressStatus -= 10;
-        }
+        tiger_100.setVisibility(View.INVISIBLE);
+        tiger_up_check = "f";
+
+        if (progressStatus <= 10) progressStatus = 0;
+        else if (( progressStatus >= 50 )&( progressStatus < 100 )) progressStatus -= 15;
+        else if (progressStatus > 100) progressStatus = 48;
+        else progressStatus -= 15;
 
         Score();
 
@@ -153,6 +152,7 @@ public class exercise_screen extends AppCompatActivity {
     }
 
     public void progress() {
+        tiger_up_check = "t";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -167,21 +167,34 @@ public class exercise_screen extends AppCompatActivity {
                         @Override
                         public void run() {
                             pb.setProgress(progressStatus);
-                            if (( progressStatus >= 80 )&( progressStatus < 100 )) {
-
+                            if (progressStatus < 50){
+                                tiger_exercise.setVisibility(View.INVISIBLE);
                             }
-                            if (progressStatus == 100) { // 호랑이 등장
-
+                            else if (progressStatus == 50){
+                                tiger_exercise.setY(tiger_100.getY() + 800);
+                            }
+                            else if (progressStatus < 100) {
+                                up_count++;
+                                tiger_exercise.setVisibility(View.VISIBLE);
+                                if (tiger_up_check.equals("t")) { // 올라가기
+                                    ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - tiger_up_num).setDuration(600).start();
+                                }
+                                else { // 내려가기 up 버튼을 눌렀을 때
+                                    ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() + 3 * tiger_up_num).setDuration(600).start();
+                                    tiger_up_check = "t";
+                                }
+                            }
+                            else if (progressStatus == 100) { // 호랑이 등장
+                                System.out.println("up_count : " + up_count);
                                 tiger_count += 1;
-                                //tiger_exercise.setVisibility(View.VISIBLE);
+                                tiger_exercise.setVisibility(View.INVISIBLE);
                                 tiger_100.setVisibility(View.VISIBLE);
                                 soundPool.play(sound,1,1,0,0,1); //호랑이 등장 소리
-
                             }
-                            if(progressStatus > 100) progressStatus=101;
+                            else progressStatus = 101;
                         }
                     });
-                    progressStatus += 2;
+                    progressStatus += 1;
                 }
             }
         }).start();
@@ -215,7 +228,7 @@ public class exercise_screen extends AppCompatActivity {
                         }
                     });
                 }
-                if (timerStatus ==0){
+                if (timerStatus == 0){
                     mediaPlayer.stop();
                     progressStatus = 101;
                     Intent start_intent = new Intent(exercise_screen.this, rest.class);
