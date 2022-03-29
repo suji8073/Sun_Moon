@@ -5,6 +5,9 @@ import static java.lang.Thread.sleep;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -12,6 +15,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,7 +35,7 @@ public class exercise_screen_1 extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    private int timerStatus = 10, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
@@ -49,13 +53,17 @@ public class exercise_screen_1 extends AppCompatActivity {
     Thread tthread = new Thread(timerThread);
     Thread pthread = new Thread(progressThread);
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen_1);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         mediaPlayer.start();
-
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size);
         Intent intent = getIntent(); //전달할 데이터를 받을 Intent
         score_text_1 = intent.getIntExtra("점수", 0);
         tiger_count = intent.getIntExtra("호랑이", 0);
@@ -63,11 +71,18 @@ public class exercise_screen_1 extends AppCompatActivity {
 
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
+        Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        image.setImageBitmap(resizedbg);
 
         score_view = findViewById(R.id.score_view);
         time_view= findViewById(R.id.time_view);
 
         scroll = findViewById(R.id.scrl);
+        scroll.setOnTouchListener((v, event) -> {
+            scroll.requestDisallowInterceptTouchEvent(false);
+            return true;
+        });
         originX = scroll.getScrollX();
         originY = scroll.getScrollY();
         time = findViewById(R.id.time);

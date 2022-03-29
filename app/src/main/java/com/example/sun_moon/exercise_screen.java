@@ -4,7 +4,14 @@ import static java.lang.Thread.sleep;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,6 +20,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,7 +32,13 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 public class exercise_screen extends AppCompatActivity {
     Button up;
@@ -31,7 +46,7 @@ public class exercise_screen extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    private int timerStatus = 10, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
@@ -50,20 +65,35 @@ public class exercise_screen extends AppCompatActivity {
     Thread pthread = new Thread(progressThread);
 
 
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         mediaPlayer.start();
-
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
+        display.getRealSize(size);
+        Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        image.setImageBitmap(resizedbg);
+
+
 
         score_view = findViewById(R.id.score_view);
         time_view= findViewById(R.id.time_view);
 
         scroll= findViewById(R.id.scrl);
+        scroll.setOnTouchListener((v, event) -> {
+            scroll.requestDisallowInterceptTouchEvent(false);
+            return true;
+        });
+
         originX = scroll.getScrollX();
         originY = scroll.getScrollY();
         time = findViewById(R.id.time);
@@ -79,6 +109,8 @@ public class exercise_screen extends AppCompatActivity {
         tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
         tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
+
+
         tthread.start();
         pthread.start();
         system_start();
@@ -86,7 +118,10 @@ public class exercise_screen extends AppCompatActivity {
 
         up = findViewById(R.id.up);
         up.setOnClickListener(view -> up_action());
+
     }
+
+
     @Override
     protected void onPause(){
         super.onPause();
@@ -266,8 +301,6 @@ public class exercise_screen extends AppCompatActivity {
     }
 
 
-
-
     public void Score() {
         score_text += 1;
         Animation startAnimation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink_animation);
@@ -277,6 +310,10 @@ public class exercise_screen extends AppCompatActivity {
 
         soundPool.play(sound1,1,1,0,0,1);
     }
+
+
+
+
 
 }
 

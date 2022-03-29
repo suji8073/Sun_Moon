@@ -37,13 +37,10 @@ public class exercise_intro extends AppCompatActivity {
         runThread(txt);
 
 
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timerStatus=-1;
-                Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
-                startActivity(start_intent);
-            }
+        skip.setOnClickListener(view -> {
+            timerStatus=-1;
+            Intent start_intent = new Intent(exercise_intro.this, exercise_screen.class);
+            startActivity(start_intent);
         });
 
 
