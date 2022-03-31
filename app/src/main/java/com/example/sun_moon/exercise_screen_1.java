@@ -72,7 +72,7 @@ public class exercise_screen_1 extends AppCompatActivity {
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
         Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
-        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,8744,true);
         image.setImageBitmap(resizedbg);
 
         score_view = findViewById(R.id.score_view);
