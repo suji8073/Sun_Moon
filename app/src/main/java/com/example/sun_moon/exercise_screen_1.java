@@ -72,7 +72,7 @@ public class exercise_screen_1 extends AppCompatActivity {
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
         Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
-        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,8744,true);
         image.setImageBitmap(resizedbg);
 
         score_view = findViewById(R.id.score_view);
@@ -248,67 +248,65 @@ public class exercise_screen_1 extends AppCompatActivity {
         }
     }
 
-        class TimerThread implements Runnable {
-            public void run() {
-                try {
-                        while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
-                            timerStatus -= 1;
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+    class TimerThread implements Runnable {
+        public void run() {
+            try {
+                while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
+                    timerStatus -= 1;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    handler.post(new Runnable() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run() {
+                            if (timerStatus >= 60) {
+                                if ((timerStatus - 60) <= 9)
+                                    time.setText("1:0" + (timerStatus - 60));
+                                else time.setText("1:" + (timerStatus - 60));
+                            } else if (timerStatus <= 9)
+                                time.setText("0:0" + (timerStatus));
+                            else time.setText("0:" + (timerStatus));
+
+                            if (timerStatus <= 30) {
+                                time.setTextColor(0xAAef484a);
                             }
-                            handler.post(new Runnable() {
-                                @SuppressLint("SetTextI18n")
-                                @Override
-                                public void run() {
-                                    if (timerStatus >= 60) {
-                                        if ((timerStatus - 60) <= 9)
-                                            time.setText("1:0" + (timerStatus - 60));
-                                        else time.setText("1:" + (timerStatus - 60));
-                                    } else if (timerStatus <= 9)
-                                        time.setText("0:0" + (timerStatus));
-                                    else time.setText("0:" + (timerStatus));
-
-                                    if (timerStatus <= 30) {
-                                        time.setTextColor(0xAAef484a);
-                                    }
-                                }
-                            });
                         }
-                        if (timerStatus == 0) {
-                            mediaPlayer.stop();
-                            progressStatus = 101;
-
-                            Intent start_intent = new Intent(exercise_screen_1.this, scoreboard.class);
-                            start_intent.putExtra("점수_1", score_text_1);
-                            start_intent.putExtra("점수_2", score_text);
-                            start_intent.putExtra("호랑이", tiger_count);
-                            startActivity(start_intent);
-                        }
-
-
-                } catch (Exception ignored) {
-
-
+                    });
                 }
+                if (timerStatus == 0) {
+                    mediaPlayer.stop();
+                    progressStatus = 101;
+
+                    Intent start_intent = new Intent(exercise_screen_1.this, scoreboard.class);
+                    start_intent.putExtra("점수_1", score_text_1);
+                    start_intent.putExtra("점수_2", score_text);
+                    start_intent.putExtra("호랑이", tiger_count);
+                    startActivity(start_intent);
+                }
+
+
+            } catch (Exception ignored) {
+
+
             }
-
-        }
-
-
-        public void Score() {
-            score_text += 1;
-            Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_animation);
-            score_view.startAnimation(startAnimation);
-            score.setText(String.valueOf(score_text) + "점");
-            score_view.setBackgroundResource(R.drawable.score_plus);
-
-            soundPool.play(sound1, 1, 1, 0, 0, 1);
         }
 
     }
 
 
+    public void Score() {
+        score_text += 1;
+        Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink_animation);
+        score_view.startAnimation(startAnimation);
+        score.setText(String.valueOf(score_text) + "점");
+        score_view.setBackgroundResource(R.drawable.score_plus);
+
+        soundPool.play(sound1, 1, 1, 0, 0, 1);
+    }
+
+}
 
 

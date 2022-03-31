@@ -23,6 +23,8 @@
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_btn.xml" value="0.126" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_progress.xml" value="0.208" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_progress1.xml" value="0.208" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_score.xml" value="0.2435" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable-v24/final_score1.xml" value="0.2435" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/bg_gradient.xml" value="0.126" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/exit.xml" value="0.126" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/home_scoreboard.xml" value="0.126" />
@@ -43,7 +45,7 @@
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/finalscoreboard.xml" value="0.190234375" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/list.xml" value="0.176" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/loading.xml" value="0.152" />
-        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/login.xml" value="0.1" />
+        <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/login.xml" value="0.176" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/rest.xml" value="0.1" />
         <entry key="..\:/Users/SUZY/AndroidStudioProjects/Sun_Moon/app/src/main/res/layout/scoreboard.xml" value="0.165625" />
         <entry key="..\:/Users/lgm2713/AndroidStudioProjects/Sun_Moon/app/src/main/res/drawable/score.xml" value="0.3125" />

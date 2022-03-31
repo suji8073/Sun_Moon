@@ -72,7 +72,8 @@ public class exercise_screen extends AppCompatActivity {
         image= findViewById(R.id.image);
         display.getRealSize(size);
         Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
-        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,8744,true);
+        Log.v("size",resizedbg.getHeight()+" 넓"+resizedbg.getWidth());
         image.setImageBitmap(resizedbg);
 
 
@@ -223,10 +224,8 @@ public class exercise_screen extends AppCompatActivity {
                                 up_count++;
                                 tiger_exercise.setVisibility(View.VISIBLE);
                                 if (tiger_up_check.equals("t")) { // 올라가기
-                                    System.out.println("올라감");
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - tiger_up_num).setDuration(600).start();
                                 } else { // 내려가기 up 버튼을 눌렀을 때
-                                    System.out.println("내려가야함");
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() + 3 * tiger_up_num).setDuration(600).start();
                                     tiger_up_check = "t";
                                 }
@@ -250,38 +249,37 @@ public class exercise_screen extends AppCompatActivity {
     class TimerThread implements Runnable {
         public void run() {
             try {
-                    while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
-                        timerStatus -= 1;
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                while (!Thread.currentThread().isInterrupted()&&timerStatus > 0) {
+                    timerStatus -= 1;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    handler.post(() -> {
+                        if (timerStatus >= 60) {
+                            if ((timerStatus - 60) <= 9)
+                                time.setText("1:0" + (timerStatus - 60));
+                            else time.setText("1:" + (timerStatus - 60));
+                        } else if (timerStatus <= 9)
+                            time.setText("0:0" + (timerStatus));
+                        else time.setText("0:" + (timerStatus));
+
+                        if (timerStatus <= 30) {
+                            time.setTextColor(0xAAef484a);
                         }
-                        handler.post(() -> {
-                            if (timerStatus >= 60) {
-                                if ((timerStatus - 60) <= 9)
-                                    time.setText("1:0" + (timerStatus - 60));
-                                else time.setText("1:" + (timerStatus - 60));
-                            } else if (timerStatus <= 9)
-                                time.setText("0:0" + (timerStatus));
-                            else time.setText("0:" + (timerStatus));
-
-                            if (timerStatus <= 30) {
-                                time.setTextColor(0xAAef484a);
-                            }
-                        });
-                    }
-                    if (timerStatus == 0&&!Thread.currentThread().isInterrupted()){
-                        Log.v("타이머 탈출","타이머 탈출");
-                        mediaPlayer.stop();
-                        progressStatus = 101;
-                        Intent start_intent = new Intent(exercise_screen.this, rest.class);
-                        start_intent.putExtra("점수", score_text);
-                        start_intent.putExtra("호랑이", tiger_count);
-                        start_intent.putExtra("screen_up", move_num * score_text );
-                        startActivity(start_intent);
-                    }
-
+                    });
+                }
+                if (timerStatus == 0&&!Thread.currentThread().isInterrupted()){
+                    Log.v("타이머 탈출","타이머 탈출");
+                    mediaPlayer.stop();
+                    progressStatus = 101;
+                    Intent start_intent = new Intent(exercise_screen.this, rest.class);
+                    start_intent.putExtra("점수", score_text);
+                    start_intent.putExtra("호랑이", tiger_count);
+                    start_intent.putExtra("screen_up", move_num * score_text );
+                    startActivity(start_intent);
+                }
 
             } catch (Exception ignored) {
 
@@ -290,7 +288,6 @@ public class exercise_screen extends AppCompatActivity {
         }
 
     }
-
 
     public void Score() {
         score_text += 1;
@@ -302,10 +299,4 @@ public class exercise_screen extends AppCompatActivity {
         soundPool.play(sound1,1,1,0,0,1);
     }
 
-
-
-
-
 }
-
-
