@@ -72,7 +72,8 @@ public class exercise_screen extends AppCompatActivity {
         image= findViewById(R.id.image);
         display.getRealSize(size);
         Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
-        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
+        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,8744,true);
+        Log.v("size",resizedbg.getHeight()+" 넓"+resizedbg.getWidth());
         image.setImageBitmap(resizedbg);
 
 
