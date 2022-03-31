@@ -1,5 +1,6 @@
 package com.example.sun_moon;
 
+import static com.google.mlkit.vision.pose.PoseDetectorOptionsBase.CPU_GPU;
 import static java.lang.Thread.sleep;
 
 import android.animation.ObjectAnimator;
@@ -7,14 +8,19 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.util.Size;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,7 +33,34 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ExperimentalGetImage;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.google.android.gms.tasks.Task;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.common.internal.ImageConvertUtils;
+import com.google.mlkit.vision.pose.Pose;
+import com.google.mlkit.vision.pose.PoseDetection;
+import com.google.mlkit.vision.pose.PoseDetector;
+import com.google.mlkit.vision.pose.PoseLandmark;
+import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
+import com.google.mlkit.vision.segmentation.Segmentation;
+import com.google.mlkit.vision.segmentation.SegmentationMask;
+import com.google.mlkit.vision.segmentation.Segmenter;
+import com.google.mlkit.vision.segmentation.selfie.SelfieSegmenterOptions;
+
+import java.nio.ByteBuffer;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class exercise_screen_1 extends AppCompatActivity {
     Button up;
@@ -53,12 +86,30 @@ public class exercise_screen_1 extends AppCompatActivity {
     Thread tthread = new Thread(timerThread);
     Thread pthread = new Thread(progressThread);
 
+    protected ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+    ImageView userNoBG;
+    PoseLandmark leftWrist;
+    private final Executor classificationExecutor;
+    private final Executor segmentExecutor;
+    public boolean leftWristDown= false;
+    public int count =0;
 
-    @SuppressLint("ClickableViewAccessibility")
+    private PoseDetector detector;
+    private Segmenter segmenter;
+
+    public exercise_screen_1() {
+        classificationExecutor = Executors.newSingleThreadExecutor();
+        segmentExecutor= Executors.newSingleThreadExecutor();
+    }
+
+
+    @SuppressLint({"ClickableViewAccessibility", "UnsafeOptInUsageError"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_screen_1);
+        userNoBG=findViewById(R.id.userwithnobg);
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         mediaPlayer = MediaPlayer.create(this, R.raw.background);
         mediaPlayer.start();
         Display display = getWindowManager().getDefaultDisplay();
@@ -98,19 +149,25 @@ public class exercise_screen_1 extends AppCompatActivity {
         tiger_exercise.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
         tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
-
+        up = findViewById(R.id.up);
         tthread.start();
         pthread.start();
         system_start();
         music_start();
 
-        up = findViewById(R.id.up); // 운동 했을 떄
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                up_action();
-            }
-        });
+        PoseDetectorOptions options =
+                new PoseDetectorOptions.Builder()
+                        .setDetectorMode(PoseDetectorOptions.STREAM_MODE)
+                        .setPreferredHardwareConfigs(CPU_GPU)
+                        .build();
+        detector = PoseDetection.getClient(options);
+        SelfieSegmenterOptions options2 =
+                new SelfieSegmenterOptions.Builder()
+                        .setDetectorMode(SelfieSegmenterOptions.STREAM_MODE)
+                        //.enableRawSizeMask()
+                        .build();
+        segmenter = Segmentation.getClient(options2);
+        startCamera();
     }
 
     @Override
@@ -305,6 +362,91 @@ public class exercise_screen_1 extends AppCompatActivity {
         score_view.setBackgroundResource(R.drawable.score_plus);
 
         soundPool.play(sound1, 1, 1, 0, 0, 1);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @ExperimentalGetImage
+    private void startCamera(){
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                CameraSelector cameraSelector = new CameraSelector.Builder()
+                        .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
+                        .build();
+                ImageAnalysis imageAnalysis =
+                        new ImageAnalysis.Builder()
+                                .setTargetResolution(new Size(640,480))
+                                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                .build();
+
+                imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this),
+                        imageProxy -> {
+                            Image mediaImage = imageProxy.getImage();
+                            if (mediaImage != null) {
+                                InputImage image = InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
+                                posework(image).addOnCompleteListener(result->segwork(image).addOnCompleteListener(results -> imageProxy.close()));
+                            }
+                        });
+
+                cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis);
+            } catch (ExecutionException | InterruptedException ignored) {
+            }
+        }, ContextCompat.getMainExecutor(this));
+    }
+
+
+    private Task<Object> segwork(InputImage image) {
+        return segmenter
+                .process(image)
+                .continueWith(segmentExecutor,
+                        task -> {
+                            SegmentationMask segmentationMask  = task.getResult();
+                            ByteBuffer mask = segmentationMask.getBuffer();
+                            int maskWidth = segmentationMask.getWidth();
+                            int maskHeight = segmentationMask.getHeight();
+                            Bitmap inputimg = ImageConvertUtils.getInstance().getUpRightBitmap(image);
+                            int[] pixels = new int[inputimg.getHeight()*inputimg.getWidth()];
+                            inputimg.getPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
+                            for (int i = 0; i < maskWidth * maskHeight; i++) { //픽셀을 하나하나 처리하면 너무 느려지고 배열로 한번에 처리한후 배열째로 처리(갱신)해야함
+                                float backgroundLikelihood = 1 - mask.getFloat();
+                                if (backgroundLikelihood > 0.9){
+                                    pixels[i]= Color.TRANSPARENT;
+                                }
+                            }
+                            inputimg.setPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    userNoBG.setImageBitmap(inputimg);
+                                }
+                            });
+                            return task;
+                        }
+                );
+    }
+
+
+    private Task<Object> posework(InputImage image){
+        return detector
+                .process(image)
+                .continueWith(
+                        classificationExecutor,
+                        task -> {
+                            Pose pose = task.getResult();
+                            leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
+                            Log.v("test2", String.valueOf(leftWrist.getPosition().y));
+                            if (leftWrist.getPosition().y<200&leftWristDown){
+                                up_action();
+                                leftWristDown=false;
+                            }
+                            else if(leftWrist.getPosition().y>450&!leftWristDown){
+                                leftWristDown=true;
+                            }
+
+                            return task;
+                        }
+                );
+
     }
 
 }

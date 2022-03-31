@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+
         <ScrollView
             android:id="@+id/scrl"
             android:layout_width="fill_parent"
@@ -30,6 +32,7 @@
                     android:layout_height="fill_parent"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/background"/>
+
 
                 <Button
                     android:id="@+id/up"
@@ -152,6 +155,15 @@
                         app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_gravity="bottom"
+                    android:id="@+id/userwithnobg"
+                    android:layout_width="match_parent"
+                    android:layout_height="2560px"
+                    android:scaleType="fitXY"/>
+
+
 
                 <ImageView
                     android:id="@+id/tiger_exercise"

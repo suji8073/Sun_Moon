@@ -30,6 +30,11 @@
                     android:layout_height="fill_parent"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/background"/>
+                <ImageView
+                    android:id="@+id/userwithnobg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
 
                 <Button
                     android:id="@+id/up"

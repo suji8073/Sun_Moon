@@ -40,7 +40,7 @@ public class exercise_screen extends AppCompatActivity {
     ProgressBar pb;
     TextView time, score;
     int originX, originY;
-    private int timerStatus = 90, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
+    private int timerStatus = 10, score_text = 0, tiger_count = 0, progressStatus = 0, move_num = 100 ;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
