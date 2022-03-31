@@ -19,10 +19,10 @@ public class loading extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), login.class);
+                Intent intent = new Intent(getApplicationContext(), scoreboard.class);
                 startActivity(intent);
                 finish();
             }
-        }, 3000);
+        }, 3500);
     }
 }

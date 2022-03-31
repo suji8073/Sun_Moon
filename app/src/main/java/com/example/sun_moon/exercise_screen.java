@@ -31,14 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 
 public class exercise_screen extends AppCompatActivity {
     Button up;
@@ -65,8 +59,6 @@ public class exercise_screen extends AppCompatActivity {
     Thread pthread = new Thread(progressThread);
 
 
-
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +74,6 @@ public class exercise_screen extends AppCompatActivity {
         Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
         Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,background.getHeight(),true);
         image.setImageBitmap(resizedbg);
-
 
 
         score_view = findViewById(R.id.score_view);
@@ -110,7 +101,6 @@ public class exercise_screen extends AppCompatActivity {
         tiger_100.setVisibility(View.INVISIBLE); // 호랑이 안 보이게
 
 
-
         tthread.start();
         pthread.start();
         system_start();
@@ -131,6 +121,7 @@ public class exercise_screen extends AppCompatActivity {
         tthread.interrupt();
         pthread.interrupt();
     }
+
     @Override
     protected void onResume(){
         super.onResume();
