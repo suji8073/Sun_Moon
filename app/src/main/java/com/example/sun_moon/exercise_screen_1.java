@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.AspectRatio;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
@@ -76,7 +77,7 @@ public class exercise_screen_1 extends AppCompatActivity {
     private SoundPool soundPool;
     private int sound, sound1;
     private final Handler handler = new Handler();
-
+    int count1 =0;
     int score_text_1, screen_up;
     int up_count = 0;
     int tiger_up_num = 30;
@@ -281,15 +282,13 @@ public class exercise_screen_1 extends AppCompatActivity {
                                 up_count++;
                                 tiger_exercise.setVisibility(View.VISIBLE);
                                 if (tiger_up_check.equals("t")) { // 올라가기
-                                    System.out.println("올라감");
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - tiger_up_num).setDuration(600).start();
                                 } else { // 내려가기 up 버튼을 눌렀을 때
-                                    System.out.println("내려가야함");
+
                                     ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() + 3 * tiger_up_num).setDuration(600).start();
                                     tiger_up_check = "t";
                                 }
                             } else if (progressStatus == 100) { // 호랑이 등장
-                                System.out.println("up_count : " + up_count);
                                 tiger_count += 1;
                                 tiger_exercise.setVisibility(View.INVISIBLE);
                                 tiger_100.setVisibility(View.VISIBLE);
@@ -375,14 +374,17 @@ public class exercise_screen_1 extends AppCompatActivity {
                         .build();
                 ImageAnalysis imageAnalysis =
                         new ImageAnalysis.Builder()
-                                .setTargetResolution(new Size(640,480))
+                                .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+                                //.setTargetResolution(new Size(640,480))
                                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                                 .build();
 
                 imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this),
                         imageProxy -> {
+
                             Image mediaImage = imageProxy.getImage();
                             if (mediaImage != null) {
+                                Log.v("size", "inputimage "+mediaImage.getHeight()+" we :" +mediaImage.getWidth());
                                 InputImage image = InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
                                 posework(image).addOnCompleteListener(result->segwork(image).addOnCompleteListener(results -> imageProxy.close()));
                             }
@@ -408,18 +410,13 @@ public class exercise_screen_1 extends AppCompatActivity {
                             int[] pixels = new int[inputimg.getHeight()*inputimg.getWidth()];
                             inputimg.getPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
                             for (int i = 0; i < maskWidth * maskHeight; i++) { //픽셀을 하나하나 처리하면 너무 느려지고 배열로 한번에 처리한후 배열째로 처리(갱신)해야함
-                                float backgroundLikelihood = 1 - mask.getFloat();
-                                if (backgroundLikelihood > 0.9){
+                                if (mask.getFloat() < 0.1){ //사람
                                     pixels[i]= Color.TRANSPARENT;
                                 }
                             }
                             inputimg.setPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    userNoBG.setImageBitmap(inputimg);
-                                }
-                            });
+                            new Handler(Looper.getMainLooper()).post(() -> userNoBG.setImageBitmap(inputimg));
+
                             return task;
                         }
                 );
@@ -434,7 +431,6 @@ public class exercise_screen_1 extends AppCompatActivity {
                         task -> {
                             Pose pose = task.getResult();
                             leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
-                            Log.v("test2", String.valueOf(leftWrist.getPosition().y));
                             if (leftWrist.getPosition().y<200&leftWristDown){
                                 up_action();
                                 leftWristDown=false;
