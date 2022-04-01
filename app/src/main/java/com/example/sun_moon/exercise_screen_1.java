@@ -246,6 +246,7 @@ public class exercise_screen_1 extends AppCompatActivity {
             scroll.post(new Runnable() {
                 @Override
                 public void run() {
+                    ObjectAnimator.ofFloat(userNoBG, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
                     ObjectAnimator.ofInt(scroll, "scrollY", Math.round(up.getY()), Math.round(up.getY() - move_num)).setDuration(600).start();
                     ObjectAnimator.ofFloat(up, "Y", up.getY(), up.getY() - move_num).setDuration(600).start();
                     ObjectAnimator.ofFloat(time_view, "Y", time_view.getY(), time_view.getY() - move_num).setDuration(600).start();
@@ -409,7 +410,7 @@ public class exercise_screen_1 extends AppCompatActivity {
                             Bitmap inputimg = ImageConvertUtils.getInstance().getUpRightBitmap(image);
                             int[] pixels = new int[inputimg.getHeight()*inputimg.getWidth()];
                             inputimg.getPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
-                            for (int i = 0; i < maskWidth * maskHeight; i++) { //픽셀을 하나하나 처리하면 너무 느려지고 배열로 한번에 처리한후 배열째로 처리(갱신)해야함
+                            for (int i = 0; i < maskWidth * maskHeight; i++) {
                                 if (mask.getFloat() < 0.1){ //사람
                                     pixels[i]= Color.TRANSPARENT;
                                 }
@@ -431,11 +432,11 @@ public class exercise_screen_1 extends AppCompatActivity {
                         task -> {
                             Pose pose = task.getResult();
                             leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
-                            if (leftWrist.getPosition().y<200&leftWristDown){
+                            if (leftWrist.getPosition().y<150&leftWristDown){
                                 up_action();
                                 leftWristDown=false;
                             }
-                            else if(leftWrist.getPosition().y>450&!leftWristDown){
+                            else if(leftWrist.getPosition().y>250&!leftWristDown){
                                 leftWristDown=true;
                             }
 
