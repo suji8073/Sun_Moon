@@ -47,6 +47,7 @@ public class exercise_screen extends exerciseScreen {
         system_start();
     }
 
+
     public void system_start(){
         pb.setProgress(progressStatus);
         if (originY == 0) {
