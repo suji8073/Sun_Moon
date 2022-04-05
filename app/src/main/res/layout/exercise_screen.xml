@@ -30,11 +30,7 @@
                     android:layout_height="fill_parent"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/background"/>
-                <ImageView
-                    android:id="@+id/userwithnobg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"/>
+
 
                 <Button
                     android:id="@+id/up"
@@ -157,6 +153,13 @@
                         app:textStrokeWidth="7.0"/>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/userwithnobg"
+                    android:layout_width="match_parent"
+                    android:layout_height="2560px"
+                    android:layout_gravity="bottom"
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:id="@+id/tiger_exercise"
