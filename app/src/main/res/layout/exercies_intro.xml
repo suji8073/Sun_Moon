@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/sds"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="250dp" />
 
 
@@ -114,11 +114,11 @@
                 android:id="@+id/skip"
                 android:layout_width="200dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="1000dp"
-                android:layout_marginLeft="440dp"
+                android:layout_marginLeft="420dp"
+                android:layout_marginTop="900dp"
                 android:background="@drawable/final_btn"
-                android:text="skip"
                 android:fontFamily="@font/sds"
+                android:text="시 작"
                 android:textColor="@color/white"
                 android:textSize="50dp" />
 

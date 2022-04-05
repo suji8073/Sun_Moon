@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class rest extends AppCompatActivity {
-    int rest_time = 31;
+    int rest_time = 15;
     float alpha = 1;
     ImageView full_view_rest;
     TextView rest_timer;

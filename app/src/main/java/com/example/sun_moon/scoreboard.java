@@ -28,8 +28,8 @@ public class scoreboard extends AppCompatActivity {
         setContentView(R.layout.scoreboard);
 
         Intent secondIntent = getIntent();
-        int set1_score = secondIntent.getIntExtra("점수_1",10);
-        int score_text = secondIntent.getIntExtra("점수_2",14);
+        int set1_score = secondIntent.getIntExtra("점수_1",0);
+        int score_text = secondIntent.getIntExtra("점수_2",0);
         int tiger = secondIntent.getIntExtra("호랑이",0);
 
         SharedPreferences pref;
@@ -62,7 +62,7 @@ public class scoreboard extends AppCompatActivity {
         view_1 = findViewById(R.id.view_1);
         view_2 = findViewById(R.id.view_2);
 
-        int sum = set1_score + score_text;
+        float sum = set1_score + score_text;
         diff_score.setText((sum / 2) + "점");
 
         if((set1_score - score_text) > 0)
@@ -72,26 +72,44 @@ public class scoreboard extends AppCompatActivity {
             pb5.getLayoutParams().height = 440;
             view_1.getLayoutParams().height = 0;
 
-            float user_one_point_dp = pb5.getLayoutParams().height / set1_score;
+            float user_one_point_dp = set1_score == 0 ? pb5.getLayoutParams().height : pb5.getLayoutParams().height / set1_score; // 여기 0점 하면 0나누기 에러 발생해서 임의로 고쳤는데 0일떄 그래프 풀로 나타남.
             System.out.println(user_one_point_dp);
 
-            view_2.getLayoutParams().height = (int) (diff * user_one_point_dp);
-            pb6.getLayoutParams().height =  440 - (int) (diff * user_one_point_dp);
-        }
+            if (score_text == 0) {
+                view_2.getLayoutParams().height = 440;
+                pb6.getLayoutParams().height = 0;
+            }
+            else {
+                view_2.getLayoutParams().height = (int) (diff * user_one_point_dp);
+                pb6.getLayoutParams().height =  440 - (int) (diff * user_one_point_dp);
+            }
 
-        else
-        {
+        }
+        else if (set1_score == 0 && score_text == 0) { // 둘 다 0 일 때
+            pb5.getLayoutParams().height = 0;
+            pb6.getLayoutParams().height = 0;
+            view_1.getLayoutParams().height = 440;
+            view_2.getLayoutParams().height = 440;
+        }
+        else {
             diff = score_text - set1_score;
 
             pb6.getLayoutParams().height = 440;
             view_2.getLayoutParams().height = 0;
 
-            float user_one_point_dp = 440 / score_text;
+            float user_one_point_dp = score_text == 0 ? 440: 440 / score_text; //여기도
             System.out.println(user_one_point_dp);
 
-            view_1.getLayoutParams().height = (int) (diff * user_one_point_dp);
-            pb5.getLayoutParams().height = 440 - (int) (diff * user_one_point_dp);
+            if (set1_score == 0){
+                view_1.getLayoutParams().height = 440;
+                pb5.getLayoutParams().height = 0;
+            }
+            else {
+                view_1.getLayoutParams().height = (int) (diff * user_one_point_dp);
+                pb5.getLayoutParams().height = 440 - (int) (diff * user_one_point_dp);
+            }
         }
+
 
 
 
