@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -89,9 +88,7 @@ public class exerciseScreen extends AppCompatActivity {
     int up_count = 0;
     int tiger_up_num = 30;
     String tiger_up_check = "f";
-    //TimerThread timerThread = new TimerThread();
     progressThread progressThread = new progressThread();
-    //Thread tthread = new Thread(timerThread);
     Timer timer = new Timer();
     Thread pthread = new Thread(progressThread);
 
@@ -104,6 +101,8 @@ public class exerciseScreen extends AppCompatActivity {
 
     private PoseDetector detector;
     private Segmenter segmenter;
+
+    boolean isActivityForeground= false;
 
     public exerciseScreen() { //생성자는 나중에 처리
         classificationExecutor = Executors.newSingleThreadExecutor();
@@ -156,9 +155,7 @@ public class exerciseScreen extends AppCompatActivity {
         up = findViewById(R.id.up);
         TimerTask timerTask = new timerFunc();
         timer.schedule(timerTask,0,1000);
-        //tthread.start();
         pthread.start();
-        //system_start();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         music_start();
 
@@ -180,6 +177,7 @@ public class exerciseScreen extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        isActivityForeground=false;
         soundPool.autoPause();
         mediaPlayer.pause();
 
@@ -189,6 +187,7 @@ public class exerciseScreen extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        isActivityForeground=true;
         soundPool.autoResume();
         mediaPlayer.start();
     }
@@ -196,6 +195,8 @@ public class exerciseScreen extends AppCompatActivity {
     @Override
     protected void onDestroy()
     {
+        isActivityForeground=false;
+        soundPool.release();
         timer.cancel();
         super.onDestroy();
     }
@@ -276,7 +277,9 @@ public class exerciseScreen extends AppCompatActivity {
                             tiger_count += 1;
                             tiger_exercise.setVisibility(View.INVISIBLE);
                             tiger_100.setVisibility(View.VISIBLE);
-                            soundPool.play(sound, 1, 1, 0, 0, 1); //호랑이 등장 소리
+                            if(isActivityForeground){
+                                soundPool.play(sound, 1, 1, 0, 0, 1); //호랑이 등장 소리
+                            }
                         } else progressStatus = 101;
                     });
                     progressStatus += 1;
@@ -299,7 +302,6 @@ public class exerciseScreen extends AppCompatActivity {
                 nextScreen();
             }
             handler.post(()->time.setText(getString(R.string.caltime,timerStatus/60,timerStatus%60/10,timerStatus%60%10)));
-            Log.e("time","분 :"+timerStatus/60+"초"+timerStatus%60/10+timerStatus%60%10);
 
             if (timerStatus <= 30) {
                 handler.post(()->time.setTextColor(0xAAef484a));
@@ -342,13 +344,12 @@ public class exerciseScreen extends AppCompatActivity {
                         imageProxy -> {
                             Image mediaImage = imageProxy.getImage();
                             if (mediaImage != null) {
-                                //Log.v("size", "inputimage "+mediaImage.getHeight()+" we :" +mediaImage.getWidth());
                                 InputImage image = InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
                                 posework(image).addOnCompleteListener(result->segwork(image).addOnCompleteListener(results -> imageProxy.close()));
                             }
                         });
 
-                cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis);
+                cameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis);
             } catch (ExecutionException | InterruptedException ignored) {
             }
         }, ContextCompat.getMainExecutor(this));
