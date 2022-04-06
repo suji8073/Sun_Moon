@@ -22,6 +22,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -158,6 +159,7 @@ public class exerciseScreen extends AppCompatActivity {
         //tthread.start();
         pthread.start();
         //system_start();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         music_start();
 
         PoseDetectorOptions options =
