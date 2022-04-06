@@ -99,12 +99,13 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/time"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sds"
                         android:text="1:30"
                         android:textColor="#00BCD4"
+                        android:textAlignment="center"
                         android:textSize="45sp"
                         app:textStroke="true"
                         app:textStrokeColor="#000000"
@@ -143,12 +144,13 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/score"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sds"
                         android:text="0점"
                         android:textColor="#00BCD4"
+                        android:textAlignment="center"
                         android:textSize="50dp"
                         app:textStroke="true"
                         app:textStrokeColor="#000000"
