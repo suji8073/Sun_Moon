@@ -11,7 +11,7 @@ public class logout1 extends Dialog {
 
     private Context context;
     private CustomDialogClickListener1 customDialogClickListener;
-    private TextView tvTitle, tvNegative, tvPositive, option_codetype_dialog_title_tv;
+    private TextView  tvNegative, tvPositive, option_codetype_dialog_title_tv;
 
     public logout1(@NonNull Context context, CustomDialogClickListener1 customDialogClickListener) {
         super(context);
@@ -24,7 +24,6 @@ public class logout1 extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logout);
 
-        tvTitle = findViewById(R.id.option_codetype_dialog_title_tv);
         tvPositive = findViewById(R.id.option_codetype_dialog_positive);
         tvNegative = findViewById(R.id.option_codetype_dialog_negative);
         option_codetype_dialog_title_tv = findViewById(R.id.option_codetype_dialog_title_tv);

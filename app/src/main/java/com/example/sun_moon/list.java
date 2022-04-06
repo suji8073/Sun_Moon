@@ -23,6 +23,7 @@ public class list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         pref = getSharedPreferences("pref", MODE_PRIVATE);
         name_text = pref.getString("name",null);

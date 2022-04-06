@@ -13,13 +13,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class scoreboard extends AppCompatActivity {
-
     View view_1, view_2;
     ImageView home;
-    TextView name, diff_score, final_score, tiger_score, set1, set2, tiger_count, which_score;
+    TextView name, diff_score, final_score, tiger_score, set1, set2, tiger_count;
     Button final_btn;
     ProgressBar pb5, pb6;
-    int diff = 0;
+    int diff, set1_score, score_text;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -28,8 +27,8 @@ public class scoreboard extends AppCompatActivity {
         setContentView(R.layout.scoreboard);
 
         Intent secondIntent = getIntent();
-        int set1_score = secondIntent.getIntExtra("점수_1",0);
-        int score_text = secondIntent.getIntExtra("점수_2",0);
+        set1_score = secondIntent.getIntExtra("점수_1",0);
+        score_text = secondIntent.getIntExtra("점수_2",0);
         int tiger = secondIntent.getIntExtra("호랑이",0);
 
         SharedPreferences pref;
@@ -65,53 +64,15 @@ public class scoreboard extends AppCompatActivity {
         float sum = set1_score + score_text;
         diff_score.setText((sum / 2) + "점");
 
-        if((set1_score - score_text) > 0)
-        {
-            diff = set1_score - score_text;
+        if((set1_score - score_text) > 0) progress_height_diff(set1_score, score_text, pb6, pb5, view_2, view_1);
 
-            pb5.getLayoutParams().height = 440;
-            view_1.getLayoutParams().height = 0;
-
-            float user_one_point_dp = set1_score == 0 ? pb5.getLayoutParams().height : pb5.getLayoutParams().height / set1_score; // 여기 0점 하면 0나누기 에러 발생해서 임의로 고쳤는데 0일떄 그래프 풀로 나타남.
-            System.out.println(user_one_point_dp);
-
-            if (score_text == 0) {
-                view_2.getLayoutParams().height = 440;
-                pb6.getLayoutParams().height = 0;
-            }
-            else {
-                view_2.getLayoutParams().height = (int) (diff * user_one_point_dp);
-                pb6.getLayoutParams().height =  440 - (int) (diff * user_one_point_dp);
-            }
-
-        }
-        else if (set1_score == 0 && score_text == 0) { // 둘 다 0 일 때
+        else if (set1_score == 0 && score_text == 0) {
             pb5.getLayoutParams().height = 0;
             pb6.getLayoutParams().height = 0;
             view_1.getLayoutParams().height = 440;
             view_2.getLayoutParams().height = 440;
         }
-        else {
-            diff = score_text - set1_score;
-
-            pb6.getLayoutParams().height = 440;
-            view_2.getLayoutParams().height = 0;
-
-            float user_one_point_dp = score_text == 0 ? 440: 440 / score_text; //여기도
-            System.out.println(user_one_point_dp);
-
-            if (set1_score == 0){
-                view_1.getLayoutParams().height = 440;
-                pb5.getLayoutParams().height = 0;
-            }
-            else {
-                view_1.getLayoutParams().height = (int) (diff * user_one_point_dp);
-                pb5.getLayoutParams().height = 440 - (int) (diff * user_one_point_dp);
-            }
-        }
-
-
-
+        else progress_height_diff(score_text, set1_score, pb5, pb6, view_1, view_2);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,5 +89,22 @@ public class scoreboard extends AppCompatActivity {
                 startActivity(start_intent);
             }
         });
+    }
+
+    public void progress_height_diff(int num1, int num2, ProgressBar pb1,ProgressBar pb2, View view1, View view2){
+        diff = num2 - num1;
+        float user_one_point_dp = num2 == 0 ? 440: 440 / num2; //여기도
+        pb2.getLayoutParams().height = 440;
+        view2.getLayoutParams().height = 0;
+
+
+        if (num1 == 0){
+            view1.getLayoutParams().height = 440;
+            pb1.getLayoutParams().height = 0;
+        }
+        else {
+            view1.getLayoutParams().height = (int) (diff * user_one_point_dp);
+            pb1.getLayoutParams().height = 440 - (int) (diff * user_one_point_dp);
+        }
     }
 }
