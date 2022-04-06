@@ -85,7 +85,7 @@
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/sds"
                         android:gravity="center"
-                        android:singleLine="true"
+
                         android:text="@string/time"
                         android:textColor="#FFC809"
                         android:textSize="45dp"
@@ -97,16 +97,17 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/time"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sds"
-                        android:text="1:30"
+                        android:text="01:30"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp"
+                        android:textSize="50sp"
+                        android:textAlignment="center"
                         app:textStroke="true"
                         app:textStrokeColor="#000000"
-                        app:textStrokeWidth="7.0"/>
+                        app:textStrokeWidth="7.0" />
 
                 </LinearLayout>
 
@@ -141,13 +142,15 @@
 
                     <com.example.sun_moon.CustomTextView
                         android:id="@+id/score"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/sds"
                         android:text="0점"
+                        android:textAlignment="center"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp"
+                        android:textSize="50sp"
+                        android:maxLines="1"
                         app:textStroke="true"
                         app:textStrokeColor="#000000"
                         app:textStrokeWidth="7.0"/>

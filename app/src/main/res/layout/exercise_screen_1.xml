@@ -105,7 +105,7 @@
                         android:fontFamily="@font/sds"
                         android:text="1:30"
                         android:textColor="#00BCD4"
-                        android:textSize="50dp"
+                        android:textSize="45sp"
                         app:textStroke="true"
                         app:textStrokeColor="#000000"
                         app:textStrokeWidth="7.0"/>
