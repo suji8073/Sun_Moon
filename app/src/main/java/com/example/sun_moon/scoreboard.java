@@ -86,10 +86,13 @@ public class scoreboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent start_intent = new Intent(scoreboard.this, list.class);
+                start_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);//액티비티 스택제거
                 startActivity(start_intent);
             }
         });
     }
+    @Override
+    public void onBackPressed(){}
 
     public void progress_height_diff(int num1, int num2, ProgressBar pb1,ProgressBar pb2, View view1, View view2){
         diff = num2 - num1;

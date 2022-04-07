@@ -21,6 +21,9 @@ public class exercise_screen extends exerciseScreen {
         system_start();
     }
 
+    @Override
+    public void onBackPressed(){}
+
     public void system_start(){
         pb.setProgress(progressStatus);
         if (originY == 0) {
