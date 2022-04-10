@@ -374,7 +374,7 @@ public class exerciseScreen extends AppCompatActivity {
                                 }
                             }
                             inputimg.setPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
-                            Bitmap resize= Bitmap.createScaledBitmap(inputimg,1600,2560,true);
+                            //Bitmap resize= Bitmap.createScaledBitmap(inputimg,1600,2560,true);
                             new Handler(Looper.getMainLooper()).post(() -> userNoBG.setImageBitmap(inputimg));
 
                             return task;
@@ -404,6 +404,8 @@ public class exerciseScreen extends AppCompatActivity {
                 );
 
     }
+
+
 
 
 

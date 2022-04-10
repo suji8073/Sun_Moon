@@ -23,7 +23,9 @@ public class loading extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
+    @Override
     public void onBackPressed(){}
+
 
     private void startLoading() {
         Handler handler = new Handler();
