@@ -56,6 +56,7 @@ import com.google.mlkit.vision.segmentation.Segmenter;
 import com.google.mlkit.vision.segmentation.selfie.SelfieSegmenterOptions;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
@@ -74,6 +75,7 @@ public class exerciseScreen extends AppCompatActivity {
     int tiger_count = 0;
     int progressStatus = 0;
     final int move_num = 100 ;
+    int speed_count = 0;
     ImageView image, tiger_exercise, tiger_100, tiger_progress;
     MediaPlayer mediaPlayer;
     LinearLayout view, score_view, time_view;
@@ -101,8 +103,10 @@ public class exerciseScreen extends AppCompatActivity {
 
     private PoseDetector detector;
     private Segmenter segmenter;
+    private Bitmap background, resized_bg;
 
     boolean isActivityForeground= false;
+    ArrayList move_time_save = new ArrayList();
 
     public exerciseScreen() { //생성자는 나중에 처리
         classificationExecutor = Executors.newSingleThreadExecutor();
@@ -116,7 +120,7 @@ public class exerciseScreen extends AppCompatActivity {
         setContentView(layoutid);
         userNoBG=findViewById(R.id.userwithnobg);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
-        mediaPlayer = MediaPlayer.create(this, R.raw.background);
+        mediaPlayer = MediaPlayer.create(this, R.raw.background); // 배경음악
         mediaPlayer.start();
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -125,9 +129,9 @@ public class exerciseScreen extends AppCompatActivity {
 
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
-        Bitmap background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
-        Bitmap resizedbg= Bitmap.createScaledBitmap(background,size.x,8744,true);
-        image.setImageBitmap(resizedbg);
+        background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
+        resized_bg= Bitmap.createScaledBitmap(background,size.x,8744,true);
+        image.setImageBitmap(resized_bg);
 
         score_view = findViewById(R.id.score_view);
         time_view= findViewById(R.id.time_view);
@@ -158,6 +162,7 @@ public class exerciseScreen extends AppCompatActivity {
         pthread.start();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         music_start();
+        move_time_save.add(timerStatus);
 
         PoseDetectorOptions options =
                 new PoseDetectorOptions.Builder()
@@ -180,8 +185,6 @@ public class exerciseScreen extends AppCompatActivity {
         isActivityForeground=false;
         soundPool.autoPause();
         mediaPlayer.pause();
-
-
     }
 
     @Override
@@ -212,8 +215,9 @@ public class exerciseScreen extends AppCompatActivity {
                 .setAudioAttributes(audioAttributes)
                 .build();
 
-        sound = soundPool.load(this,R.raw.growl,1);
+        sound = soundPool.load(this,R.raw.growl,1); // 호랑이 등장 소리
         sound1 = soundPool.load(this,R.raw.plus,1);
+
     }
 
     public void system_start(){}
@@ -228,6 +232,8 @@ public class exerciseScreen extends AppCompatActivity {
         else progressStatus -= 15;
 
         Score();
+        move_time_save.add(timerStatus);
+        Speed_count();
 
         if (up.getY() - move_num > 0) {
             scroll.post(() -> {
@@ -243,8 +249,6 @@ public class exerciseScreen extends AppCompatActivity {
             score_view.setBackgroundResource(R.drawable.score);
         }
     }
-
-
 
 
     class progressThread implements Runnable {
@@ -268,8 +272,8 @@ public class exerciseScreen extends AppCompatActivity {
                             tiger_exercise.setVisibility(View.VISIBLE);
                             if (tiger_up_check.equals("t")) { // 올라가기
                                 ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() - tiger_up_num).setDuration(600).start();
-                            } else { // 내려가기 up 버튼을 눌렀을 때
-
+                            }
+                            else { // 내려가기 up 버튼을 눌렀을 때
                                 ObjectAnimator.ofFloat(tiger_exercise, "Y", tiger_exercise.getY(), tiger_exercise.getY() + 3 * tiger_up_num).setDuration(600).start();
                                 tiger_up_check = "t";
                             }
@@ -306,7 +310,6 @@ public class exerciseScreen extends AppCompatActivity {
             if (timerStatus <= 30) {
                 handler.post(()->time.setTextColor(0xAAef484a));
             }
-
         }
     }
 
@@ -322,6 +325,28 @@ public class exerciseScreen extends AppCompatActivity {
         score_view.setBackgroundResource(R.drawable.score_plus);
 
         soundPool.play(sound1, 1, 1, 0, 0, 1);
+    }
+
+    public void Speed_count(){ // 3초 이내에 운동 한번씩 * 5번 진행 -> 배속
+        int array_size = move_time_save.size();
+        int last_time = (int) move_time_save.get(array_size - 2);
+        int now_time = (int) move_time_save.get(array_size - 1);
+
+        if (last_time - now_time <= 3) { // 3초 이내이면
+            speed_count++;
+        } else {
+            speed_count = 0; // 초기화
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.0f));
+            }
+        }
+
+        if (speed_count >= 3) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.5f));
+            }
+            speed_count = 0; // 초기화
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -357,57 +382,40 @@ public class exerciseScreen extends AppCompatActivity {
 
 
     private Task<Object> segwork(InputImage image) {
-        return segmenter
-                .process(image)
-                .continueWith(segmentExecutor,
-                        task -> {
-                            SegmentationMask segmentationMask  = task.getResult();
-                            ByteBuffer mask = segmentationMask.getBuffer();
-                            int maskWidth = segmentationMask.getWidth();
-                            int maskHeight = segmentationMask.getHeight();
-                            Bitmap inputimg = ImageConvertUtils.getInstance().getUpRightBitmap(image);
-                            int[] pixels = new int[inputimg.getHeight()*inputimg.getWidth()];
-                            inputimg.getPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
-                            for (int i = 0; i < maskWidth * maskHeight; i++) {
-                                if (mask.getFloat() < 0.1){ //사람
-                                    pixels[i]= Color.TRANSPARENT;
-                                }
-                            }
-                            inputimg.setPixels(pixels, 0, inputimg.getWidth(), 0, 0, inputimg.getWidth(), inputimg.getHeight());
-                            //Bitmap resize= Bitmap.createScaledBitmap(inputimg,1600,2560,true);
-                            new Handler(Looper.getMainLooper()).post(() -> userNoBG.setImageBitmap(inputimg));
+        return segmenter.process(image).continueWith(segmentExecutor, task -> {
+            SegmentationMask segmentationMask  = task.getResult();
+            ByteBuffer mask = segmentationMask.getBuffer();
+            int maskWidth = segmentationMask.getWidth();
+            int maskHeight = segmentationMask.getHeight();
+            Bitmap input_img = ImageConvertUtils.getInstance().getUpRightBitmap(image);
+            int[] pixels = new int[input_img.getHeight() * input_img.getWidth()];
+            input_img.getPixels(pixels, 0, input_img.getWidth(), 0, 0, input_img.getWidth(), input_img.getHeight());
+            for (int i = 0; i < maskWidth * maskHeight; i++) {
+                if (mask.getFloat() < 0.1){ //사람
+                    pixels[i]= Color.TRANSPARENT;
+                }
+            }
+            input_img.setPixels(pixels, 0, input_img.getWidth(), 0, 0, input_img.getWidth(), input_img.getHeight());
+            Bitmap resize= Bitmap.createScaledBitmap(input_img,1600,2560,true);
+            new Handler(Looper.getMainLooper()).post(() -> userNoBG.setImageBitmap(input_img));
 
-                            return task;
-                        }
-                );
+            return task;
+        });
     }
 
 
     private Task<Object> posework(InputImage image){
-        return detector
-                .process(image)
-                .continueWith(
-                        classificationExecutor,
-                        task -> {
-                            Pose pose = task.getResult();
-                            leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
-                            if (leftWrist.getPosition().y<150&leftWristDown){
-                                up_action();
-                                leftWristDown=false;
-                            }
-                            else if(leftWrist.getPosition().y>250&!leftWristDown){
-                                leftWristDown=true;
-                            }
-
-                            return task;
-                        }
-                );
-
+        return detector.process(image).continueWith( classificationExecutor, task -> {
+            Pose pose = task.getResult();
+            leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
+            if (leftWrist.getPosition().y<150&leftWristDown){
+                up_action();
+                leftWristDown=false;
+            }
+            else if(leftWrist.getPosition().y>250&!leftWristDown){
+                leftWristDown=true;
+            }
+            return task;
+        });
     }
-
-
-
-
-
-
 }
