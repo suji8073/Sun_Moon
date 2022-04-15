@@ -343,7 +343,7 @@ public class exerciseScreen extends AppCompatActivity {
 
         if (speed_count >= 3) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.5f));
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1.3f));
             }
             speed_count = 0; // 초기화
         }
