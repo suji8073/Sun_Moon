@@ -126,7 +126,6 @@ public class exerciseScreen extends AppCompatActivity {
         Point size = new Point();
         display.getRealSize(size);
 
-
         view = findViewById(R.id.view);
         image= findViewById(R.id.image);
         background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
@@ -250,7 +249,6 @@ public class exerciseScreen extends AppCompatActivity {
         }
     }
 
-
     class progressThread implements Runnable {
         public void run() {
             try {
@@ -313,9 +311,7 @@ public class exerciseScreen extends AppCompatActivity {
         }
     }
 
-
     public void nextScreen(){}
-
 
     public void Score() {
         score_text += 1;
@@ -402,7 +398,6 @@ public class exerciseScreen extends AppCompatActivity {
             return task;
         });
     }
-
 
     private Task<Object> posework(InputImage image){
         return detector.process(image).continueWith( classificationExecutor, task -> {

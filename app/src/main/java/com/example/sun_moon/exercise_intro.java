@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class exercise_intro extends AppCompatActivity {
     TextView txt, back;
     public int timerStatus = 30;

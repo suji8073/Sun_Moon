@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ScrollView;
 
-
 public class exercise_screen extends exerciseScreen {
     public exercise_screen() {
         this.layoutid = R.layout.exercise_screen;
@@ -50,7 +49,5 @@ public class exercise_screen extends exerciseScreen {
         start_intent.putExtra("screen_up", move_num * score_text );
         startActivity(start_intent);
     }
-
-
 
 }
