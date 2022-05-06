@@ -99,7 +99,7 @@ public class exerciseScreen extends AppCompatActivity {
     PoseLandmark leftWrist;
     private final Executor classificationExecutor;
     private final Executor segmentExecutor;
-    public boolean leftWristDown= false;
+    public boolean state= false;
 
     private PoseDetector detector;
     private Segmenter segmenter;
@@ -408,12 +408,18 @@ public class exerciseScreen extends AppCompatActivity {
         return detector.process(image).continueWith( classificationExecutor, task -> {
             Pose pose = task.getResult();
             leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
-            if (leftWrist.getPosition().y<150&leftWristDown){
-                up_action();
-                leftWristDown=false;
-            }
-            else if(leftWrist.getPosition().y>250&!leftWristDown){
-                leftWristDown=true;
+            PoseLandmark leftWrist = pose.getPoseLandmark(PoseLandmark.LEFT_WRIST);
+            PoseLandmark rightWrist = pose.getPoseLandmark(PoseLandmark.RIGHT_WRIST);
+            PoseLandmark nose = pose.getPoseLandmark(PoseLandmark.NOSE);
+            double wristCenterY = (leftWrist.getPosition().y+rightWrist.getPosition().y)/2;
+            double noseY = nose.getPosition().y;
+            if (wristCenterY<noseY){
+                state = true;
+            }else {
+                if(state){
+                    state = false;
+                    up_action();
+                }
             }
             return task;
         });
