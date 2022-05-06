@@ -48,7 +48,6 @@ public class exercise_screen_1 extends exerciseScreen {
         }
     }
 
-
     @Override
     public void nextScreen(){
         Intent start_intent = new Intent(exercise_screen_1.this, scoreboard.class);
@@ -57,9 +56,6 @@ public class exercise_screen_1 extends exerciseScreen {
         start_intent.putExtra("호랑이", tiger_count);
         startActivity(start_intent);
     }
-
-
-
 }
 
 

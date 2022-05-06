@@ -40,7 +40,6 @@ public class rest extends AppCompatActivity {
                             @Override
                             public void run() {
                                 rest_time--;
-                                System.out.println(rest_time);
                                 rest_timer.setText(String.valueOf(rest_time));
                                 full_view_rest.setAlpha(alpha);
 
