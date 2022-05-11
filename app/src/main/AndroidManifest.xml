@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="com.example.sun_moon.scroll" android:label="scroll" android:screenOrientation="portrait"/>
         <activity android:name="com.example.sun_moon.login" android:label="login" android:screenOrientation="portrait"/>
         <activity android:name="com.example.sun_moon.rest" android:label="rest" android:screenOrientation="portrait"/>
         <activity android:name="com.example.sun_moon.exercise_screen" android:label="exercise_screen" android:screenOrientation="portrait"/>
