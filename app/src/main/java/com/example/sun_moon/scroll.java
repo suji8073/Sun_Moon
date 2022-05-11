@@ -37,10 +37,7 @@ public class scroll extends AppCompatActivity {
             });
         }
         scroll.fullScroll(ScrollView.FOCUS_DOWN);
-
-
         up = findViewById(R.id.up);
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
