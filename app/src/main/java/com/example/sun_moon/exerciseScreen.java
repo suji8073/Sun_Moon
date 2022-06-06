@@ -41,6 +41,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
@@ -130,7 +131,14 @@ public class exerciseScreen extends AppCompatActivity {
         image= findViewById(R.id.image);
         background = BitmapFactory.decodeResource(getResources(),R.drawable.background);
         resized_bg= Bitmap.createScaledBitmap(background,size.x,8744,true);
-        image.setImageBitmap(resized_bg);
+
+
+        Glide.with(this)
+                .load(resized_bg)
+                .into(image);
+
+
+
 
         score_view = findViewById(R.id.score_view);
         time_view= findViewById(R.id.time_view);
@@ -162,7 +170,7 @@ public class exerciseScreen extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         music_start();
         move_time_save.add(timerStatus);
-
+        image.setImageBitmap(resized_bg);
         PoseDetectorOptions options =
                 new PoseDetectorOptions.Builder()
                         .setDetectorMode(PoseDetectorOptions.STREAM_MODE)
